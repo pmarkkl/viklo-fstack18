@@ -1,0 +1,30 @@
+{
+  "name": "viklo",
+  "version": "0.0.1",
+  "description": "Viklo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puhuri666/viklo-fstack18.git"
+  },
+  "author": "Petterti Markkola",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/puhuri666/viklo-fstack18/issues"
+  },
+  "homepage": "https://github.com/puhuri666/viklo-fstack18#readme",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.0.17"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}

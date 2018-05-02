@@ -1,0 +1,13 @@
+POST http://localhost:3001/api/users
+content-type: application/json
+
+{
+  "firstname": "Petteri",
+  "lastname": "Markkola",
+  "email": "pmarkkola@gmail.com",
+  "address": "Pasteurinkatu 1",
+  "zipcode": "00790",
+  "town": "Helsinki",
+  "phone": "04238911",
+  "password": "Perkeles6!"
+}
