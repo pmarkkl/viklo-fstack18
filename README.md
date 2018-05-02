@@ -1,1 +1,1 @@
-Viklo - lintuharrastajan muistikirja
+Viklo - lintuharrastajan havaintokirja
