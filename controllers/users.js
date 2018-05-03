@@ -5,7 +5,7 @@ const User = require('../models/user')
 usersRouter.get('/', async (req,res) => {
   const users = await User
   .find({})
-  .populate('observations', { latitude: 1, longitude: 1, additionalComments: 1, species: 1 })
+  .populate('observations', { date: 1, latitude: 1, longitude: 1, additionalComments: 1, species: 1 })
   res.json(users.map(User.format))
 })
 
@@ -19,7 +19,7 @@ usersRouter.get('/:id', async (req,res) => {
     }
   } catch (exception) {
     console.log(exception)
-    res.status(400).json({ error: 'id väärin' })
+    res.status(400).json({ error: 'id päin helvettiä' })
   }
 })
 

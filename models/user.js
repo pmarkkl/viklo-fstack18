@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   town: String,
   phone: String,
   passwordHash: String,
+  admin: { type: Boolean, default: false },
   observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }],
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: ' User ' }]
 })
@@ -23,6 +24,7 @@ userSchema.statics.format = (user) => {
     zipcode: user.zipcode,
     town: user.town,
     phone: user.phone,
+    admin: user.admin,
     observations: user.observations,
     friends: user.friends
   }

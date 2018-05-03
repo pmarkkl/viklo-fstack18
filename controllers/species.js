@@ -9,6 +9,22 @@ speciesRouter.get('/', async (req, res) => {
   res.json(allSpecies.map(Species.format))
 })
 
+speciesRouter.get('/:id', async (req, res) => {
+  try {
+    const species = await Species.findById(req.params.id)
+
+    if (species) {
+      res.json(Species.format(species))
+    } else {
+      res.status(404).end()
+    }
+
+  } catch (exception) {
+    console.log(exception)
+    res.status(400).json({ error: 'id päin helvettiä' })
+  }
+})
+
 speciesRouter.post('/', async (req, res) => {
   try {
     const body = req.body

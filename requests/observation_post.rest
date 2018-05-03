@@ -1,10 +1,11 @@
 POST http://localhost:3001/api/observations
 content-type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhbGFtYUBoYXJyaXp6ei5jb20iLCJmaXJzdG5hbWUiOiJTYWxhbWEiLCJsYXN0bmFtZSI6IkjDpHJyaSIsImlkIjoiNWFlYWRlZDZkMjFkOWYyNjNjNjBjNGFhIiwiaWF0IjoxNTI1MzQ4OTc5fQ.ifFhb9XI3qGG-9d8MaOycr3jhKg8Z1DhxH-sWdaTfVI
 
 {
   "latitude": 54.039991,
   "longitude": 15.3822811,
-  "date": "04-05-2018",
+  "date": "4.5.2018 14:11",
   "additionalComments": "Vautsi vau!",
   "userId": "5aeaded6d21d9f263c60c4aa",
   "speciesId": "5aeaef6f6eedee1b58e74b26"
