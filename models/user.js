@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   town: String,
   phone: String,
   passwordHash: String,
-  observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }]
+  observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }],
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: ' User ' }]
 })
 
 userSchema.statics.format = (user) => {
@@ -21,7 +22,9 @@ userSchema.statics.format = (user) => {
     address: user.address,
     zipcode: user.zipcode,
     town: user.town,
-    phone: user.phone
+    phone: user.phone,
+    observations: user.observations,
+    friends: user.friends
   }
 }
 

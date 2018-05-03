@@ -10,7 +10,8 @@ speciesSchema.statics.format = (species) => {
   return {
     id: species.id,
     finnishName: species.finnishName,
-    latinName: species.latinName
+    latinName: species.latinName,
+    observations: species.observations
   }
 }
 
