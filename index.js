@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const config = require('./utils/config')
+const cors = require('cors')
 
 const usersRouter = require('./controllers/users')
 const observationRouter = require('./controllers/observations')
@@ -15,6 +16,7 @@ const bodyParser = require('body-parser')
 mongoose.connect(config.mongoUrl)
 
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)

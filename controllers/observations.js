@@ -28,6 +28,8 @@ observationRouter.post('/', async (req,res) => {
     const token = getTokenFrom(req)
     const decodedToken = jwt.verify(token, process.env.SECRET)
 
+    console.log(decodedToken.admin)
+
     if (!token || !decodedToken.id) {
       return res.status(401).json({ error: 'Ei tokenia tai se on virheellinen.' })
     }

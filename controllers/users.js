@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const Request = require('../models/request')
+const jwt = require('jsonwebtoken')
 
 usersRouter.get('/', async (req,res) => {
   const users = await User
@@ -88,6 +89,40 @@ usersRouter.post('/removeallfriends', async (req, res) => {
     user.save()
   })
   res.json({ error: 'KAIKKI POISTETTU!' })
+})
+
+const getTokenFrom = (req) => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    return authorization.substring(7)
+  }
+  return null
+}
+
+usersRouter.post('/makeadmin', async (req, res) => {
+  const body = req.body
+  console.log(body.userId)
+  
+  const token = getTokenFrom(req)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+
+  if (!token) {
+    return res.status(401).json({ error: 'Ei tokenia' })
+  }
+
+  const checkAdminStatus = await User.findById(decodedToken.id)
+
+  if (!checkAdminStatus.admin) {
+    return res.status(401).json({ error: 'Et omista admin-oikeuksia' })
+  }
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(body.userId, { admin: true })
+    res.json(updatedUser)
+  } catch (exception) {
+    console.log(exception)
+    res.status(500).json({ error: 'Jotain kummallista tapahtui admin-oikeuksien muuttamisessa' })
+  }
 })
 
 module.exports = usersRouter

@@ -2,9 +2,9 @@ POST http://localhost:3001/api/users
 content-type: application/json
 
 {
-  "firstname": "Salama",
-  "lastname": "Härri",
-  "email": "salama@harrizzz.com",
+  "firstname": "Petteri",
+  "lastname": "Markkola",
+  "email": "pmarkkolzzz@hki.fi",
   "address": "Pasteurinkatu 1",
   "zipcode": "00790",
   "town": "Helsinki",
