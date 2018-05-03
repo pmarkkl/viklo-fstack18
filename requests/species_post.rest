@@ -2,6 +2,6 @@ POST http://localhost:3001/api/species
 content-type: application/json
 
 {
-  "finnishName": "Liro",
-  "latinName": "Tringa glareola"
+  "finnishName": "Kiljuhanhi",
+  "latinName": "Anser erythropus"
 }

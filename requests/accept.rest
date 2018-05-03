@@ -1,0 +1,8 @@
+POST http://localhost:3001/api/users/accept
+Content-Type: application/json
+
+{
+  "id": "5aeb4f12bcf09d080851e9cb",
+  "sent": "5aeafc59294a5b2940838d2a",
+  "received": "5aeaded6d21d9f263c60c4aa"
+}

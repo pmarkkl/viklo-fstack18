@@ -1,19 +1,20 @@
 const mongoose = require('mongoose')
 
 const requestSchema = new mongoose.Schema({
-  firstUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  secondUser: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  accepted: Boolean
+  sent: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  received: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  accepted: { type: Boolean, default: false }
 })
 
-requestSchema.static.format = (request) => {
+requestSchema.statics.format = (request) => {
   return {
     id: request.id,
-    firstUser: request.firstUser,
-    secondUser: request.secondUser,
+    sent: request.sent,
+    received: request.received,
     accepted: request.accepted
   }
 }
 
 const Request = mongoose.model('Request', requestSchema)
+
 module.exports = Request

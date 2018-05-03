@@ -8,6 +8,7 @@ const usersRouter = require('./controllers/users')
 const observationRouter = require('./controllers/observations')
 const speciesRouter = require('./controllers/species')
 const loginRouter = require('./controllers/login')
+const requestRouter = require('./controllers/requests')
 
 const bodyParser = require('body-parser')
 
@@ -19,6 +20,7 @@ app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/observations', observationRouter)
 app.use('/api/species', speciesRouter)
+app.use('/api/requests', requestRouter)
 
 const server = http.createServer(app)
 

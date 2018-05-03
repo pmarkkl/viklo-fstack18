@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const Request = require('../models/request')
 
 usersRouter.get('/', async (req,res) => {
   const users = await User
@@ -19,7 +20,7 @@ usersRouter.get('/:id', async (req,res) => {
     }
   } catch (exception) {
     console.log(exception)
-    res.status(400).json({ error: 'id päin helvettiä' })
+    res.status(404).json({ error: 'id päin helvettiä' })
   }
 })
 
@@ -52,6 +53,41 @@ usersRouter.post('/', async (req, res) => {
     console.log(exc)
     res.status(500).json({ error: 'jotain kummaa tapahtui' })
   }
+})
+
+usersRouter.post('/accept', async (req, res) => {
+  const body = req.body
+  try {
+    const sent = await User.findById(body.sent)
+    const received = await User.findById(body.received)
+
+    const updatedRequest = await Request.findByIdAndUpdate(body.id, { accepted: true })
+
+    if (sent === undefined || received === undefined || updatedRequest === undefined) {
+      return res.status(404).end()
+    }
+
+    sent.friends = sent.friends.concat(received._id)
+    received.friends = received.friends.concat(sent._id)
+
+    await sent.save()
+    await received.save()
+
+    res.json(Request.format(updatedRequest))
+
+  } catch (exception) {
+    console.log(exception)
+    res.status(500).json({ error: 'accepting kusee' })
+  }
+})
+
+usersRouter.post('/removeallfriends', async (req, res) => {
+  const users = await User.find({})
+  users.map(user => {
+    user.friends = []
+    user.save()
+  })
+  res.json({ error: 'KAIKKI POISTETTU!' })
 })
 
 module.exports = usersRouter

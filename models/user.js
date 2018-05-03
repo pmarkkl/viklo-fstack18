@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   passwordHash: String,
   admin: { type: Boolean, default: false },
   observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }],
-  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: ' User ' }]
+  friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 })
 
 userSchema.statics.format = (user) => {
