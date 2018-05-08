@@ -1,7 +1,6 @@
 import observationService from '../services/observations'
 
 const observationReducer = (state = [], action) => {
-  console.log('ACTION: ', action)
   switch (action.type) {
     case 'INIT_OBSERVATIONS':
       return action.data
