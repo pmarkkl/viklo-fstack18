@@ -1,7 +1,13 @@
 import React from 'react'
-import observationService from './services/observations'
+import { connect } from 'react-redux'
+import { initializeObservations } from './reducers/observationReducer'
 
 class App extends React.Component {
+
+  componentWillMount() {
+    this.props.initializeObservations()
+  }
+
   render() {
     return (
       <div>
@@ -11,4 +17,7 @@ class App extends React.Component {
   }
 }
 
-export default App
+export default connect(
+  null,
+  { initializeObservations }
+)(App)

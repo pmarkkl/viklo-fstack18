@@ -1,12 +1,12 @@
 POST http://localhost:3001/api/observations
 content-type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBtYXJra29senp6QGhraS5maSIsImZpcnN0bmFtZSI6IlBldHRlcmkiLCJsYXN0bmFtZSI6Ik1hcmtrb2xhIiwiYWRtaW4iOmZhbHNlLCJpZCI6IjVhZWI2ZTc5YWIxOTg5MWI3ODBmNmU4MiIsImlhdCI6MTUyNTM3ODY5MX0.k16rHi_eXt0BuQmJrdWyk6XRbd3qxzfF3SQKJlbwPtg
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBtYXJra29senp6QGhraS5maSIsImZpcnN0bmFtZSI6IlBldHRlcmkiLCJsYXN0bmFtZSI6Ik1hcmtrb2xhIiwiYWRtaW4iOnRydWUsImlkIjoiNWFlYjZlNzlhYjE5ODkxYjc4MGY2ZTgyIiwiaWF0IjoxNTI1NzcyMzU0fQ.8mLrtLhzPLt9qmGAzJt-oi4e3e_9DdRsavpRcmHCWUY
 
 {
   "latitude": 54.039991,
-  "longitude": 31.3822811,
-  "date": "3.5.2018 23:11",
-  "additionalComments": "Aikuinen yksilö",
+  "longitude": 51.342233,
+  "date": "8.5.2018 13:11",
+  "additionalComments": "Poikanen",
   "userId": "5aeaded6d21d9f263c60c4aa",
   "speciesId": "5aeaef646eedee1b58e74b25"
 }
