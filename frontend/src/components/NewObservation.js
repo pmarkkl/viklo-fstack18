@@ -10,16 +10,25 @@ class NewObservation extends React.Component {
     super(props)
     this.state = {
       species: '',
+      latitude: this.props.latitude,
+      longitude: this.props.longitude
     }
   }
 
+
   addObservation = async (event) => {
     event.preventDefault()
+
     const requestObject = {
       token: this.props.user.token,
       user: this.props.user.id,
-      species: this.state.species
+      species: this.state.species,
+      latitude: this.props.location.latitude,
+      longitude: this.props.location.longitude
     }
+
+
+    this.setState({ latitude: '', longitude: '' })
     const response = await observationService.newObservation(requestObject)
     this.props.observationCreation(response)
     console.log(response)
@@ -31,20 +40,17 @@ class NewObservation extends React.Component {
   }
 
   render() {
-
-    const location = this.props.location
-    console.log(location)
-
     return (
       <div>
         <h2>Lisää havainto</h2>
         <Location />
-        {this.locationIndicator}
         <div>
           <form onSubmit={this.addObservation}>
-            <select name="species" onChange={this.handleChange}>
+            Laji: <select name="species" onChange={this.handleChange}>
               {this.props.species.map(species => <option key={species.id} value={species.id}>{species.finnishName} ({species.latinName})</option>)}
             </select><br />
+            Latitude: <input type="text" name="latitude" value={this.props.location.latitude}/><br />
+            Longitude: <input type="text" name="longitude" value={this.props.location.longitude}/><br />
             <button>lisää</button><br />
           </form>
         </div>
