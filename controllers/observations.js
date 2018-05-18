@@ -24,17 +24,16 @@ const getTokenFrom = (req) => {
 observationRouter.post('/', async (req,res) => {
   const body = req.body
   try {
-
     const token = getTokenFrom(req)
     const decodedToken = jwt.verify(token, process.env.SECRET)
 
-    console.log(decodedToken.admin)
+    console.log(decodedToken)
 
     if (!token || !decodedToken.id) {
       return res.status(401).json({ error: 'Ei tokenia tai se on virheellinen.' })
     }
     
-    if (body.speciesId === undefined || body.userId === undefined) {
+    if (body.speciesId === undefined) {
       return res.status(400).json({ error: 'Ei sisältöä.' })
     }
 
@@ -48,8 +47,8 @@ observationRouter.post('/', async (req,res) => {
       longitude: body.longitude,
       date,
       additionalComments: body.additionalComments,
-      user: user._id,
-      species: species._id
+      user,
+      species
     })
 
     const savedObservation = await observation.save()
@@ -59,7 +58,7 @@ observationRouter.post('/', async (req,res) => {
 
     species.observations = species.observations.concat(savedObservation._id)
     await species.save()
-
+	
     res.json(Observation.format(savedObservation))
 
   } catch (exception) {

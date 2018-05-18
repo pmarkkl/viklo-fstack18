@@ -3,10 +3,12 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import observationReducer from './reducers/observationReducer'
 import userReducer from './reducers/userReducer'
+import speciesReducer from './reducers/speciesReducer'
 
 const reducer = combineReducers({
   observations: observationReducer,
-  users: userReducer
+  user: userReducer,
+  species: speciesReducer
 })
 
 const store = createStore(

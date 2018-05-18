@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Observation = ({ observation }) => {
-  console.log(observation)
   return (
     <div>
     <p>Laji: {observation.species.finnishName} ({observation.species.latinName})</p>

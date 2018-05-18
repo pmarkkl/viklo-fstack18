@@ -4,6 +4,8 @@ const observationReducer = (state = [], action) => {
   switch (action.type) {
     case 'INIT_OBSERVATIONS':
       return action.data
+    case 'NEW_OBSERVATION':
+      return [...state, action.data]
     default: 
       return state
   }
@@ -16,6 +18,14 @@ export const initializeObservations = () => {
       type: 'INIT_OBSERVATIONS',
       data: observations
     })
+  }
+}
+
+export const observationCreation = (data) => {
+  console.log('data täällä', data)
+  return {
+    type: 'NEW_OBSERVATION',
+    data
   }
 }
 
