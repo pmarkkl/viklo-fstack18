@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import observationService from '../services/observations'
 import { observationCreation } from '../reducers/observationReducer'
+import Location from '../components/Location'
 
 class NewObservation extends React.Component {
 
@@ -30,9 +31,15 @@ class NewObservation extends React.Component {
   }
 
   render() {
+
+    const location = this.props.location
+    console.log(location)
+
     return (
       <div>
         <h2>Lisää havainto</h2>
+        <Location />
+        {this.locationIndicator}
         <div>
           <form onSubmit={this.addObservation}>
             <select name="species" onChange={this.handleChange}>
@@ -50,7 +57,8 @@ class NewObservation extends React.Component {
 const mapStateToProps = (state) => {
   return {
     species: state.species,
-    user: state.user
+    user: state.user,
+    location: state.location
   }
 }
 

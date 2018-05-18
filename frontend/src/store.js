@@ -4,11 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import observationReducer from './reducers/observationReducer'
 import userReducer from './reducers/userReducer'
 import speciesReducer from './reducers/speciesReducer'
+import locationReducer from './reducers/locationReducer'
 
 const reducer = combineReducers({
   observations: observationReducer,
   user: userReducer,
-  species: speciesReducer
+  species: speciesReducer,
+  location: locationReducer
 })
 
 const store = createStore(

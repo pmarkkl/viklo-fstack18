@@ -22,7 +22,6 @@ export const initializeObservations = () => {
 }
 
 export const observationCreation = (data) => {
-  console.log('data täällä', data)
   return {
     type: 'NEW_OBSERVATION',
     data
