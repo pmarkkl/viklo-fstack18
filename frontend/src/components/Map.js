@@ -162,5 +162,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { setLocation })(GoogleApiWrapper({
-  apiKey: 'AIzaSyD8bfLtwWL2sBo1qktwaxChVIomZ10gMpU'
+  apiKey: process.env.GOOGLE_API
 })(MapContainer))
