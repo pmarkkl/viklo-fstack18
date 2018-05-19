@@ -39,16 +39,28 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    return (
+
+    const loginform = () => (
       <div>
-        <h1>Tervetuloa {this.props.user.email}</h1>
-        <button onClick={this.logout}>Kirjaudu ulos</button>
         <h2>loginForm</h2>
         <form onSubmit={this.login}>
           Käyttäjä: <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} /><br />
           Salasana: <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} /><br />
           <button>Kirjaudu</button>
         </form>
+      </div>
+    )
+
+    const logoutform = () => (
+      <div>
+        <h1>{this.props.user.email} logged in</h1>
+        <p><button onClick={this.logout}>Kirjaudu ulos</button></p>
+    </div>
+    )
+
+    return (
+      <div>
+        { this.props.user.length < 1 ? loginform() : logoutform() }
       </div>
     )
   }

@@ -1,8 +1,19 @@
 import React from 'react'
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react'
+import { connect } from 'react-redux'
+import { setLocation } from '../reducers/locationReducer'
 
 export class MapContainer extends React.Component {
   state = {
+    mapFocus: {
+      lat: 60.1699,
+      lng: 24.9384
+    },
+    inputCoordinates: {
+      lat: 0,
+      lng: 0
+    },
+    mapZoom: 6,
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
@@ -17,7 +28,9 @@ export class MapContainer extends React.Component {
       species: {
         finnishName: '',
         latinName: ''
-      }
+      },
+      mapFocus: 666,
+      search: ''
     }
   }
 
@@ -29,7 +42,6 @@ export class MapContainer extends React.Component {
     this.setState({ 
       showingInfoWindow: true,
       activeMarker: marker,
-      selectedPlace: props,
       activeMarkerInfo: {
         firstname: props.observation.user.firstname,
         lastname: props.observation.user.lastname,
@@ -43,7 +55,51 @@ export class MapContainer extends React.Component {
         }
       }
     })
-    console.log(this.state.activeMarkerInfo)
+  }
+
+  onMapClick = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({showingInfoWindow: false})
+    }
+  }
+
+  handleFieldChange = (event) => {
+    event.preventDefault()
+    this.setState({ [event.target.name]: event.target.value })
+    console.log(this.state.search)
+  }
+
+  geocodeIt = (event) => {
+    event.preventDefault()
+    const geocoder = new window.google.maps.Geocoder()
+
+    console.log('ekaksi täällä', this.state.mapFocus)
+
+    geocoder.geocode( { 'address': this.state.search }, (results, status) => {
+      if (status === 'OK') {
+        console.log('latitude: ', results[0].geometry.viewport.f.b)
+        console.log('longitude: ', results[0].geometry.viewport.b.b)
+        const mapFocusObject = {
+          lat: results[0].geometry.viewport.f.b,
+          lng: results[0].geometry.viewport.b.b
+        }
+
+        this.setState({ mapFocus: mapFocusObject, mapZoom: 16, inputCoordinates: mapFocusObject })
+
+        const locationForReducer = {
+          latitude: mapFocusObject.lat,
+          longitude: mapFocusObject.lng
+        }
+
+        this.props.setLocation(locationForReducer)
+
+        console.log('entäs sit täällä', this.state.mapFocus)
+
+    } else {
+        console.log('Ei tuloksia');
+      }
+    })
+
   }
 
   render() {
@@ -51,16 +107,29 @@ export class MapContainer extends React.Component {
       width: '750px',
       height: '450px'
     }
-    
+
     return (
       <div>
+        <div>
+          <p>etsi osoitteen perusteella: </p>
+          <form onSubmit={this.geocodeIt}>
+            <input type="text" name="search" onChange={this.handleFieldChange}/><br />
+            <button>etsi</button>
+            <br />
+            latitude: <input type="text" value={this.state.inputCoordinates.lat} /><br />
+            longitude: <input type="text" value={this.state.inputCoordinates.lng} />
+          </form>
+        </div>
+        <div>
+        </div>
         <Map 
           google={this.props.google} 
-          zoom={6} 
+          zoom={this.state.mapZoom} 
           style={style}
-          initialCenter={{ lat: 65.01236, lng: 25.46816 }}
+          center={{ lat: this.state.mapFocus.lat, lng: this.state.mapFocus.lng }}
+          initialCenter={{ lat: 60.1699, lng: 24.9384 }}
+          onClick={this.onMapClick}
         >
-
           { this.props.observations.map(observation => 
             <Marker 
               key={observation.id} 
@@ -86,6 +155,12 @@ export class MapContainer extends React.Component {
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API
-})(MapContainer)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export const MapContainerComponent = connect(mapStateToProps, { setLocation })(GoogleApiWrapper({
+  apiKey: 'AIzaSyD8bfLtwWL2sBo1qktwaxChVIomZ10gMpU'
+})(MapContainer))

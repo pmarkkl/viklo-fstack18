@@ -7,7 +7,8 @@ import { initLocation } from './reducers/locationReducer'
 import ObservationList from './components/ObservationList'
 import NewObservation from './components/NewObservation'
 import LoginForm from './components/LoginForm'
-import Map from './components/Map'
+import { MapContainerComponent } from './components/Map'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -23,13 +24,23 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div>
-        <LoginForm />
-        <h1>Viklo 0.1</h1>
-        <NewObservation />
-        <ObservationList />
-        <Map observations={this.props.observations} />
+      <Router>
+        <div>
+          <div>
+            <Link to="/">etusivu</Link>&nbsp;
+            <Link to="/kartta">kartta</Link>&nbsp;
+            <Link to="/havainnot">havainnot</Link>
+          </div>
+          <div>
+            <Route exact path="/" render={() => <div><h1>Viklo</h1> <LoginForm /></div>} />
+            <Route path="/kartta" render={() => <MapContainerComponent observations={this.props.observations} />} />
+            <Route path="/havainnot" render={() => <ObservationList />} />
+          </div>
+        </div>
+      </Router>
       </div>
     )
   }
