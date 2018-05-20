@@ -42,7 +42,7 @@ class LoginForm extends React.Component {
 
     const loginform = () => (
       <div>
-        <h2>loginForm</h2>
+        <h2>Kirjaudu sisään</h2>
         <form onSubmit={this.login}>
           Käyttäjä: <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} /><br />
           Salasana: <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} /><br />

@@ -17,6 +17,14 @@ class Location extends React.Component {
       longitude: ''
     }
   }
+  
+  error = (error) => {
+    console.warn(error.message)
+  }
+  
+  getLocation = (event) => {
+    navigator.geolocation.getCurrentPosition(this.success, this.error, options)
+  }
 
   success = (position) => {
     const coordinates = position.coords
@@ -26,14 +34,6 @@ class Location extends React.Component {
       longitude: coordinates.longitude
     }
     this.props.setLocation(locationForReducer)
-  }
-  
-  error = (error) => {
-    console.warn(error.message)
-  }
-  
-  getLocation = (event) => {
-    navigator.geolocation.getCurrentPosition(this.success, this.error, options)
   }
 
   render() {

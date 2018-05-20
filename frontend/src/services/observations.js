@@ -1,25 +1,14 @@
 import axios from 'axios'
+import { setToken } from './helpers'
 const url = 'http://localhost:3001/api/observations'
-
-let token = null
 
 const getAll = async () => {
   const response = await axios.get(url)
   return response.data
 }
 
-const setToken = (newToken) => {
-  token = `bearer ${newToken}`
-  return token
-}
-
 const newObservation = async (request) => {
-
-  const token = setToken(request.token)
-
-  const config = {
-    headers: { 'Authorization': token }
-  }
+  const config = await setToken(request.token)
 
   const observationObject = {
     latitude: request.latitude,
@@ -31,7 +20,6 @@ const newObservation = async (request) => {
 
   const response = await axios.post(url, observationObject, config)
   return response.data
-
 }
 
 export default {

@@ -1,6 +1,7 @@
 
 const speciesRouter = require('express').Router()
 const Species = require('../models/species')
+const jwt = require('jsonwebtoken')
 
 speciesRouter.get('/', async (req, res) => {
   const allSpecies = await Species
@@ -25,9 +26,31 @@ speciesRouter.get('/:id', async (req, res) => {
   }
 })
 
+const getTokenFrom = (req) => {
+  const authorization = req.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    return authorization.substring(7)
+  }
+  return null
+}
+
 speciesRouter.post('/', async (req, res) => {
+  const body = req.body
   try {
-    const body = req.body
+    const token = getTokenFrom(req)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return res.status(401).json({ error: 'Ei tokenia tai se on virheellinen.' })
+    }
+
+    if (!decodedToken.admin) {
+      return res.status(401).json({ error: 'Unauthorized' })
+    }
+    
+    if (body.finnishName === undefined || body.latinName == undefined ) {
+      return res.status(400).json({ error: 'Ei sisältöä.' })
+    }
 
     const maybeExists = await Species.find({ latinName: body.latinName })
 

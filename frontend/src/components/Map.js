@@ -13,6 +13,10 @@ export class MapContainer extends React.Component {
       lat: 0,
       lng: 0
     },
+    initialCenter: {
+      lat: 60.1699,
+      lng: 24.9384
+    },
     mapZoom: 6,
     showingInfoWindow: false,
     activeMarker: {},
@@ -30,7 +34,7 @@ export class MapContainer extends React.Component {
         latinName: ''
       },
       mapFocus: 666,
-      search: ''
+      search: '' 
     }
   }
 
@@ -38,8 +42,8 @@ export class MapContainer extends React.Component {
     this.setState({ observations: this.props.observations })
   }
 
-  onMarkerClick = (props, marker, e) => {
-    this.setState({ 
+  onMarkerClick = (props, marker) => {
+    this.setState({
       showingInfoWindow: true,
       activeMarker: marker,
       activeMarkerInfo: {
@@ -57,9 +61,9 @@ export class MapContainer extends React.Component {
     })
   }
 
-  onMapClick = (props) => {
+  onMapClick = () => {
     if (this.state.showingInfoWindow) {
-      this.setState({showingInfoWindow: false})
+      this.setState({ showingInfoWindow: false })
     }
   }
 
@@ -84,7 +88,7 @@ export class MapContainer extends React.Component {
           lng: results[0].geometry.viewport.b.b
         }
 
-        this.setState({ mapFocus: mapFocusObject, mapZoom: 16, inputCoordinates: mapFocusObject })
+        this.setState({ mapFocus: mapFocusObject, mapZoom: 16, inputCoordinates: mapFocusObject, initialCenter: mapFocusObject })
 
         const locationForReducer = {
           latitude: mapFocusObject.lat,
@@ -105,7 +109,7 @@ export class MapContainer extends React.Component {
   render() {
     const style = {
       width: '750px',
-      height: '450px'
+      height: '500px'
     }
 
     return (
@@ -120,14 +124,13 @@ export class MapContainer extends React.Component {
             longitude: <input type="text" value={this.state.inputCoordinates.lng} />
           </form>
         </div>
-        <div>
-        </div>
+        <div id="kartta">
         <Map 
           google={this.props.google} 
           zoom={this.state.mapZoom} 
           style={style}
           center={{ lat: this.state.mapFocus.lat, lng: this.state.mapFocus.lng }}
-          initialCenter={{ lat: 60.1699, lng: 24.9384 }}
+          initialCenter={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
           onClick={this.onMapClick}
         >
           { this.props.observations.map(observation => 
@@ -150,7 +153,8 @@ export class MapContainer extends React.Component {
             </div>
           </InfoWindow>
         </Map>
-      </div>
+        </div>
+    </div>
     )
   }
 }
@@ -162,5 +166,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { setLocation })(GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API
+  apiKey: 'AIzaSyD8bfLtwWL2sBo1qktwaxChVIomZ10gMpU'
 })(MapContainer))
