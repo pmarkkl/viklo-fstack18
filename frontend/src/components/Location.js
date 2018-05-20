@@ -41,6 +41,7 @@ class Location extends React.Component {
       <div>
       Location ois nyt tässä<br />
       <button onClick={this.getLocation}>Hae sijainti</button>
+      <label type="submit" onClick={this.getLocation} value="Hae sijainti" />
       </div>
     )
   }

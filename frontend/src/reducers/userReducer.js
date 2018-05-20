@@ -1,3 +1,5 @@
+import userService from '../services/users'
+
 const userReducer = (state = [], action) => {
   switch (action.type) {
     case 'INIT_USERS':
@@ -13,9 +15,10 @@ const userReducer = (state = [], action) => {
 
 export const initializeUser = (user) => {
   return async (dispatch) => {
+    const data = await userService.fetchUserData(user.id)
     dispatch({
       type: 'INIT_USER',
-      data: user
+      data
     })
   }
 }

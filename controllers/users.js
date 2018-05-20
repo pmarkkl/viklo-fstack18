@@ -41,10 +41,6 @@ usersRouter.post('/', async (req, res) => {
       firstname: body.firstname,
       lastname: body.lastname,
       email: body.email,
-      address: body.address,
-      zipcode: body.zipcode,
-      town: body.town,
-      phone: body.phone,
       passwordHash
     })
 
@@ -124,5 +120,6 @@ usersRouter.post('/makeadmin', async (req, res) => {
     res.status(500).json({ error: 'Jotain kummallista tapahtui admin-oikeuksien muuttamisessa' })
   }
 })
+
 
 module.exports = usersRouter

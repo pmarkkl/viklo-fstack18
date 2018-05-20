@@ -16,8 +16,15 @@ observationSchema.statics.format = (observation) => {
     longitude: observation.longitude,
     date: observation.date,
     additionalComments: observation.additionalComments,
-    user: observation.user,
-    species: observation.species
+    species: {
+      finnishName: observation.species.finnishName,
+      latinName: observation.species.latinName
+    },
+    user: {
+      id: observation.user._id,
+      firstname: observation.user.firstname,
+      lastname: observation.user.lastname
+    }
   }
 }
 

@@ -8,9 +8,9 @@ import ObservationList from './components/ObservationList'
 import LoginForm from './components/LoginForm'
 import NewObservation from './components/NewObservation'
 import AddSpecies from './components/AddSpecies'
+import MyPage from './components/MyPage'
 import { MapContainerComponent } from './components/Map'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import { logo } from './logo.png'
 
 class App extends React.Component {
 
@@ -27,6 +27,10 @@ class App extends React.Component {
 
   render() {
 
+    const profiili = {
+      float: 'right'
+    }
+
     return (
       <div id="container">
         <div id="yla">
@@ -34,20 +38,24 @@ class App extends React.Component {
         </div>
         <div id="ala">
             <Router>
-              <div>
+              <div id="alaloota">
                 <div>
                   <ul>
                   <li><Link to="/">Etusivu</Link></li>
                   <li><Link to="/kartta">Kartta</Link></li>
                   <li><Link to="/havainnot">Havainnot</Link></li>
                   <li><Link to="/lajit">Lisää laji</Link></li>
+                  <li style={profiili}><Link to="/omasivu">Oma sivu</Link></li>
                   </ul>
                 </div>
-                <div>
+                <div id="clear">
+                </div>
+                <div id="leveys">
                   <Route exact path="/" render={() => <LoginForm />} />
                   <Route path="/kartta" render={() => <div><NewObservation /> <MapContainerComponent observations={this.props.observations} /></div>} />
                   <Route path="/havainnot" render={() => <ObservationList />} />
                   <Route path="/lajit" render={() => <AddSpecies />} /> 
+                  <Route path="/omasivu" render={() => <MyPage />} />
                 </div>
               </div>
             </Router>

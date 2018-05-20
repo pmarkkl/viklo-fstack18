@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import observationService from '../services/observations'
 import { observationCreation } from '../reducers/observationReducer'
 import Location from '../components/Location'
-import { Form } from 'semantic-ui-react'
 
 class NewObservation extends React.Component {
 
@@ -46,12 +45,12 @@ class NewObservation extends React.Component {
         <Location />
         <div>
           <form onSubmit={this.addObservation}>
-            Laji: <select name="species" onChange={this.handleChange}>
+            <select name="species" onChange={this.handleChange}>
               {this.props.species.map(species => <option key={species.id} value={species.id}>{species.finnishName} ({species.latinName})</option>)}
             </select><br />
             Latitude: <input type="text" name="latitude" defaultValue={this.state.latitude} value={this.props.location.latitude}/><br />
             Longitude: <input type="text" name="longitude" defaultValue={this.state.longitude} value={this.props.location.longitude}/><br />
-            <button>lisää</button><br />
+            <input type="submit" value="Lisää" /><br />
           </form>
         </div>
         <br />

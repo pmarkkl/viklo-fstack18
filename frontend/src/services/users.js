@@ -7,6 +7,23 @@ const getAll = async () => {
   return response.data
 }
 
+const newUser = async (data) => {
+  const userObject = {
+    email: data.email,
+    firstname: data.firstname,
+    lastname: data.lastname,
+    password: data.password
+  }
+
+  const response = await axios.post(url, userObject)
+  return response.data
+}
+
+const fetchUserData = async (id) => {
+  const response = await axios.get(`${url}/${id}`)
+  return response.data
+}
+
 export default {
-  getAll
+  getAll, newUser, fetchUserData
 }
