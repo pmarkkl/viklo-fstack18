@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { setLocation } from '../reducers/locationReducer'
+import { setLocation } from '../../reducers/locationReducer'
 
 const options = {
   enableHighAccuracy: true,
@@ -39,7 +39,6 @@ class Location extends React.Component {
   render() {
     return (
       <div>
-      Location ois nyt tässä<br />
       <button onClick={this.getLocation}>Hae sijainti</button>
       <label type="submit" onClick={this.getLocation} value="Hae sijainti" />
       </div>

@@ -1,27 +1,22 @@
 import React from 'react'
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react'
 import { connect } from 'react-redux'
-import { setLocation } from '../reducers/locationReducer'
+import { setMarkers, markersForUser, emptyMarkers, addMarker } from '../../reducers/markerReducer'
 
 export class MapContainer extends React.Component {
+
   state = {
+    showingInfoWindow: false,
     mapFocus: {
-      lat: 60.1699,
-      lng: 24.9384
-    },
-    inputCoordinates: {
-      lat: 0,
-      lng: 0
+      lat: 60.2279004,
+      lng: 25.0270719
     },
     initialCenter: {
-      lat: 60.1699,
-      lng: 24.9384
+      lat: 60.2279004,
+      lng: 25.0270719
     },
     mapZoom: 6,
-    showingInfoWindow: false,
     activeMarker: {},
-    selectedPlace: {},
-    observations: [],
     activeMarkerInfo: {
       firstname: '',
       lastname: '',
@@ -32,14 +27,8 @@ export class MapContainer extends React.Component {
       species: {
         finnishName: '',
         latinName: ''
-      },
-      mapFocus: 666,
-      search: '' 
+      }
     }
-  }
-
-  componentWillMount() {
-    this.setState({ observations: this.props.observations })
   }
 
   onMarkerClick = (props, marker) => {
@@ -61,79 +50,25 @@ export class MapContainer extends React.Component {
     })
   }
 
-  onMapClick = () => {
-    if (this.state.showingInfoWindow) {
-      this.setState({ showingInfoWindow: false })
-    }
-  }
-
-  handleFieldChange = (event) => {
-    event.preventDefault()
-    this.setState({ [event.target.name]: event.target.value })
-    console.log(this.state.search)
-  }
-
-  geocodeIt = (event) => {
-    event.preventDefault()
-    const geocoder = new window.google.maps.Geocoder()
-
-    console.log('ekaksi täällä', this.state.mapFocus)
-
-    geocoder.geocode( { 'address': this.state.search }, (results, status) => {
-      if (status === 'OK') {
-        console.log('latitude: ', results[0].geometry.viewport.f.b)
-        console.log('longitude: ', results[0].geometry.viewport.b.b)
-        const mapFocusObject = {
-          lat: results[0].geometry.viewport.f.b,
-          lng: results[0].geometry.viewport.b.b
-        }
-
-        this.setState({ mapFocus: mapFocusObject, mapZoom: 16, inputCoordinates: mapFocusObject, initialCenter: mapFocusObject })
-
-        const locationForReducer = {
-          latitude: mapFocusObject.lat,
-          longitude: mapFocusObject.lng
-        }
-
-        this.props.setLocation(locationForReducer)
-
-        console.log('entäs sit täällä', this.state.mapFocus)
-
-    } else {
-        console.log('Ei tuloksia');
-      }
-    })
-
-  }
-
   render() {
+
     const style = {
-      width: '750px',
-      height: '500px'
+      width: '800px',
+      height: '400px'
     }
 
     return (
       <div>
-        <div>
-          <p>etsi osoitteen perusteella: </p>
-          <form onSubmit={this.geocodeIt}>
-            <input type="text" name="search" onChange={this.handleFieldChange}/><br />
-            <button>etsi</button>
-            <br />
-            latitude: <input type="text" value={this.state.inputCoordinates.lat} /><br />
-            longitude: <input type="text" value={this.state.inputCoordinates.lng} />
-          </form>
-        </div>
         <div id="kartta">
         <Map 
           google={this.props.google} 
           zoom={this.state.mapZoom} 
           style={style}
-          center={{ lat: this.state.mapFocus.lat, lng: this.state.mapFocus.lng }}
+          center={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
           initialCenter={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
           onClick={this.onMapClick}
         >
-          { this.props.observations.map(observation => 
+          { this.props.markers.map(observation => 
             <Marker 
               key={observation.id} 
               position={{lat: observation.latitude, lng: observation.longitude}} 
@@ -142,7 +77,6 @@ export class MapContainer extends React.Component {
             >
             </Marker>) 
           }
-
           <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
             <div>
               <p><b>{this.state.activeMarkerInfo.species.finnishName} ({this.state.activeMarkerInfo.species.latinName})</b></p>
@@ -161,10 +95,12 @@ export class MapContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    observations: state.observations,
+    markers: state.markers,
     user: state.user
   }
 }
 
-export const MapContainerComponent = connect(mapStateToProps, { setLocation })(GoogleApiWrapper({
+export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker })(GoogleApiWrapper({
   apiKey: process.env.GOOGLE_API
 })(MapContainer))

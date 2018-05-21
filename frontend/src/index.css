@@ -1,7 +1,7 @@
 body {
   background-color: #EFEFEF;
-  font-family: Verdana, Geneva, sans-serif;
-  font-size: 9pt;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11pt;
   margin: 0px;
   overflow-x: hidden;
 }
@@ -9,13 +9,14 @@ body {
 
 
 #yla {
-  height: 61px;
+  height: 59px;
   width: 100%;
   background-color: #FFFFFF;
   padding: 0px;
   margin: 0px;
   padding-left: 22px;
-  padding-top: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   box-shadow: 0px 4px 4px #e1e1e1;
 }
 
@@ -43,7 +44,7 @@ ul {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #3d5856;
+  background-color: #583845;
   text-align: center;
   font-size: 10pt;
   margin-bottom: 10px;
@@ -62,7 +63,7 @@ li a {
 }
 
 li a:hover {
-  background-color: #578f83;
+  background-color: #36262c;
   color: #FFFFFF;
 }
 
@@ -112,7 +113,7 @@ button {
   background-color: #f9f9f9;
   border: 1px solid #6dbaa9;
   box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
+  font-size: 10pt;
 }
 
 #leveys {
@@ -124,14 +125,21 @@ button {
 }
 
 #alaloota {
-  width: 85%;
+  width: 75%;
   margin: 0px auto;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-bottom: 30px;
-  padding: 12px;
+  padding: 16px;
   background-color: #FFFFFF;
   border: 1px solid #e1e1e1;
   border-radius: 3px;
   box-shadow: 4px 4px 4px #e1e1e1;
   box-sizing: border-box;
+}
+
+#testi {
+  width: 75%;
+  margin: 0px auto;
+  margin-top: 25px;
+  box-shadow: 0px 4px 4px #e1e1e1;
 }

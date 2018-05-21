@@ -4,12 +4,12 @@ import { initializeObservations } from './reducers/observationReducer'
 import { initializeSpecies } from './reducers/speciesReducer'
 import { initializeUser } from './reducers/userReducer'
 import { initLocation } from './reducers/locationReducer'
-import ObservationList from './components/ObservationList'
+import { setMarkers } from './reducers/markerReducer'
+import ObservationList from './components/observation/ObservationList'
 import LoginForm from './components/LoginForm'
-import NewObservation from './components/NewObservation'
+import NewObservation from './components/observation/NewObservation'
 import AddSpecies from './components/AddSpecies'
 import MyPage from './components/MyPage'
-import { MapContainerComponent } from './components/Map'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 class App extends React.Component {
@@ -18,6 +18,7 @@ class App extends React.Component {
     this.props.initializeObservations()
     this.props.initializeSpecies()
     this.props.initLocation()
+    this.props.setMarkers()
     const loggedIn = window.localStorage.getItem('loggedInUser')
     const parsed = JSON.parse(loggedIn)
     if (parsed) {
@@ -32,35 +33,35 @@ class App extends React.Component {
     }
 
     return (
+      <Router>
       <div id="container">
         <div id="yla">
-          <img src={require('./logo.png')} alt="viklo" />
+          <img src={require('./logo2.png')} alt="viklo" />
+        </div>
+        <div id="testi">
+        <ul>
+        <li><Link to="/">Etusivu</Link></li>
+        <li><Link to="/uusihavainto">Uusi havainto</Link></li>
+        <li><Link to="/havainnot">Havainnot</Link></li>
+        <li><Link to="/lajit">Lisää laji</Link></li>
+        <li style={profiili}><Link to="/omasivu">Oma sivu</Link></li>
+                  </ul>
         </div>
         <div id="ala">
-            <Router>
-              <div id="alaloota">
-                <div>
-                  <ul>
-                  <li><Link to="/">Etusivu</Link></li>
-                  <li><Link to="/kartta">Kartta</Link></li>
-                  <li><Link to="/havainnot">Havainnot</Link></li>
-                  <li><Link to="/lajit">Lisää laji</Link></li>
-                  <li style={profiili}><Link to="/omasivu">Oma sivu</Link></li>
-                  </ul>
-                </div>
-                <div id="clear">
-                </div>
-                <div id="leveys">
-                  <Route exact path="/" render={() => <LoginForm />} />
-                  <Route path="/kartta" render={() => <div><NewObservation /> <MapContainerComponent observations={this.props.observations} /></div>} />
-                  <Route path="/havainnot" render={() => <ObservationList />} />
-                  <Route path="/lajit" render={() => <AddSpecies />} /> 
-                  <Route path="/omasivu" render={() => <MyPage />} />
-                </div>
-              </div>
-            </Router>
+          <div id="alaloota">
+            <div id="clear">
+            </div>
+            <div id="leveys">
+              <Route exact path="/" render={() => <LoginForm />} />
+              <Route path="/uusihavainto" render={() => <div><NewObservation /></div>} />
+              <Route path="/havainnot" render={() => <ObservationList />} />
+              <Route path="/lajit" render={() => <AddSpecies />} /> 
+              <Route path="/omasivu" render={() => <MyPage />} />
+          </div>
         </div>
+      </div>
     </div>
+    </Router>
     )
   }
 }
@@ -73,5 +74,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initializeObservations, initializeSpecies, initializeUser, initLocation }
+  { initializeObservations, initializeSpecies, initializeUser, initLocation, setMarkers }
 )(App)

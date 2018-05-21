@@ -15,6 +15,16 @@ const bodyParser = require('body-parser')
 
 mongoose.connect(config.mongoUrl)
 
+const logger = (request, response, next) => {
+  console.log('Method:', request.method)
+  console.log('Path:  ', request.path)
+  console.log('Body:  ', request.body)
+  console.log('---')
+  next()
+}
+
+app.use(logger)
+
 app.use(bodyParser.json())
 app.use(cors())
 

@@ -18,7 +18,7 @@ export const initializeUser = (user) => {
     const data = await userService.fetchUserData(user.id)
     dispatch({
       type: 'INIT_USER',
-      data
+      data: user
     })
   }
 }

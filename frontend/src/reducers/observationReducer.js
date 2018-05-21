@@ -14,6 +14,7 @@ const observationReducer = (state = [], action) => {
 export const initializeObservations = () => {
   return async (dispatch) => {
     const observations = await observationService.getAll()
+    observations.reverse()
     dispatch({
       type: 'INIT_OBSERVATIONS',
       data: observations

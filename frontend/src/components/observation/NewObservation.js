@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import observationService from '../services/observations'
-import { observationCreation } from '../reducers/observationReducer'
-import Location from '../components/Location'
+import observationService from '../../services/observations'
+import { observationCreation } from '../../reducers/observationReducer'
+import { MapContainerComponent } from '../../components/observation/Map'
+import Location from './Location'
 
 class NewObservation extends React.Component {
 
@@ -18,7 +19,6 @@ class NewObservation extends React.Component {
 
   addObservation = async (event) => {
     event.preventDefault()
-
     const requestObject = {
       token: this.props.user.token,
       user: this.props.user.id,
@@ -26,8 +26,6 @@ class NewObservation extends React.Component {
       latitude: this.props.location.latitude,
       longitude: this.props.location.longitude
     }
-
-
     this.setState({ latitude: '', longitude: '' })
     const response = await observationService.newObservation(requestObject)
     this.props.observationCreation(response)
@@ -41,7 +39,7 @@ class NewObservation extends React.Component {
   render() {
     return (
       <div>
-        <h2>Lisää havainto</h2>
+        <h1>Lisää havainto</h1>
         <Location />
         <div>
           <form onSubmit={this.addObservation}>
@@ -54,6 +52,7 @@ class NewObservation extends React.Component {
           </form>
         </div>
         <br />
+        <MapContainerComponent />
       </div>
     )
   }

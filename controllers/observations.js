@@ -22,6 +22,7 @@ const getTokenFrom = (req) => {
 }
 
 observationRouter.post('/', async (req,res) => {
+  console.log(req.body)
   const body = req.body
   try {
     const token = getTokenFrom(req)
