@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react'
+import { GoogleApiWrapper, InfoWindow, Map, Marker, } from 'google-maps-react'
 import { connect } from 'react-redux'
 import { setMarkers, markersForUser, emptyMarkers, addMarker } from '../../reducers/markerReducer'
 
@@ -63,7 +63,7 @@ export class MapContainer extends React.Component {
   render() {
 
     const style = {
-      width: '800px',
+      width: '100%',
       height: '400px'
     }
 
@@ -112,5 +112,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker })(GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API
+  apiKey: process.env.GOOGLE_API_KEY
 })(MapContainer))

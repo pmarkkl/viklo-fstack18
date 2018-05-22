@@ -38,34 +38,28 @@ class App extends React.Component {
 
     return (
       <Router>
-      <div id="container">
-        <div id="yla">
-          <img src={require('./logo2.png')} alt="viklo" />
-        </div>
-        <div id="testi">
-        <ul>
+      <div>
+        <div id="vasen">
+        <img src={require('./logooo.png')} alt="viklo" />
+          <ul>
             <li><Link to="/">Etusivu</Link></li>
             <li><Link to="/uusihavainto">Uusi havainto</Link></li>
             <li><Link to="/havainnot">Havainnot</Link></li>
             <li><Link to="/lajit">Lisää laji</Link></li>
-            <li style={profiili}><Link to="/omasivu">Oma sivu</Link></li>
+            <li><Link to="/omasivu">Oma sivu</Link></li>
           </ul>
         </div>
-        <div id="ala">
-          <div id="alaloota">
-            <div id="clear">
-            </div>
-            <div id="leveys">
-              <Route exact path="/" render={() => <LoginForm />} />
-              <Route path="/uusihavainto" render={() => <div><NewObservation /></div>} />
-              <Route path="/havainnot" render={() => <ObservationList />} />
-              <Route path="/lajit" render={() => <AddSpecies />} /> 
-              <Route path="/omasivu" render={() => <MyPage />} />
+        <div id="oikea">
+          <div id="jes">
+            <Route exact path="/" render={() => <LoginForm />} />
+            <Route path="/uusihavainto" render={() => <div><NewObservation /></div>} />
+            <Route path="/havainnot" render={() => <ObservationList />} />
+            <Route path="/lajit" render={() => <AddSpecies />} /> 
+            <Route path="/omasivu" render={() => <MyPage />} />
           </div>
         </div>
       </div>
-    </div>
-    </Router>
+      </Router>
     )
   }
 }

@@ -9,9 +9,13 @@ requestRouter.get('/', async (req,res) => {
 })
 
 requestRouter.get('/user/:id', async (req, res) => {
-  const allRequests = await Request.find({})
-  const userRequests = allRequests.filter(request => (request.sent == req.params.id || request.received == req.params.id) && !request.accepted)
-  res.json(userRequests.map(Request.format))
+  const response = await Request.find({ 
+    $or: [
+      { sent: req.params.id },
+      { received: req.params.id }
+    ]
+   })
+  res.json(response.filter(response => !response.accepted).map(Request.format))
 })
 
 requestRouter.post('/', async (req, res) => {

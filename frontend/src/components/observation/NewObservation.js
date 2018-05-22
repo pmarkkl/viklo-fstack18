@@ -70,6 +70,7 @@ class NewObservation extends React.Component {
     return (
       <div>
         <h1>Lisää havainto</h1>
+        <MapContainerComponent />
         <div>
           <form onSubmit={this.addObservation}>
             <div id="laji">
@@ -82,7 +83,6 @@ class NewObservation extends React.Component {
             </div>
           </form>
         </div>
-        <MapContainerComponent />
       </div>
     )
   }

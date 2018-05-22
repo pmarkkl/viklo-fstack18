@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { initializeUser } from '../reducers/userReducer'
 import { logout } from '../reducers/userReducer'
 import userService from '../services/users'
+import { Table, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 class LoginForm extends React.Component {
 
@@ -58,28 +59,38 @@ class LoginForm extends React.Component {
   render() {
 
     const loginform = () => (
-      <div>
+      <div id="loginForm">
         <h3>Kirjaudu sisään</h3>
         <form onSubmit={this.login}>
-          Käyttäjä:<br/> <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} /><br />
-          Salasana:<br /> <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} /><br />
-          <input type="submit" value="Kirjaudu" />
+          <FormGroup>
+            <ControlLabel>Sähköposti:</ControlLabel>
+            <FormControl type="text" name="email" onChange={this.handleFieldChange} />
+            <ControlLabel>Salasana: </ControlLabel>
+            <FormControl type="password" name="password" onChange={this.handleFieldChange} />
+            <Button bsStyle="success" type="submit">Kirjaudu</Button>
+          </FormGroup>
         </form>
         <h3>Oletko uusi jäsen? Rekisteröidy alla.</h3>
         <form onSubmit={this.register}>
-          Sähköposti:<br/> <input type="text" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} /><br />
-          Etunimi:<br /> <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} /><br />
-          Sukunimi:<br/> <input type="text" name="newUserLastname" value={this.state.newUserLastname} onChange={this.handleFieldChange} /><br />
-          Salasana:<br /> <input type="password" name="newUserPassword" value={this.state.newUserPassword} onChange={this.handleFieldChange} /><br />
-          <button>Rekisteröidy</button>
+          <FormGroup>
+              <ControlLabel>Sähköposti:</ControlLabel>
+              <FormControl type="text" name="newUserEmail" onChange={this.handleFieldChange} />
+              <ControlLabel>Etunimi:</ControlLabel>
+              <FormControl type="text" name="newUserFirstname" onChange={this.handleFieldChange} />
+              <ControlLabel>Sukunimi:</ControlLabel>
+              <FormControl type="text" name="newUserLastname" onChange={this.handleFieldChange} />
+              <ControlLabel>Salasana: </ControlLabel>
+              <FormControl type="password" name="newUserPassword" onChange={this.handleFieldChange} />
+              <Button bsStyle="primary" type="submit">Rekisteröidy</Button>
+            </FormGroup>
         </form>
       </div>
     )
 
     const logoutform = () => (
       <div>
-        <p>{this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in</p>
-        <p><input type="submit" onClick={this.logout} value="Kirjaudu ulos" /></p>
+        <h3>{this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in</h3>
+        <Button bsStyle="danger" onClick={this.logout}>Kirjaudu ulos</Button>
     </div>
     )
 
