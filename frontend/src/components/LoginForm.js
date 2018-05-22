@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { initializeUser } from '../reducers/userReducer'
 import { logout } from '../reducers/userReducer'
 import userService from '../services/users'
-import { Table, FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
+import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 class LoginForm extends React.Component {
 
@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
     const loginform = () => (
       <div id="loginForm">
         <h3>Kirjaudu sisään</h3>
-        <form onSubmit={this.login}>
+        <form onSubmit={this.login} autoComplete="on">
           <FormGroup>
             <ControlLabel>Sähköposti:</ControlLabel>
             <FormControl type="text" name="email" onChange={this.handleFieldChange} />
@@ -70,8 +70,8 @@ class LoginForm extends React.Component {
             <Button bsStyle="success" type="submit">Kirjaudu</Button>
           </FormGroup>
         </form>
-        <h3>Oletko uusi jäsen? Rekisteröidy alla.</h3>
-        <form onSubmit={this.register}>
+        <h3>Rekisteröityminen</h3>
+        <form onSubmit={this.register} autoComplete="on">
           <FormGroup>
               <ControlLabel>Sähköposti:</ControlLabel>
               <FormControl type="text" name="newUserEmail" onChange={this.handleFieldChange} />

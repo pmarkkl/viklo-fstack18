@@ -32,10 +32,6 @@ class App extends React.Component {
 
   render() {
 
-    const profiili = {
-      float: 'right'
-    }
-
     return (
       <Router>
       <div>
@@ -48,11 +44,15 @@ class App extends React.Component {
             <li><Link to="/lajit">Lisää laji</Link></li>
             <li><Link to="/omasivu">Oma sivu</Link></li>
           </ul>
+          <br />
+          <ul id="admin">
+            <li><Link to="/yllapito">Ylläpito</Link></li>
+          </ul>
         </div>
         <div id="oikea">
           <div id="jes">
             <Route exact path="/" render={() => <LoginForm />} />
-            <Route path="/uusihavainto" render={() => <div><NewObservation /></div>} />
+            <Route path="/uusihavainto" render={() => <NewObservation />} />
             <Route path="/havainnot" render={() => <ObservationList />} />
             <Route path="/lajit" render={() => <AddSpecies />} /> 
             <Route path="/omasivu" render={() => <MyPage />} />

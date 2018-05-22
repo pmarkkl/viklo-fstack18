@@ -25,7 +25,6 @@ class MyPage extends React.Component {
     return (
       <div>
         <h1>Käyttäjäsivu</h1>
-        <h3></h3>
         <div>
           {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email})
         </div>

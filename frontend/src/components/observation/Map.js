@@ -28,6 +28,10 @@ export class MapContainer extends React.Component {
         finnishName: '',
         latinName: ''
       }
+    },
+    newMarker: {
+      lat: 0,
+      lng: 0
     }
   }
 
@@ -54,14 +58,35 @@ export class MapContainer extends React.Component {
     })
   }
 
-  onMapClick = (props) => {
+  onMapClick = (mapProps, map, clickEvent) => {
+
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
     }
+
+    const lat = clickEvent.latLng.lat()
+    const lng = clickEvent.latLng.lng()
+
+    this.props.google.maps.event.addListener(map, 'dblclick', function(event) {
+      const newMarker = {
+        lat: lat,
+        lng: lng
+      }
+      const marker = new window.google.maps.Marker({ position: newMarker, map: map })
+    })
+
+    this.setState({
+      newMarker: {
+        lat, lng
+      },
+      mapFocus: {
+        lat, lng
+      }
+    })
+
   }
 
   render() {
-
     const style = {
       width: '100%',
       height: '400px'
@@ -76,6 +101,7 @@ export class MapContainer extends React.Component {
           style={style}
           center={{ lat: this.state.mapFocus.lat, lng: this.state.mapFocus.lng }}
           initialCenter={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
+          onReady={this.fetchPlaces}
           onClick={this.onMapClick}
         >
           { this.props.markers.map(observation => 
