@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Observation from '../components/observation/Observation'
 import { MapContainerComponent } from '../components/observation/Map'
 import { setMarkers, markersForUser, emptyMarkers, addMarker } from '../reducers/markerReducer'
 
@@ -26,6 +25,10 @@ class MyPage extends React.Component {
     return (
       <div>
         <h1>Käyttäjäsivu</h1>
+        <h3></h3>
+        <div>
+          {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email})
+        </div>
         <h3>Omat havainnot</h3>
         <button onClick={this.emptyMap}>tyhjennä kartta</button><button onClick={this.getMarkers}>hae kaikki</button><button onClick={this.getUsersMarkers}>hae omat</button>
         <MapContainerComponent />

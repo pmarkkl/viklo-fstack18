@@ -8,6 +8,7 @@ usersRouter.get('/', async (req,res) => {
   const users = await User
   .find({})
   .populate('observations', { date: 1, latitude: 1, longitude: 1, additionalComments: 1, species: 1 })
+  .populate('requests', { accepted: 1, sent: 1, received: 1 })
   res.json(users.map(User.format))
 })
 

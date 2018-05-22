@@ -5,6 +5,8 @@ import { initializeSpecies } from './reducers/speciesReducer'
 import { initializeUser } from './reducers/userReducer'
 import { initLocation } from './reducers/locationReducer'
 import { setMarkers } from './reducers/markerReducer'
+import { initFriends } from './reducers/friendsReducer'
+import { initRequests } from './reducers/requestsReducer'
 import ObservationList from './components/observation/ObservationList'
 import LoginForm from './components/LoginForm'
 import NewObservation from './components/observation/NewObservation'
@@ -23,6 +25,8 @@ class App extends React.Component {
     const parsed = JSON.parse(loggedIn)
     if (parsed) {
       this.props.initializeUser(parsed)
+      this.props.initFriends(parsed.id)
+      this.props.initRequests(parsed.id)
     }
   }
 
@@ -40,12 +44,12 @@ class App extends React.Component {
         </div>
         <div id="testi">
         <ul>
-        <li><Link to="/">Etusivu</Link></li>
-        <li><Link to="/uusihavainto">Uusi havainto</Link></li>
-        <li><Link to="/havainnot">Havainnot</Link></li>
-        <li><Link to="/lajit">Lisää laji</Link></li>
-        <li style={profiili}><Link to="/omasivu">Oma sivu</Link></li>
-                  </ul>
+            <li><Link to="/">Etusivu</Link></li>
+            <li><Link to="/uusihavainto">Uusi havainto</Link></li>
+            <li><Link to="/havainnot">Havainnot</Link></li>
+            <li><Link to="/lajit">Lisää laji</Link></li>
+            <li style={profiili}><Link to="/omasivu">Oma sivu</Link></li>
+          </ul>
         </div>
         <div id="ala">
           <div id="alaloota">
@@ -74,5 +78,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initializeObservations, initializeSpecies, initializeUser, initLocation, setMarkers }
+  { initializeObservations, initializeSpecies, initializeUser, initLocation, setMarkers, initFriends, initRequests }
 )(App)

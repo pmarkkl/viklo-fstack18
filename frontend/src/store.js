@@ -6,13 +6,17 @@ import userReducer from './reducers/userReducer'
 import speciesReducer from './reducers/speciesReducer'
 import locationReducer from './reducers/locationReducer'
 import markerReducer from './reducers/markerReducer'
+import friendsReducer from './reducers/friendsReducer'
+import requestsReducer from './reducers/requestsReducer'
 
 const reducer = combineReducers({
   observations: observationReducer,
   user: userReducer,
   species: speciesReducer,
   location: locationReducer,
-  markers: markerReducer
+  markers: markerReducer,
+  friends: friendsReducer,
+  requests: requestsReducer
 })
 
 const store = createStore(

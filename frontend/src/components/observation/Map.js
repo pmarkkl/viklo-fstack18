@@ -46,8 +46,18 @@ export class MapContainer extends React.Component {
           finnishName: props.observation.species.finnishName,
           latinName: props.observation.species.latinName
         }
+      },
+      mapFocus: {
+        lat: props.observation.latitude,
+        lng: props.observation.longitude
       }
     })
+  }
+
+  onMapClick = (props) => {
+    if (this.state.showingInfoWindow) {
+      this.setState({ showingInfoWindow: false })
+    }
   }
 
   render() {
@@ -64,7 +74,7 @@ export class MapContainer extends React.Component {
           google={this.props.google} 
           zoom={this.state.mapZoom} 
           style={style}
-          center={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
+          center={{ lat: this.state.mapFocus.lat, lng: this.state.mapFocus.lng }}
           initialCenter={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
           onClick={this.onMapClick}
         >

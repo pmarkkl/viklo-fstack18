@@ -8,6 +8,12 @@ requestRouter.get('/', async (req,res) => {
   res.json(requests.map(Request.format))
 })
 
+requestRouter.get('/user/:id', async (req, res) => {
+  const allRequests = await Request.find({})
+  const userRequests = allRequests.filter(request => (request.sent == req.params.id || request.received == req.params.id) && !request.accepted)
+  res.json(userRequests.map(Request.format))
+})
+
 requestRouter.post('/', async (req, res) => {
   const body = req.body
   try {
@@ -24,6 +30,11 @@ requestRouter.post('/', async (req, res) => {
     })
   
     const savedRequest = await request.save()
+
+    firstUser.requests = firstUser.requests.concat(savedRequest._id)
+    secondUser.requests = secondUser.requests.concat(savedRequest._id)
+    await firstUser.save()
+    await secondUser.save()
 
     res.json(Request.format(savedRequest))
 
