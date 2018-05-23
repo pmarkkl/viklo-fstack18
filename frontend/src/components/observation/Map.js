@@ -1,7 +1,7 @@
 import React from 'react'
 import { GoogleApiWrapper, InfoWindow, Map, Marker, } from 'google-maps-react'
 import { connect } from 'react-redux'
-import { setMarkers, markersForUser, emptyMarkers, addMarker } from '../../reducers/markerReducer'
+import { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast } from '../../reducers/markerReducer'
 
 export class MapContainer extends React.Component {
 
@@ -32,33 +32,41 @@ export class MapContainer extends React.Component {
     newMarker: {
       lat: 0,
       lng: 0
-    }
+    },
+    lastMarker: ''
   }
 
   onMarkerClick = (props, marker) => {
-    this.setState({
-      showingInfoWindow: true,
-      activeMarker: marker,
-      activeMarkerInfo: {
-        firstname: props.observation.user.firstname,
-        lastname: props.observation.user.lastname,
-        latitude: props.observation.latitude,
-        longitude: props.observation.longitude,
-        date: props.observation.date,
-        comment: props.observation.additionalComments,
-        species: {
-          finnishName: props.observation.species.finnishName,
-          latinName: props.observation.species.latinName
+    if (props.observation.species) {
+      this.setState({
+        showingInfoWindow: true,
+        activeMarker: marker,
+        activeMarkerInfo: {
+          firstname: props.observation.user.firstname,
+          lastname: props.observation.user.lastname,
+          latitude: props.observation.latitude,
+          longitude: props.observation.longitude,
+          date: props.observation.date,
+          comment: props.observation.additionalComments,
+          species: {
+            finnishName: props.observation.species.finnishName,
+            latinName: props.observation.species.latinName
+          }
+        },
+        mapFocus: {
+          lat: props.observation.latitude,
+          lng: props.observation.longitude
         }
-      },
-      mapFocus: {
-        lat: props.observation.latitude,
-        lng: props.observation.longitude
-      }
-    })
+      }) 
+    }
   }
 
-  onMapClick = (mapProps, map, clickEvent) => {
+  generateIdForRedux = () => {
+    return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1)
+  }
+
+  onMapClick = (mapProps, map, clickEvent, mapCenter) => {
+    this.props.deleteLast(this.state.lastMarker)
 
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
@@ -72,18 +80,25 @@ export class MapContainer extends React.Component {
         lat: lat,
         lng: lng
       }
-      const marker = new window.google.maps.Marker({ position: newMarker, map: map })
     })
 
+    console.log(map)
+    const locationObject = {
+      id: this.generateIdForRedux(),
+      latitude: lat,
+      longitude: lng
+    }
+    this.props.addMarker(locationObject)
     this.setState({
-      newMarker: {
-        lat, lng
-      },
+      lastMarker: locationObject.id,
       mapFocus: {
         lat, lng
       }
     })
+  }
 
+  onReady = (mapProps, map) => {
+    map.disableDoubleClickZoom = true
   }
 
   render() {
@@ -103,6 +118,7 @@ export class MapContainer extends React.Component {
           initialCenter={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
           onReady={this.fetchPlaces}
           onClick={this.onMapClick}
+          onReady={this.onReady}
         >
           { this.props.markers.map(observation => 
             <Marker 
@@ -137,6 +153,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker })(GoogleApiWrapper({
+export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast })(GoogleApiWrapper({
   apiKey: process.env.GOOGLE_API_KEY
 })(MapContainer))
