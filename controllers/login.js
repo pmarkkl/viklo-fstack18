@@ -11,7 +11,7 @@ loginRouter.post('/', async (req, res) => {
   const passwordCheck = user === null ? false : await bcrypt.compare(body.password, user.passwordHash)
 
   if (!(user && passwordCheck)) {
-    return res.status(401).send({ error: 'tunnus tai salasana väärin' })
+    return res.status(401).send({ error: 'Tunnus tai salasana väärin.' })
   }
 
   const userForToken = {
@@ -24,8 +24,11 @@ loginRouter.post('/', async (req, res) => {
 
   const token = jwt.sign(userForToken, process.env.SECRET)
 
-  res.status(200).send({ token, id: user.id, email: user.email, firstname: user.firstname, lastname: user.lastname })
+  console.log(user)
 
+  res.status(200).send({ 
+    token, id: user.id, email: user.email, firstname: user.firstname, lastname: user.lastname, admin: user.admin
+  })
 })
 
 module.exports = loginRouter

@@ -4,7 +4,7 @@ content-type: application/json
 {
   "firstname": "Petteri",
   "lastname": "Markkola",
-  "email": "pmarkkolzzz@hki.fi",
+  "email": "mega@putti.fi",
   "address": "Pasteurinkatu 1",
   "zipcode": "00790",
   "town": "Helsinki",

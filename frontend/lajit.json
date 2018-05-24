@@ -1,0 +1,1864 @@
+{
+  "lajit": [
+    {
+      "finnishName": "Kyhmyjoutsen",
+      "latinName": "Cygnus olor"
+    },
+    {
+      "finnishName": "Pikkujoutsen",
+      "latinName": "Cygnus columbianus"
+    },
+    {
+      "finnishName": "Laulujoutsen",
+      "latinName": "Cygnus cygnus"
+    },
+    {
+      "finnishName": "Metsähanhi",
+      "latinName": "Anser fabalis"
+    },
+    {
+      "finnishName": "Lyhytnokkahanhi",
+      "latinName": "Anser brachyrhynchus"
+    },
+    {
+      "finnishName": "Tundrahanhi",
+      "latinName": "Anser albifrons"
+    },
+    {
+      "finnishName": "Merihanhi",
+      "latinName": "Anser anser"
+    },
+    {
+      "finnishName": "Lumihanhi",
+      "latinName": "Anser caerulescens"
+    },
+    {
+      "finnishName": "Tiibetinhanhi",
+      "latinName": "Anser indicus"
+    },
+    {
+      "finnishName": "Kanadanhanhi",
+      "latinName": "Branta canadensis"
+    },
+    {
+      "finnishName": "Valkoposkihanhi",
+      "latinName": "Branta leucopsis"
+    },
+    {
+      "finnishName": "Sepelhanhi",
+      "latinName": "Branta bernicla"
+    },
+    {
+      "finnishName": "Punakaulahanhi",
+      "latinName": "Branta ruficollis"
+    },
+    {
+      "finnishName": "Pikkukanadanhanhi",
+      "latinName": "Branta hutchinsii"
+    },
+    {
+      "finnishName": "Ruostesorsa",
+      "latinName": "Tadorna ferruginea"
+    },
+    {
+      "finnishName": "Ristisorsa",
+      "latinName": "Tadorna tadorna"
+    },
+    {
+      "finnishName": "Mandariinisorsa",
+      "latinName": "Aix galericulata"
+    },
+    {
+      "finnishName": "Haapana",
+      "latinName": "Anas penelope"
+    },
+    {
+      "finnishName": "Amerikanhaapana",
+      "latinName": "Anas americana"
+    },
+    {
+      "finnishName": "Harmaasorsa",
+      "latinName": "Anas strepera"
+    },
+    {
+      "finnishName": "Tavi",
+      "latinName": "Anas crecca"
+    },
+    {
+      "finnishName": "Amerikantavi",
+      "latinName": "Anas carolinensis"
+    },
+    {
+      "finnishName": "Sinisorsa",
+      "latinName": "Anas platyrhynchos"
+    },
+    {
+      "finnishName": "Nokisorsa",
+      "latinName": "Anas rubripes"
+    },
+    {
+      "finnishName": "Jouhisorsa",
+      "latinName": "Anas acuta"
+    },
+    {
+      "finnishName": "Heinätavi",
+      "latinName": "Anas querquedula"
+    },
+    {
+      "finnishName": "Sinisiipitavi",
+      "latinName": "Anas discors"
+    },
+    {
+      "finnishName": "Lapasorsa",
+      "latinName": "Anas clypeata"
+    },
+    {
+      "finnishName": "Punapäänarsku",
+      "latinName": "Netta rufina"
+    },
+    {
+      "finnishName": "Punasotka",
+      "latinName": "Aythya ferina"
+    },
+    {
+      "finnishName": "Amerikantukkasotka",
+      "latinName": "Aythya collaris"
+    },
+    {
+      "finnishName": "Ruskosotka",
+      "latinName": "Aythya nyroca"
+    },
+    {
+      "finnishName": "Tukkasotka",
+      "latinName": "Aythya fuligula"
+    },
+    {
+      "finnishName": "Lapasotka",
+      "latinName": "Aythya marila"
+    },
+    {
+      "finnishName": "Pikkulapasotka",
+      "latinName": "Aythya affinis"
+    },
+    {
+      "finnishName": "Haahka",
+      "latinName": "Somateria mollissima"
+    },
+    {
+      "finnishName": "Kyhmyhaahka",
+      "latinName": "Somateria spectabilis"
+    },
+    {
+      "finnishName": "Allihaahka",
+      "latinName": "Polysticta stelleri"
+    },
+    {
+      "finnishName": "Virta-alli",
+      "latinName": "Histrionicus histrionicus"
+    },
+    {
+      "finnishName": "Alli",
+      "latinName": "Clangula hyemalis"
+    },
+    {
+      "finnishName": "Mustalintu",
+      "latinName": "Melanitta nigra"
+    },
+    {
+      "finnishName": "Amerikanmustalintu",
+      "latinName": "Melanitta americana"
+    },
+    {
+      "finnishName": "Pilkkaniska",
+      "latinName": "Melanitta perspicillata"
+    },
+    {
+      "finnishName": "Pilkkasiipi",
+      "latinName": "Melanitta fusca"
+    },
+    {
+      "finnishName": "Kyhmypilkkasiipi",
+      "latinName": "Melanitta deglandi"
+    },
+    {
+      "finnishName": "Telkkä",
+      "latinName": "Bucephala clangula"
+    },
+    {
+      "finnishName": "Uivelo",
+      "latinName": "Mergellus albellus"
+    },
+    {
+      "finnishName": "Tukkakoskelo",
+      "latinName": "Mergus serrator"
+    },
+    {
+      "finnishName": "Isokoskelo",
+      "latinName": "Mergus merganser"
+    },
+    {
+      "finnishName": "Kuparisorsa",
+      "latinName": "Oxyura jamaicensis"
+    },
+    {
+      "finnishName": "Pyy",
+      "latinName": "Bonasa bonasia"
+    },
+    {
+      "finnishName": "Riekko",
+      "latinName": "Lagopus lagopus"
+    },
+    {
+      "finnishName": "Kiiruna",
+      "latinName": "Lagopus muta"
+    },
+    {
+      "finnishName": "Teeri",
+      "latinName": "Tetrao tetrix"
+    },
+    {
+      "finnishName": "Metso",
+      "latinName": "Tetrao urogallus"
+    },
+    {
+      "finnishName": "Peltopyy",
+      "latinName": "Perdix perdix"
+    },
+    {
+      "finnishName": "Viiriäinen",
+      "latinName": "Coturnix coturnix"
+    },
+    {
+      "finnishName": "Fasaani",
+      "latinName": "Phasianus colchicus"
+    },
+    {
+      "finnishName": "Kaakkuri",
+      "latinName": "Gavia stellata"
+    },
+    {
+      "finnishName": "Kuikka",
+      "latinName": "Gavia arctica"
+    },
+    {
+      "finnishName": "Tundrakuikka",
+      "latinName": "Gavia pacifica"
+    },
+    {
+      "finnishName": "Amerikanjääkuikka",
+      "latinName": "Gavia immer"
+    },
+    {
+      "finnishName": "Jääkuikka",
+      "latinName": "Gavia adamsii"
+    },
+    {
+      "finnishName": "Mustakaulauikku",
+      "latinName": "Podiceps nigricollis"
+    },
+    {
+      "finnishName": "Myrskylintu",
+      "latinName": "Fulmarus glacialis"
+    },
+    {
+      "finnishName": "Nokiliitäjä",
+      "latinName": "Puffinus griseus"
+    },
+    {
+      "finnishName": "Pikkuliitäjä",
+      "latinName": "Puffinus puffinus"
+    },
+    {
+      "finnishName": "Merikeiju",
+      "latinName": "Hydrobates pelagicus"
+    },
+    {
+      "finnishName": "Myrskykeiju",
+      "latinName": "Oceanodroma leucorhoa"
+    },
+    {
+      "finnishName": "Madeirankeiju",
+      "latinName": "Oceanodroma castro"
+    },
+    {
+      "finnishName": "Suula",
+      "latinName": "Morus bassanus"
+    },
+    {
+      "finnishName": "Merimetso",
+      "latinName": "Phalacrocorax carbo"
+    },
+    {
+      "finnishName": "Karimetso",
+      "latinName": "Phalacrocorax aristotelis"
+    },
+    {
+      "finnishName": "Pelikaani",
+      "latinName": "Pelecanus onocrotalus"
+    },
+    {
+      "finnishName": "Kaulushaikara",
+      "latinName": "Botaurus stellaris"
+    },
+    {
+      "finnishName": "Pikkuhaikara",
+      "latinName": "Ixobrychus minutus"
+    },
+    {
+      "finnishName": "Yöhaikara",
+      "latinName": "Nycticorax nycticorax"
+    },
+    {
+      "finnishName": "Lehmähaikara",
+      "latinName": "Bubulcus ibis"
+    },
+    {
+      "finnishName": "Rääkkähaikara",
+      "latinName": "Ardeola ralloides"
+    },
+    {
+      "finnishName": "Silkkihaikara",
+      "latinName": "Egretta garzetta"
+    },
+    {
+      "finnishName": "Jalohaikara",
+      "latinName": "Egretta alba"
+    },
+    {
+      "finnishName": "Harmaahaikara",
+      "latinName": "Ardea cinerea"
+    },
+    {
+      "finnishName": "Ruskohaikara",
+      "latinName": "Ardea purpurea"
+    },
+    {
+      "finnishName": "Mustahaikara",
+      "latinName": "Ciconia nigra"
+    },
+    {
+      "finnishName": "Kattohaikara",
+      "latinName": "Ciconia ciconia"
+    },
+    {
+      "finnishName": "Pronssi-iibis",
+      "latinName": "Plegadis falcinellus"
+    },
+    {
+      "finnishName": "Kapustahaikara",
+      "latinName": "Platalea leucorodia"
+    },
+    {
+      "finnishName": "Mehiläishaukka",
+      "latinName": "Pernis apivorus"
+    },
+    {
+      "finnishName": "Haarahaukka",
+      "latinName": "Milvus migrans"
+    },
+    {
+      "finnishName": "Isohaarahaukka",
+      "latinName": "Milvus milvus"
+    },
+    {
+      "finnishName": "Aromerikotka",
+      "latinName": "Haliaeetus leucoryphus"
+    },
+    {
+      "finnishName": "Merikotka",
+      "latinName": "Haliaeetus albicilla"
+    },
+    {
+      "finnishName": "Pikkukorppikotka",
+      "latinName": "Neophron percnopterus"
+    },
+    {
+      "finnishName": "Hanhikorppikotka",
+      "latinName": "Gyps fulvus"
+    },
+    {
+      "finnishName": "Munkkikorppikotka",
+      "latinName": "Aegypius monachus"
+    },
+    {
+      "finnishName": "Käärmekotka",
+      "latinName": "Circaetus gallicus"
+    },
+    {
+      "finnishName": "Ruskosuohaukka",
+      "latinName": "Circus aeruginosus"
+    },
+    {
+      "finnishName": "Sinisuohaukka",
+      "latinName": "Circus cyaneus"
+    },
+    {
+      "finnishName": "Arosuohaukka",
+      "latinName": "Circus macrourus"
+    },
+    {
+      "finnishName": "Niittysuohaukka",
+      "latinName": "Circus pygargus"
+    },
+    {
+      "finnishName": "Kanahaukka",
+      "latinName": "Accipiter gentilis"
+    },
+    {
+      "finnishName": "Varpushaukka",
+      "latinName": "Accipiter nisus"
+    },
+    {
+      "finnishName": "Hiirihaukka",
+      "latinName": "Buteo buteo"
+    },
+    {
+      "finnishName": "Arohiirihaukka",
+      "latinName": "Buteo rufinus"
+    },
+    {
+      "finnishName": "Piekana",
+      "latinName": "Buteo lagopus"
+    },
+    {
+      "finnishName": "Pikkukiljukotka",
+      "latinName": "Aquila pomarina"
+    },
+    {
+      "finnishName": "Kiljukotka",
+      "latinName": "Aquila clanga"
+    },
+    {
+      "finnishName": "Arokotka",
+      "latinName": "Aquila nipalensis"
+    },
+    {
+      "finnishName": "Keisarikotka",
+      "latinName": "Aquila heliaca"
+    },
+    {
+      "finnishName": "Maakotka",
+      "latinName": "Aquila chrysaetos"
+    },
+    {
+      "finnishName": "Pikkukotka",
+      "latinName": "Hieraaetus pennatus"
+    },
+    {
+      "finnishName": "Sääksi",
+      "latinName": "Pandion haliaetus"
+    },
+    {
+      "finnishName": "Pikkutuulihaukka",
+      "latinName": "Falco naumanni"
+    },
+    {
+      "finnishName": "Tuulihaukka",
+      "latinName": "Falco tinnunculus"
+    },
+    {
+      "finnishName": "Punajalkahaukka",
+      "latinName": "Falco vespertinus"
+    },
+    {
+      "finnishName": "Ampuhaukka",
+      "latinName": "Falco columbarius"
+    },
+    {
+      "finnishName": "Nuolihaukka",
+      "latinName": "Falco subbuteo"
+    },
+    {
+      "finnishName": "Välimerenhaukka",
+      "latinName": "Falco eleonorae"
+    },
+    {
+      "finnishName": "Aavikkohaukka",
+      "latinName": "Falco cherrug"
+    },
+    {
+      "finnishName": "Tunturihaukka",
+      "latinName": "Falco rusticolus"
+    },
+    {
+      "finnishName": "Muuttohaukka",
+      "latinName": "Falco peregrinus"
+    },
+    {
+      "finnishName": "Luhtakana",
+      "latinName": "Rallus aquaticus"
+    },
+    {
+      "finnishName": "Luhtahuitti",
+      "latinName": "Porzana porzana"
+    },
+    {
+      "finnishName": "Pikkuhuitti",
+      "latinName": "Porzana parva"
+    },
+    {
+      "finnishName": "Kääpiöhuitti",
+      "latinName": "Porzana pusilla"
+    },
+    {
+      "finnishName": "Ruisrääkkä",
+      "latinName": "Crex crex"
+    },
+    {
+      "finnishName": "Liejukana",
+      "latinName": "Gallinula chloropus"
+    },
+    {
+      "finnishName": "Kurnuliejukana",
+      "latinName": "Porphyrio alleni"
+    },
+    {
+      "finnishName": "Nokikana",
+      "latinName": "Fulica atra"
+    },
+    {
+      "finnishName": "Kurki",
+      "latinName": "Grus grus"
+    },
+    {
+      "finnishName": "Hietakurki",
+      "latinName": "Grus canadensis"
+    },
+    {
+      "finnishName": "Neitokurki",
+      "latinName": "Grus virgo"
+    },
+    {
+      "finnishName": "Kurki",
+      "latinName": "Grus grus"
+    },
+    {
+      "finnishName": "Hietakurki",
+      "latinName": "Grus canadensis"
+    },
+    {
+      "finnishName": "Neitokurki",
+      "latinName": "Grus virgo"
+    },
+    {
+      "finnishName": "Meriharakka",
+      "latinName": "Haematopus ostralegus"
+    },
+    {
+      "finnishName": "Pitkäjalka",
+      "latinName": "Himantopus himantopus"
+    },
+    {
+      "finnishName": "Avosetti",
+      "latinName": "Recurvirostra avosetta"
+    },
+    {
+      "finnishName": "Paksujalka",
+      "latinName": "Burhinus oedicnemus"
+    },
+    {
+      "finnishName": "Aavikkojuoksija",
+      "latinName": "Cursorius cursor"
+    },
+    {
+      "finnishName": "Pääskykahlaaja",
+      "latinName": "Glareola pratincola"
+    },
+    {
+      "finnishName": "Aropääskykahlaaja",
+      "latinName": "Glareola nordmanni"
+    },
+    {
+      "finnishName": "Pikkutylli",
+      "latinName": "Charadrius dubius"
+    },
+    {
+      "finnishName": "Tylli",
+      "latinName": "Charadrius hiaticula"
+    },
+    {
+      "finnishName": "Mustajalkatylli",
+      "latinName": "Charadrius alexandrinus"
+    },
+    {
+      "finnishName": "Ylänkötylli",
+      "latinName": "Charadrius mongolus"
+    },
+    {
+      "finnishName": "Aavikkotylli",
+      "latinName": "Charadrius leschenaultii"
+    },
+    {
+      "finnishName": "Kaspiantylli",
+      "latinName": "Charadrius asiaticus"
+    },
+    {
+      "finnishName": "Gobintylli",
+      "latinName": "Charadrius veredus"
+    },
+    {
+      "finnishName": "Keräkurmitsa",
+      "latinName": "Charadrius morinellus"
+    },
+    {
+      "finnishName": "Amerikankurmitsa",
+      "latinName": "Pluvialis dominica"
+    },
+    {
+      "finnishName": "Siperiankurmitsa",
+      "latinName": "Pluvialis fulva"
+    },
+    {
+      "finnishName": "Kapustarinta",
+      "latinName": "Pluvialis apricaria"
+    },
+    {
+      "finnishName": "Tundrakurmitsa",
+      "latinName": "Pluvialis squatarola"
+    },
+    {
+      "finnishName": "Arohyyppä",
+      "latinName": "Vanellus gregarius"
+    },
+    {
+      "finnishName": "Suohyyppä",
+      "latinName": "Vanellus leucurus"
+    },
+    {
+      "finnishName": "Töyhtöhyyppä",
+      "latinName": "Vanellus vanellus"
+    },
+    {
+      "finnishName": "Isosirri",
+      "latinName": "Calidris canutus"
+    },
+    {
+      "finnishName": "Pulmussirri",
+      "latinName": "Calidris alba"
+    },
+    {
+      "finnishName": "Rusokaulasirri",
+      "latinName": "Calidris ruficollis"
+    },
+    {
+      "finnishName": "Pikkusirri",
+      "latinName": "Calidris minuta"
+    },
+    {
+      "finnishName": "Lapinsirri",
+      "latinName": "Calidris temminckii"
+    },
+    {
+      "finnishName": "Siperiansirri",
+      "latinName": "Calidris subminuta"
+    },
+    {
+      "finnishName": "Amerikansirri",
+      "latinName": "Calidris minutilla"
+    },
+    {
+      "finnishName": "Valkoperäsirri",
+      "latinName": "Calidris fuscicollis"
+    },
+    {
+      "finnishName": "Eskimosirri",
+      "latinName": "Calidris bairdii"
+    },
+    {
+      "finnishName": "Palsasirri",
+      "latinName": "Calidris melanotos"
+    },
+    {
+      "finnishName": "Suippopyrstösirri",
+      "latinName": "Calidris acuminata"
+    },
+    {
+      "finnishName": "Kuovisirri",
+      "latinName": "Calidris ferruginea"
+    },
+    {
+      "finnishName": "Pitkäkoipisirri",
+      "latinName": "Calidris himantopus"
+    },
+    {
+      "finnishName": "Merisirri",
+      "latinName": "Calidris maritima"
+    },
+    {
+      "finnishName": "Suosirri",
+      "latinName": "Calidris alpina"
+    },
+    {
+      "finnishName": "Jänkäsirriäinen",
+      "latinName": "Limicola falcinellus"
+    },
+    {
+      "finnishName": "Tundravikla",
+      "latinName": "Tryngites subruficollis"
+    },
+    {
+      "finnishName": "Suokukko",
+      "latinName": "Philomachus pugnax"
+    },
+    {
+      "finnishName": "Jänkäkurppa",
+      "latinName": "Lymnocryptes minimus"
+    },
+    {
+      "finnishName": "Taivaanvuohi",
+      "latinName": "Gallinago gallinago"
+    },
+    {
+      "finnishName": "Amerikantaivaanvuohi",
+      "latinName": "Gallinago delicata"
+    },
+    {
+      "finnishName": "Heinäkurppa",
+      "latinName": "Gallinago media"
+    },
+    {
+      "finnishName": "Siperiankurppa",
+      "latinName": "Gallinago megala"
+    },
+    {
+      "finnishName": "Tundrakurppelo",
+      "latinName": "Limnodromus scolopaceus"
+    },
+    {
+      "finnishName": "Lehtokurppa",
+      "latinName": "Scolopax rusticola"
+    },
+    {
+      "finnishName": "Mustapyrstökuiri",
+      "latinName": "Limosa limosa"
+    },
+    {
+      "finnishName": "Punakuiri",
+      "latinName": "Limosa lapponica"
+    },
+    {
+      "finnishName": "Taigakuovi",
+      "latinName": "Numenius minutus"
+    },
+    {
+      "finnishName": "Pikkukuovi",
+      "latinName": "Numenius phaeopus"
+    },
+    {
+      "finnishName": "Kuovi",
+      "latinName": "Numenius arquata"
+    },
+    {
+      "finnishName": "Punajalkaviklo",
+      "latinName": "Tringa totanus"
+    },
+    {
+      "finnishName": "Lampiviklo",
+      "latinName": "Tringa stagnatilis"
+    },
+    {
+      "finnishName": "Valkoviklo",
+      "latinName": "Tringa nebularia"
+    },
+    {
+      "finnishName": "Keltajalkaviklo",
+      "latinName": "Tringa flavipes"
+    },
+    {
+      "finnishName": "Metsäviklo",
+      "latinName": "Tringa ochropus"
+    },
+    {
+      "finnishName": "Rantakurvi",
+      "latinName": "Xenus cinereus"
+    },
+    {
+      "finnishName": "Rantasipi",
+      "latinName": "Actitis hypoleucos"
+    },
+    {
+      "finnishName": "Amerikansipi",
+      "latinName": "Actitis macularius"
+    },
+    {
+      "finnishName": "Preeriaviklo",
+      "latinName": "Catoptrophorus semipalmatus"
+    },
+    {
+      "finnishName": "Karikukko",
+      "latinName": "Arenaria interpres"
+    },
+    {
+      "finnishName": "Amerikanvesipääsky",
+      "latinName": "Phalaropus tricolor"
+    },
+    {
+      "finnishName": "Vesipääsky",
+      "latinName": "Phalaropus lobatus"
+    },
+    {
+      "finnishName": "Isovesipääsky",
+      "latinName": "Phalaropus fulicarius"
+    },
+    {
+      "finnishName": "Leveäpyrstökihu",
+      "latinName": "Stercorarius pomarinus"
+    },
+    {
+      "finnishName": "Merikihu",
+      "latinName": "Stercorarius parasiticus"
+    },
+    {
+      "finnishName": "Tunturikihu",
+      "latinName": "Stercorarius longicaudus"
+    },
+    {
+      "finnishName": "Isokihu",
+      "latinName": "Stercorarius skua"
+    },
+    {
+      "finnishName": "Mustanmerenlokki",
+      "latinName": "Larus melanocephalus"
+    },
+    {
+      "finnishName": "Nokisiipilokki",
+      "latinName": "Larus atricilla"
+    },
+    {
+      "finnishName": "Preerianaurulokki",
+      "latinName": "Larus pipixcan"
+    },
+    {
+      "finnishName": "Tiiralokki",
+      "latinName": "Larus sabini"
+    },
+    {
+      "finnishName": "Naurulokki",
+      "latinName": "Larus ridibundus"
+    },
+    {
+      "finnishName": "Kaitanokkalokki",
+      "latinName": "Larus genei"
+    },
+    {
+      "finnishName": "Kalalokki",
+      "latinName": "Larus canus"
+    },
+    {
+      "finnishName": "Välimerenlokki",
+      "latinName": "Larus audouinii"
+    },
+    {
+      "finnishName": "Selkälokki",
+      "latinName": "Larus fuscus"
+    },
+    {
+      "finnishName": "Harmaalokki",
+      "latinName": "Larus argentatus"
+    },
+    {
+      "finnishName": "Aroharmaalokki",
+      "latinName": "Larus cachinnans"
+    },
+    {
+      "finnishName": "Etelänharmaalokki",
+      "latinName": "Larus michahellis"
+    },
+    {
+      "finnishName": "Grönlanninlokki",
+      "latinName": "Larus glaucoides"
+    },
+    {
+      "finnishName": "Isolokki",
+      "latinName": "Larus hyperboreus"
+    },
+    {
+      "finnishName": "Merilokki",
+      "latinName": "Larus marinus"
+    },
+    {
+      "finnishName": "Ohotanlokki",
+      "latinName": "Larus schistisagus"
+    },
+    {
+      "finnishName": "Ruusulokki",
+      "latinName": "Rhodostethia rosea"
+    },
+    {
+      "finnishName": "Pikkukajava",
+      "latinName": "Rissa tridactyla"
+    },
+    {
+      "finnishName": "Jäälokki",
+      "latinName": "Pagophila eburnea"
+    },
+    {
+      "finnishName": "Pikkulokki",
+      "latinName": "Hydrocoloeus minutus"
+    },
+    {
+      "finnishName": "Hietatiira",
+      "latinName": "Gelochelidon nilotica"
+    },
+    {
+      "finnishName": "Räyskä",
+      "latinName": "Hydroprogne caspia"
+    },
+    {
+      "finnishName": "Riuttatiira",
+      "latinName": "Sterna sandvicensis"
+    },
+    {
+      "finnishName": "Kalatiira",
+      "latinName": "Sterna hirundo"
+    },
+    {
+      "finnishName": "Lapintiira",
+      "latinName": "Sterna paradisaea"
+    },
+    {
+      "finnishName": "Pikkutiira",
+      "latinName": "Sternula albifrons"
+    },
+    {
+      "finnishName": "Valkoposkitiira",
+      "latinName": "Chlidonias hybrida"
+    },
+    {
+      "finnishName": "Mustatiira",
+      "latinName": "Chlidonias niger"
+    },
+    {
+      "finnishName": "Valkosiipitiira",
+      "latinName": "Chlidonias leucopterus"
+    },
+    {
+      "finnishName": "Etelänkiisla",
+      "latinName": "Uria aalge"
+    },
+    {
+      "finnishName": "Pohjankiisla",
+      "latinName": "Uria lomvia"
+    },
+    {
+      "finnishName": "Ruokki",
+      "latinName": "Alca torda"
+    },
+    {
+      "finnishName": "Riskilä",
+      "latinName": "Cepphus grylle"
+    },
+    {
+      "finnishName": "Pikkuruokki",
+      "latinName": "Alle alle"
+    },
+    {
+      "finnishName": "Lunni",
+      "latinName": "Fratercula arctica"
+    },
+    {
+      "finnishName": "Arokyyhky",
+      "latinName": "Syrrhaptes paradoxus"
+    },
+    {
+      "finnishName": "Kesykyyhky",
+      "latinName": "Columba livia"
+    },
+    {
+      "finnishName": "Uuttukyyhky",
+      "latinName": "Columba oenas"
+    },
+    {
+      "finnishName": "Sepelkyyhky",
+      "latinName": "Columba palumbus"
+    },
+    {
+      "finnishName": "Turkinkyyhky",
+      "latinName": "Streptopelia decaocto"
+    },
+    {
+      "finnishName": "Turturikyyhky",
+      "latinName": "Streptopelia turtur"
+    },
+    {
+      "finnishName": "Idänturturikyyhky",
+      "latinName": "Streptopelia orientalis"
+    },
+    {
+      "finnishName": "Harakkakäki",
+      "latinName": "Clamator glandarius"
+    },
+    {
+      "finnishName": "Käki",
+      "latinName": "Cuculus canorus"
+    },
+    {
+      "finnishName": "Tornipöllö",
+      "latinName": "Tyto alba"
+    },
+    {
+      "finnishName": "Kyläpöllönen",
+      "latinName": "Otus scops"
+    },
+    {
+      "finnishName": "Tunturipöllö",
+      "latinName": "Bubo scandiacus"
+    },
+    {
+      "finnishName": "Hiiripöllö",
+      "latinName": "Surnia ulula"
+    },
+    {
+      "finnishName": "Varpuspöllö",
+      "latinName": "Glaucidium passerinum"
+    },
+    {
+      "finnishName": "Minervanpöllö",
+      "latinName": "Athene noctua"
+    },
+    {
+      "finnishName": "Lehtopöllö",
+      "latinName": "Strix aluco"
+    },
+    {
+      "finnishName": "Viirupöllö",
+      "latinName": "Strix uralensis"
+    },
+    {
+      "finnishName": "Lapinpöllö",
+      "latinName": "Strix nebulosa"
+    },
+    {
+      "finnishName": "Sarvipöllö",
+      "latinName": "Asio otus"
+    },
+    {
+      "finnishName": "Suopöllö",
+      "latinName": "Asio flammeusPesii"
+    },
+    {
+      "finnishName": "Helmipöllö",
+      "latinName": "Aegolius funereus"
+    },
+    {
+      "finnishName": "Kehrääjä",
+      "latinName": "Caprimulgus europaeus"
+    },
+    {
+      "finnishName": "Piikkipyrstökiitäjä",
+      "latinName": "Hirundapus caudacutus"
+    },
+    {
+      "finnishName": "Tervapääsky",
+      "latinName": "Apus apus"
+    },
+    {
+      "finnishName": "Vaaleakiitäjä",
+      "latinName": "Apus pallidus"
+    },
+    {
+      "finnishName": "Alppikiitäjä",
+      "latinName": "Apus melba"
+    },
+    {
+      "finnishName": "Kafferikiitäjä",
+      "latinName": "Apus caffer"
+    },
+    {
+      "finnishName": "Kuningaskalastaja",
+      "latinName": "Alcedo atthis"
+    },
+    {
+      "finnishName": "Vihermehiläissyöjä",
+      "latinName": "Merops persicus"
+    },
+    {
+      "finnishName": "Mehiläissyöjä",
+      "latinName": "Merops apiaster"
+    },
+    {
+      "finnishName": "Sininärhi",
+      "latinName": "Coracias garrulus"
+    },
+    {
+      "finnishName": "Harjalintu",
+      "latinName": "Upupa epops"
+    },
+    {
+      "finnishName": "Käenpiika",
+      "latinName": "Jynx torquilla"
+    },
+    {
+      "finnishName": "Harmaapäätikka",
+      "latinName": "Picus canus"
+    },
+    {
+      "finnishName": "Vihertikka",
+      "latinName": "Picus viridis"
+    },
+    {
+      "finnishName": "Palokärki",
+      "latinName": "Dryocopus martius"
+    },
+    {
+      "finnishName": "Käpytikka",
+      "latinName": "Dendrocopos major"
+    },
+    {
+      "finnishName": "Tammitikka",
+      "latinName": "Dendrocopos medius"
+    },
+    {
+      "finnishName": "Valkoselkätikka",
+      "latinName": "Dendrocopos leucotos"
+    },
+    {
+      "finnishName": "Pohjantikka",
+      "latinName": "Picoides tridactylus"
+    },
+    {
+      "finnishName": "Arokiuru",
+      "latinName": "Melanocorypha calandra"
+    },
+    {
+      "finnishName": "Ylänkökiuru",
+      "latinName": "Melanocorypha bimaculata"
+    },
+    {
+      "finnishName": "Valkosiipikiuru",
+      "latinName": "Melanocorypha leucoptera"
+    },
+    {
+      "finnishName": "Mustakiuru",
+      "latinName": "Melanocorypha yeltoniensis"
+    },
+    {
+      "finnishName": "Lyhytvarvaskiuru",
+      "latinName": "Calandrella brachydactyla"
+    },
+    {
+      "finnishName": "Pikkukiuru",
+      "latinName": "Calandrella rufescens"
+    },
+    {
+      "finnishName": "Töyhtökiuru",
+      "latinName": "Galerida cristata"
+    },
+    {
+      "finnishName": "Kangaskiuru",
+      "latinName": "Lullula arborea"
+    },
+    {
+      "finnishName": "Kiuru",
+      "latinName": "Alauda arvensis"
+    },
+    {
+      "finnishName": "Tunturikiuru",
+      "latinName": "Eremophila alpestris"
+    },
+    {
+      "finnishName": "Törmäpääsky",
+      "latinName": "Riparia riparia"
+    },
+    {
+      "finnishName": "Kalliopääsky",
+      "latinName": "Ptyonoprogne rupestris"
+    },
+    {
+      "finnishName": "Haarapääsky",
+      "latinName": "Hirundo rustica"
+    },
+    {
+      "finnishName": "Ruostepääsky",
+      "latinName": "Hirundo daurica"
+    },
+    {
+      "finnishName": "Räystäspääsky",
+      "latinName": "Delichon urbicum"
+    },
+    {
+      "finnishName": "Isokirvinen",
+      "latinName": "Anthus richardi"
+    },
+    {
+      "finnishName": "Mongoliankirvinen",
+      "latinName": "Anthus godlewskii"
+    },
+    {
+      "finnishName": "Nummikirvinen",
+      "latinName": "Anthus campestris"
+    },
+    {
+      "finnishName": "Taigakirvinen",
+      "latinName": "Anthus hodgsoni"
+    },
+    {
+      "finnishName": "Metsäkirvinen",
+      "latinName": "Anthus trivialis"
+    },
+    {
+      "finnishName": "Tundrakirvinen",
+      "latinName": "Anthus gustavi"
+    },
+    {
+      "finnishName": "Niittykirvinen",
+      "latinName": "Anthus pratensis"
+    },
+    {
+      "finnishName": "Lapinkirvinen",
+      "latinName": "Anthus cervinus"
+    },
+    {
+      "finnishName": "Luotokirvinen",
+      "latinName": "Anthus petrosus"
+    },
+    {
+      "finnishName": "Keltavästäräkki",
+      "latinName": "Motacilla flava"
+    },
+    {
+      "finnishName": "Sitruunavästäräkki",
+      "latinName": "Motacilla citreola"
+    },
+    {
+      "finnishName": "Virtavästäräkki",
+      "latinName": "Motacilla cinerea"
+    },
+    {
+      "finnishName": "Västäräkki",
+      "latinName": "Motacilla alba"
+    },
+    {
+      "finnishName": "Tilhi",
+      "latinName": "Bombycilla garrulus"
+    },
+    {
+      "finnishName": "Koskikara",
+      "latinName": "Cinclus cinclus"
+    },
+    {
+      "finnishName": "Peukaloinen",
+      "latinName": "Troglodytes troglodytes"
+    },
+    {
+      "finnishName": "Rautiainen",
+      "latinName": "Prunella modularis"
+    },
+    {
+      "finnishName": "Taigarautiainen",
+      "latinName": "Prunella montanella"
+    },
+    {
+      "finnishName": "Mustakurkkurautiainen",
+      "latinName": "Prunella atrogularis"
+    },
+    {
+      "finnishName": "Alppirautiainen",
+      "latinName": "Prunella collaris"
+    },
+    {
+      "finnishName": "Kirjorastas",
+      "latinName": "Zoothera dauma"
+    },
+    {
+      "finnishName": "Korpirastas",
+      "latinName": "Catharus ustulatus"
+    },
+    {
+      "finnishName": "Sepelrastas",
+      "latinName": "Turdus torquatus"
+    },
+    {
+      "finnishName": "Mustarastas",
+      "latinName": "Turdus merula"
+    },
+    {
+      "finnishName": "Harmaakurkkurastas",
+      "latinName": "Turdus obscurus"
+    },
+    {
+      "finnishName": "Ruosterastas",
+      "latinName": "Turdus naumanni"
+    },
+    {
+      "finnishName": "Ruostesiipirastas",
+      "latinName": "Turdus eunomus"
+    },
+    {
+      "finnishName": "Mustakaularastas",
+      "latinName": "Turdus atrogularis"
+    },
+    {
+      "finnishName": "Räkättirastas",
+      "latinName": "Turdus pilaris"
+    },
+    {
+      "finnishName": "Laulurastas",
+      "latinName": "Turdus philomelos"
+    },
+    {
+      "finnishName": "Punakylkirastas",
+      "latinName": "Turdus iliacus"
+    },
+    {
+      "finnishName": "Kulorastas",
+      "latinName": "Turdus viscivorus"
+    },
+    {
+      "finnishName": "Viirusirkkalintu",
+      "latinName": "Locustella lanceolata"
+    },
+    {
+      "finnishName": "Pensassirkkalintu",
+      "latinName": "Locustella naevia"
+    },
+    {
+      "finnishName": "Viitasirkkalintu",
+      "latinName": "Locustella fluviatilis"
+    },
+    {
+      "finnishName": "Ruokosirkkalintu",
+      "latinName": "Locustella luscinioides"
+    },
+    {
+      "finnishName": "Paksunokkakerttunen",
+      "latinName": "Acrocephalus aedon"
+    },
+    {
+      "finnishName": "Sarakerttunen",
+      "latinName": "Acrocephalus paludicola"
+    },
+    {
+      "finnishName": "Ruokokerttunen",
+      "latinName": "Acrocephalus schoenobaenus"
+    },
+    {
+      "finnishName": "Rytikerttunen",
+      "latinName": "Acrocephalus scirpaceus"
+    },
+    {
+      "finnishName": "Luhtakerttunen",
+      "latinName": "Acrocephalus palustris"
+    },
+    {
+      "finnishName": "Viitakerttunen",
+      "latinName": "Acrocephalus dumetorum"
+    },
+    {
+      "finnishName": "Kenttäkerttunen",
+      "latinName": "Acrocephalus agricola"
+    },
+    {
+      "finnishName": "Rastaskerttunen",
+      "latinName": "Acrocephalus arundinaceus"
+    },
+    {
+      "finnishName": "Vaaleakultarinta",
+      "latinName": "Hippolais pallida"
+    },
+    {
+      "finnishName": "Pikkukultarinta",
+      "latinName": "Hippolais caligata"
+    },
+    {
+      "finnishName": "Aavikkokultarinta",
+      "latinName": "Hippolais rama"
+    },
+    {
+      "finnishName": "Kultarinta",
+      "latinName": "Hippolais icterina"
+    },
+    {
+      "finnishName": "Mustapääkerttu",
+      "latinName": "Sylvia atricapilla"
+    },
+    {
+      "finnishName": "Lehtokerttu",
+      "latinName": "Sylvia borin"
+    },
+    {
+      "finnishName": "Hernekerttu",
+      "latinName": "Sylvia curruca"
+    },
+    {
+      "finnishName": "Pensaskerttu",
+      "latinName": "Sylvia communis"
+    },
+    {
+      "finnishName": "Kääpiökerttu",
+      "latinName": "Sylvia nana"
+    },
+    {
+      "finnishName": "Kirjokerttu",
+      "latinName": "Sylvia nisoria"
+    },
+    {
+      "finnishName": "Ruskokerttu",
+      "latinName": "Sylvia undata"
+    },
+    {
+      "finnishName": "Rusorintakerttu",
+      "latinName": "Sylvia cantillans"
+    },
+    {
+      "finnishName": "Samettipääkerttu",
+      "latinName": "Sylvia melanocephala"
+    },
+    {
+      "finnishName": "Mustakurkkukerttu",
+      "latinName": "Sylvia rueppelli"
+    },
+    {
+      "finnishName": "Amurinuunilintu",
+      "latinName": "Phylloscopus coronatus"
+    },
+    {
+      "finnishName": "Idänuunilintu",
+      "latinName": "Phylloscopus trochiloides"
+    },
+    {
+      "finnishName": "Burjatianuunilintu",
+      "latinName": "Phylloscopus plumbeitarsus"
+    },
+    {
+      "finnishName": "Lapinuunilintu",
+      "latinName": "Phylloscopus borealis"
+    },
+    {
+      "finnishName": "Hippiäisuunilintu",
+      "latinName": "Phylloscopus proregulus"
+    },
+    {
+      "finnishName": "Taigauunilintu",
+      "latinName": "Phylloscopus inornatus"
+    },
+    {
+      "finnishName": "Kashmirinuunilintu",
+      "latinName": "Phylloscopus humei"
+    },
+    {
+      "finnishName": "Siperianuunilintu",
+      "latinName": "Phylloscopus schwarzi"
+    },
+    {
+      "finnishName": "Ruskouunilintu",
+      "latinName": "Phylloscopus fuscatus"
+    },
+    {
+      "finnishName": "Vuoriuunilintu",
+      "latinName": "Phylloscopus bonelli"
+    },
+    {
+      "finnishName": "Balkaninuunilintu",
+      "latinName": "Phylloscopus orientalis"
+    },
+    {
+      "finnishName": "Sirittäjä",
+      "latinName": "Phylloscopus sibilatrix"
+    },
+    {
+      "finnishName": "Tiltaltti",
+      "latinName": "Phylloscopus collybita"
+    },
+    {
+      "finnishName": "Iberiantiltaltti",
+      "latinName": "Phylloscopus ibericus"
+    },
+    {
+      "finnishName": "Pajulintu",
+      "latinName": "Phylloscopus trochilus"
+    },
+    {
+      "finnishName": "Hippiäinen",
+      "latinName": "Regulus regulus"
+    },
+    {
+      "finnishName": "Tulipäähippiäinen",
+      "latinName": "Regulus ignicapilla"
+    },
+    {
+      "finnishName": "Harmaasieppo",
+      "latinName": "Muscicapa striata"
+    },
+    {
+      "finnishName": "Pikkusieppo",
+      "latinName": "Ficedula parva"
+    },
+    {
+      "finnishName": "Sepelsieppo",
+      "latinName": "Ficedula albicollis"
+    },
+    {
+      "finnishName": "Kirjosieppo",
+      "latinName": "Ficedula hypoleuca"
+    },
+    {
+      "finnishName": "Ruostepyrstö",
+      "latinName": "Cercotrichas galactotes"
+    },
+    {
+      "finnishName": "Punarinta",
+      "latinName": "Erithacus rubecula"
+    },
+    {
+      "finnishName": "Satakieli",
+      "latinName": "Luscinia luscinia"
+    },
+    {
+      "finnishName": "Etelänsatakieli",
+      "latinName": "Luscinia megarhynchos"
+    },
+    {
+      "finnishName": "Rubiinisatakieli",
+      "latinName": "Luscinia calliope"
+    },
+    {
+      "finnishName": "Sinirinta",
+      "latinName": "Luscinia svecica"
+    },
+    {
+      "finnishName": "Sinipyrstö",
+      "latinName": "Tarsiger cyanurus"
+    },
+    {
+      "finnishName": "Mustaleppälintu",
+      "latinName": "Phoenicurus ochruros"
+    },
+    {
+      "finnishName": "Leppälintu",
+      "latinName": "Phoenicurus phoenicurus"
+    },
+    {
+      "finnishName": "Pensastasku",
+      "latinName": "Saxicola rubetra"
+    },
+    {
+      "finnishName": "Mustapäätasku",
+      "latinName": "Saxicola rubicola"
+    },
+    {
+      "finnishName": "Sepeltasku",
+      "latinName": "Saxicola maurus"
+    },
+    {
+      "finnishName": "Nokitasku",
+      "latinName": "Saxicola caprata"
+    },
+    {
+      "finnishName": "Arotasku",
+      "latinName": "Oenanthe isabellina"
+    },
+    {
+      "finnishName": "Kivitasku",
+      "latinName": "Oenanthe oenanthe"
+    },
+    {
+      "finnishName": "Nunnatasku",
+      "latinName": "Oenanthe pleschanka"
+    },
+    {
+      "finnishName": "Rusotasku",
+      "latinName": "Oenanthe hispanica"
+    },
+    {
+      "finnishName": "Aavikkotasku",
+      "latinName": "Oenanthe deserti"
+    },
+    {
+      "finnishName": "Kivikkorastas",
+      "latinName": "Monticola saxatilis"
+    },
+    {
+      "finnishName": "Sinirastas",
+      "latinName": "Monticola solitarius"
+    },
+    {
+      "finnishName": "Viiksitimali",
+      "latinName": "Panurus biarmicus"
+    },
+    {
+      "finnishName": "Pyrstötiainen",
+      "latinName": "Aegithalos caudatus"
+    },
+    {
+      "finnishName": "Viitatiainen",
+      "latinName": "Parus palustris"
+    },
+    {
+      "finnishName": "Hömötiainen",
+      "latinName": "Parus montanus"
+    },
+    {
+      "finnishName": "Lapintiainen",
+      "latinName": "Parus cinctus"
+    },
+    {
+      "finnishName": "Töyhtötiainen",
+      "latinName": "Parus cristatus"
+    },
+    {
+      "finnishName": "Kuusitiainen",
+      "latinName": "Parus ater"
+    },
+    {
+      "finnishName": "Sinitiainen",
+      "latinName": "Parus caeruleus"
+    },
+    {
+      "finnishName": "Valkopäätiainen",
+      "latinName": "Parus cyanus"
+    },
+    {
+      "finnishName": "Talitiainen",
+      "latinName": "Parus major"
+    },
+    {
+      "finnishName": "Pähkinänakkeli",
+      "latinName": "Sitta europaea"
+    },
+    {
+      "finnishName": "Puukiipijä",
+      "latinName": "Certhia familiaris"
+    },
+    {
+      "finnishName": "Pussitiainen",
+      "latinName": "Remiz pendulinus"
+    },
+    {
+      "finnishName": "Kuhankeittäjä",
+      "latinName": "Oriolus oriolus"
+    },
+    {
+      "finnishName": "Punapyrstölepinkäinen",
+      "latinName": "Lanius isabellinus"
+    },
+    {
+      "finnishName": "Pikkulepinkäinen",
+      "latinName": "Lanius collurio"
+    },
+    {
+      "finnishName": "Mustaotsalepinkäinen",
+      "latinName": "Lanius minor"
+    },
+    {
+      "finnishName": "Isolepinkäinen",
+      "latinName": "Lanius excubitor"
+    },
+    {
+      "finnishName": "Etelänisolepinkäinen",
+      "latinName": "Lanius meridionalis"
+    },
+    {
+      "finnishName": "Punapäälepinkäinen",
+      "latinName": "Lanius senator"
+    },
+    {
+      "finnishName": "Valko-otsalepinkäinen",
+      "latinName": "Lanius nubicus"
+    },
+    {
+      "finnishName": "Närhi",
+      "latinName": "Garrulus glandarius"
+    },
+    {
+      "finnishName": "Kuukkeli",
+      "latinName": "Perisoreus infaustus"
+    },
+    {
+      "finnishName": "Harakka",
+      "latinName": "Pica pica"
+    },
+    {
+      "finnishName": "Pähkinähakki",
+      "latinName": "Nucifraga caryocatactes"
+    },
+    {
+      "finnishName": "Naakka",
+      "latinName": "Corvus monedula"
+    },
+    {
+      "finnishName": "Idännaakka",
+      "latinName": "Corvus dauuricus"
+    },
+    {
+      "finnishName": "Mustavaris",
+      "latinName": "Corvus frugilegus"
+    },
+    {
+      "finnishName": "Kottarainen",
+      "latinName": "Sturnus vulgaris"
+    },
+    {
+      "finnishName": "Punakottarainen",
+      "latinName": "Sturnus roseus"
+    },
+    {
+      "finnishName": "Varis",
+      "latinName": "Corvus corone"
+    },
+    {
+      "finnishName": "Nokivaris",
+      "latinName": "Corvus corone"
+    },
+    {
+      "finnishName": "Korppi",
+      "latinName": "Corvus corax"
+    },
+    {
+      "finnishName": "Varpunen",
+      "latinName": "Passer domesticus"
+    },
+    {
+      "finnishName": "Pensasvarpunen",
+      "latinName": "Passer hispaniolensis"
+    },
+    {
+      "finnishName": "Pikkuvarpunen",
+      "latinName": "Passer montanus"
+    },
+    {
+      "finnishName": "Peippo",
+      "latinName": "Fringilla coelebs"
+    },
+    {
+      "finnishName": "Järripeippo",
+      "latinName": "Fringilla montifringilla"
+    },
+    {
+      "finnishName": "Keltahemppo",
+      "latinName": "Serinus serinus"
+    },
+    {
+      "finnishName": "Viherpeippo",
+      "latinName": "Carduelis chloris"
+    },
+    {
+      "finnishName": "Tikli",
+      "latinName": "Carduelis carduelis"
+    },
+    {
+      "finnishName": "Vihervarpunen",
+      "latinName": "Carduelis spinus"
+    },
+    {
+      "finnishName": "Hemppo",
+      "latinName": "Carduelis cannabina"
+    },
+    {
+      "finnishName": "Vuorihemppo",
+      "latinName": "Carduelis flavirostris"
+    },
+    {
+      "finnishName": "Urpiainen",
+      "latinName": "Carduelis flammea"
+    },
+    {
+      "finnishName": "Tundraurpiainen",
+      "latinName": "Carduelis hornemanni"
+    },
+    {
+      "finnishName": "Kirjosiipikäpylintu",
+      "latinName": "Loxia leucoptera"
+    },
+    {
+      "finnishName": "Pikkukäpylintu",
+      "latinName": "Loxia curvirostra"
+    },
+    {
+      "finnishName": "Isokäpylintu",
+      "latinName": "Loxia pytyopsittacus"
+    },
+    {
+      "finnishName": "Aavikkotulkku",
+      "latinName": "Bucanetes githagineus"
+    },
+    {
+      "finnishName": "Punavarpunen",
+      "latinName": "Carpodacus erythrinus"
+    },
+    {
+      "finnishName": "Taviokuurna",
+      "latinName": "Pinicola enucleator"
+    },
+    {
+      "finnishName": "Punatulkku",
+      "latinName": "Pyrrhula pyrrhula"
+    },
+    {
+      "finnishName": "Nokkavarpunen",
+      "latinName": "Coccothraustes coccothraustes"
+    },
+    {
+      "finnishName": "Viirukerttuli",
+      "latinName": "Dendroica striata"
+    },
+    {
+      "finnishName": "Valkokurkkusirkku",
+      "latinName": "Zonotrichia albicollis"
+    },
+    {
+      "finnishName": "Lapinsirkku",
+      "latinName": "Calcarius lapponicus"
+    },
+    {
+      "finnishName": "Pulmunen",
+      "latinName": "Plectrophenax nivalis"
+    },
+    {
+      "finnishName": "Harmaapääsirkku",
+      "latinName": "Emberiza spodocephala"
+    },
+    {
+      "finnishName": "Mäntysirkku",
+      "latinName": "Emberiza leucocephalos"
+    },
+    {
+      "finnishName": "Keltasirkku",
+      "latinName": "Emberiza citrinella"
+    },
+    {
+      "finnishName": "Kivikkosirkku",
+      "latinName": "Emberiza buchanani"
+    },
+    {
+      "finnishName": "Peltosirkku",
+      "latinName": "Emberiza hortulana"
+    },
+    {
+      "finnishName": "Ruostekurkkusirkku",
+      "latinName": "Emberiza caesia"
+    },
+    {
+      "finnishName": "Pohjansirkku",
+      "latinName": "Emberiza rustica"
+    },
+    {
+      "finnishName": "Pikkusirkku",
+      "latinName": "Emberiza pusilla"
+    },
+    {
+      "finnishName": "Kastanjasirkku",
+      "latinName": "Emberiza rutila"
+    },
+    {
+      "finnishName": "Kultasirkku",
+      "latinName": "Emberiza aureola"
+    },
+    {
+      "finnishName": "Pajusirkku",
+      "latinName": "Emberiza schoeniclus"
+    },
+    {
+      "finnishName": "Mustapääsirkku",
+      "latinName": "Emberiza melanocephala"
+    },
+    {
+      "finnishName": "Harmaasirkku",
+      "latinName": "Emberiza calandra"
+    },
+    {
+      "finnishName": "Kettusirkku",
+      "latinName": "Passerella iliaca"
+    }
+  ]
+}

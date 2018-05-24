@@ -2,9 +2,7 @@ import React from 'react'
 import loginService from '../services/login'
 import { connect } from 'react-redux'
 import { initializeUser } from '../reducers/userReducer'
-import { logout } from '../reducers/userReducer'
 import userService from '../services/users'
-import { FormGroup, FormControl, ControlLabel, Button } from 'react-bootstrap'
 
 class LoginForm extends React.Component {
 
@@ -16,40 +14,67 @@ class LoginForm extends React.Component {
       newUserEmail: '',
       newUserFirstname: '',
       newUserLastname: '',
-      newUserPassword: ''
+      newUserPassword: '',
+      reg: {
+        visibility: false,
+        message: [],
+      },
+      login: {
+        visibility: false,
+        message: ''
+      }
     }
   }
 
   login = async (event) => {
     event.preventDefault()
+
     const response = await loginService.login({
       email: this.state.email,
       password: this.state.password
     })
+
     if (response.token) {
-      this.setState({ email: '', password: '' })
       window.localStorage.setItem('loggedInUser', JSON.stringify(response))
       this.props.initializeUser(response)
+      console.log(response)
+    } else {
+      console.log('juuh')
+      this.setState({ login: { message: response.error, visibility: true }, email: '', password: '' })
+      setTimeout(() => this.setState({ login: { message: '' }}), 5000)
     }
-  }
-
-  logout = async (event) => {
-    console.log('logout triggered')
-    event.preventDefault()
-    window.localStorage.removeItem('loggedInUser')
-    this.props.logout()
+    this.setState({ email: '', password: '' })
   }
 
   register = async (event) => {
     event.preventDefault()
+
     const requestObject = {
       email: this.state.newUserEmail,
       firstname: this.state.newUserFirstname,
       lastname: this.state.newUserLastname,
       password: this.state.newUserPassword
     }
+
     const response = await userService.newUser(requestObject)
     console.log(response)
+
+    if (response.error) {
+      this.setState({ reg: { visibility: true, message: response.error }, newUserEmail: '', newUserPassword: ''})
+      setTimeout(() => 
+        this.setState({ reg: { visibility: false, message: [] } })
+      ,7500)
+    } else {
+      const message = `Tervetuloa käyttäjäksi ${response.firstname}. Sähköpostiosoitteeseesi ${response.email} on lähetetty aktivointilinkki.`
+      this.setState({ 
+        reg: { visibility: true, message },
+        newUserEmail: '',
+        newUserFirstname: '',
+        newUserLastname: '',
+        newUserPassword: ''
+      })
+    }
+
   }
 
   handleFieldChange = (event) => {
@@ -58,44 +83,73 @@ class LoginForm extends React.Component {
 
   render() {
 
+    const loginInfoStyle = {
+      display: this.state.login.visibility ? '' : 'none',
+      backgroundColor: '#f9f9f9',
+      marginTop: '5px',
+      paddingLeft: '5px',
+      paddingRight: '5px',
+      color: 'black',
+      fontSize: '10pt',
+      border: '1px solid #FC4A1A'
+    }
+
+    const regInfo = {
+      display: this.state.reg.visibility ? '' : 'none',
+      marginTop: '10px',
+      paddingLeft: '5px',
+      paddingRight: '5px',
+      backgroundColor: '#f9f9f9',
+      color: 'black',
+      fontSize: '10pt',
+      border: '1px solid #FC4A1A'
+    }
+
+    const regSuccess = () => (
+      <div style={regInfo}>
+        { this.state.reg.message.map(message => <p key={message}>{message}</p>) }
+      </div>
+    )
+
+    const loginInfo = () => (
+      <div style={loginInfoStyle}>
+        <p>{this.state.login.message}</p>
+    </div>
+    )
+
     const loginform = () => (
-      <div id="loginForm">
+      <div>
+        { loginInfo() }
         <h3>Kirjaudu sisään</h3>
         <form onSubmit={this.login} autoComplete="on">
-          <FormGroup>
-            <ControlLabel>Sähköposti:</ControlLabel>
-            <FormControl type="text" name="email" onChange={this.handleFieldChange} />
-            <ControlLabel>Salasana: </ControlLabel>
-            <FormControl type="password" name="password" onChange={this.handleFieldChange} />
-            <Button bsStyle="success" type="submit">Kirjaudu</Button>
-          </FormGroup>
+          <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} placeholder="Sähköposti"/><br />
+          <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
+          <button>Kirjaudu</button>
         </form>
+        { regSuccess() }
         <h3>Rekisteröityminen</h3>
         <form onSubmit={this.register} autoComplete="on">
-          <FormGroup>
-              <ControlLabel>Sähköposti:</ControlLabel>
-              <FormControl type="text" name="newUserEmail" onChange={this.handleFieldChange} />
-              <ControlLabel>Etunimi:</ControlLabel>
-              <FormControl type="text" name="newUserFirstname" onChange={this.handleFieldChange} />
-              <ControlLabel>Sukunimi:</ControlLabel>
-              <FormControl type="text" name="newUserLastname" onChange={this.handleFieldChange} />
-              <ControlLabel>Salasana: </ControlLabel>
-              <FormControl type="password" name="newUserPassword" onChange={this.handleFieldChange} />
-              <Button bsStyle="primary" type="submit">Rekisteröidy</Button>
-            </FormGroup>
+          <input type="text" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} placeholder="Sähköposti" /><br />
+          <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />
+          <input type="text" name="newUserLastname" value={this.state.newUserLastname}onChange={this.handleFieldChange} placeholder="Sukunimi" /><br />
+          <input type="password" name="newUserPassword" value={this.state.newUserPassword} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
+          <button disabled={this.state.reg.visibility}>Rekisteröidy</button>
         </form>
       </div>
     )
 
+    const width = {
+      width: '100%'
+    }
+
     const logoutform = () => (
       <div>
         <h3>{this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in</h3>
-        <Button bsStyle="danger" onClick={this.logout}>Kirjaudu ulos</Button>
-    </div>
+        <button onClick={this.logout}>Kirjaudu ulos</button>
+      </div>
     )
-
     return (
-      <div>
+      <div style={width}>
         { this.props.user.length < 1 ? loginform() : logoutform() }
       </div>
     )
@@ -111,5 +165,5 @@ const mapStateToProps = (state) => {
 
 export default connect (
   mapStateToProps,
-  { initializeUser, logout }
+  { initializeUser }
 ) (LoginForm)

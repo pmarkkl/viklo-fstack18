@@ -13,6 +13,7 @@ import NewObservation from './components/observation/NewObservation'
 import AddSpecies from './components/AddSpecies'
 import MyPage from './components/MyPage'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { logout } from './reducers/userReducer'
 
 class App extends React.Component {
 
@@ -30,7 +31,24 @@ class App extends React.Component {
     }
   }
 
+  logout = (event) => {
+    event.preventDefault()
+    window.localStorage.removeItem('loggedInUser')
+    this.props.logout()
+  }
+
   render() {
+    const adminStyle = {
+      backgroundColor: '#3d535c',
+      marginTop: '10px',
+      display: this.props.user.admin ? '' : 'none'
+    }
+
+    const logOutStyle = {
+      marginTop: '10px',
+      backgroundColor: '#007849',
+      display: this.props.user.id ? '' : 'none'
+    }
 
     return (
       <Router>
@@ -44,9 +62,11 @@ class App extends React.Component {
             <li><Link to="/lajit">Lisää laji</Link></li>
             <li><Link to="/omasivu">Oma sivu</Link></li>
           </ul>
-          <br />
-          <ul id="admin">
+          <ul style={adminStyle}>
             <li><Link to="/yllapito">Ylläpito</Link></li>
+          </ul>
+          <ul style={logOutStyle}>
+            <li><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
           </ul>
         </div>
         <div id="oikea">
@@ -66,11 +86,12 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    observations: state.observations
+    observations: state.observations,
+    user: state.user
   }
 }
 
 export default connect(
   mapStateToProps,
-  { initializeObservations, initializeSpecies, initializeUser, initLocation, setMarkers, initFriends, initRequests }
+  { initializeObservations, initializeSpecies, initializeUser, initLocation, setMarkers, initFriends, initRequests, logout }
 )(App)

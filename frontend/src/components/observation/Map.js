@@ -1,7 +1,8 @@
 import React from 'react'
-import { GoogleApiWrapper, InfoWindow, Map, Marker, } from 'google-maps-react'
+import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react'
 import { connect } from 'react-redux'
 import { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast } from '../../reducers/markerReducer'
+import { setLocation } from '../../reducers/locationReducer'
 
 export class MapContainer extends React.Component {
 
@@ -15,7 +16,7 @@ export class MapContainer extends React.Component {
       lat: 60.2279004,
       lng: 25.0270719
     },
-    mapZoom: 6,
+    mapZoom: 7,
     activeMarker: {},
     activeMarkerInfo: {
       firstname: '',
@@ -33,7 +34,12 @@ export class MapContainer extends React.Component {
       lat: 0,
       lng: 0
     },
-    lastMarker: ''
+    lastMarker: '',
+    addressSearch: ''
+  }
+
+  componentWillReceiveProps() {
+    this.setState({ mapFocus: this.props.daLocation })
   }
 
   onMarkerClick = (props, marker) => {
@@ -66,7 +72,12 @@ export class MapContainer extends React.Component {
   }
 
   onMapClick = (mapProps, map, clickEvent, mapCenter) => {
-    this.props.deleteLast(this.state.lastMarker)
+    if (this.state.showingInfoWindow) {
+      this.setState({ showingInfoWindow: false })
+      return
+    }
+
+    this.props.deleteLast()
 
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
@@ -75,30 +86,34 @@ export class MapContainer extends React.Component {
     const lat = clickEvent.latLng.lat()
     const lng = clickEvent.latLng.lng()
 
-    this.props.google.maps.event.addListener(map, 'dblclick', function(event) {
-      const newMarker = {
-        lat: lat,
-        lng: lng
-      }
-    })
-
-    console.log(map)
     const locationObject = {
       id: this.generateIdForRedux(),
       latitude: lat,
       longitude: lng
     }
     this.props.addMarker(locationObject)
+    this.props.setLocation({ latitude: lat, longitude: lng })
+
     this.setState({
       lastMarker: locationObject.id,
-      mapFocus: {
-        lat, lng
-      }
+      mapFocus: { lat, lng }
     })
+  }
+
+  testiButtonClick = (event) => {
+    event.preventDefault()
+    this.setState({ mapFocus: { lat: 64.86901617652283, lng: 28.89430427565719 }})
+
   }
 
   onReady = (mapProps, map) => {
     map.disableDoubleClickZoom = true
+  }
+
+  handleFieldChange = (event) => {
+    event.preventDefault()
+    this.setState({ [event.target.name]: event.target.value })
+    console.log(this.state.search)
   }
 
   render() {
@@ -110,13 +125,13 @@ export class MapContainer extends React.Component {
     return (
       <div>
         <div id="kartta">
+        <button onClick={this.testiButtonClick}>click</button>
         <Map 
           google={this.props.google} 
           zoom={this.state.mapZoom} 
           style={style}
           center={{ lat: this.state.mapFocus.lat, lng: this.state.mapFocus.lng }}
           initialCenter={{ lat: this.state.initialCenter.lat, lng: this.state.initialCenter.lng }}
-          onReady={this.fetchPlaces}
           onClick={this.onMapClick}
           onReady={this.onReady}
         >
@@ -149,10 +164,11 @@ const mapStateToProps = (state) => {
   return {
     observations: state.observations,
     markers: state.markers,
-    user: state.user
+    user: state.user,
+    location: state.location
   }
 }
 
-export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast })(GoogleApiWrapper({
-  apiKey: process.env.GOOGLE_API_KEY
+export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast, setLocation })(GoogleApiWrapper({
+  apiKey: '3213213kl'
 })(MapContainer))

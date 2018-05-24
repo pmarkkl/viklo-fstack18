@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { MapContainerComponent } from '../components/observation/Map'
-import { setMarkers, markersForUser, emptyMarkers, addMarker } from '../reducers/markerReducer'
+import { setMarkers, markersForUser, emptyMarkers } from '../reducers/markerReducer'
 
 class MyPage extends React.Component {
 

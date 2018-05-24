@@ -14,9 +14,14 @@ const newUser = async (data) => {
     lastname: data.lastname,
     password: data.password
   }
+  
+  try {
+    const response = await axios.post(url, userObject)
+    return response.data
+  } catch (exc) {
+    return exc.response.data
+  }
 
-  const response = await axios.post(url, userObject)
-  return response.data
 }
 
 const fetchUserData = async (id) => {

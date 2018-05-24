@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import observationService from '../../services/observations'
 import { observationCreation } from '../../reducers/observationReducer'
-import { MapContainerComponent } from '../../components/observation/Map'
-import Location from './Location'
+import { LocationComponent } from './Location'
 
 class NewObservation extends React.Component {
 
@@ -15,8 +14,11 @@ class NewObservation extends React.Component {
       longitude: this.props.longitude,
       search: '',
       resultsVisibility: false,
-      result: '',
-      speciesId: ''
+      results: [],
+      speciesId: '',
+      date: '',
+      time: '',
+      active: {}
     }
   }
 
@@ -38,30 +40,47 @@ class NewObservation extends React.Component {
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
-    const species = this.props.species.filter(species => species.finnishName.toLowerCase().includes(this.state.search.toLowerCase()))
-    this.setState({ species })
-    if (species.length === 1) {
-        this.setState({ 
-          resultsVisibility: true,
-          result: `${species[0].finnishName} (${species[0].latinName})`,
-          speciesId: species[0].id
+
+    if (event.target.name === 'search') {
+      const species = this.props.species.filter(species => species.finnishName.toLowerCase().includes(this.state.search.toLowerCase()))
+      this.setState({ species })
+      if (species.length < 20) {
+          this.setState({
+            resultsVisibility: true,
+            results: species
+          })
+      } else {
+        this.setState({
+          resultsVisibility: false
         })
-    } else {
-      this.setState({
-        resultsVisibility: false
-      })
+      }
     }
   }
 
-  divOnClick = (event) => {
+  handleDateChange = (event) => {
+    const split = event.target.value.split('.')
+    if (split.length === 3) {
+      const date = split[1] + ' ' + split[0] + ' ' + split[2]
+      this.setState({ date })
+    }
+  }
+
+  handleSpeciesClick = (event) => {
     event.preventDefault()
+    const laji = this.props.species.find(species => species.id === event.target.id)
+    console.log(laji)
+    const search = laji.finnishName + ' (' + laji.latinName + ')'
     this.setState({ 
-      search: `${this.state.species[0].finnishName} (${this.state.species[0].latinName})`,
-      resultsVisibility: false
+      resultsVisibility: false, 
+      results: [], 
+      active: laji,
+      search
      })
   }
 
   render() {
+
+    const date = new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
 
     const visibility = {
       display: this.state.resultsVisibility ? '' : 'none'
@@ -69,22 +88,25 @@ class NewObservation extends React.Component {
 
     return (
       <div>
-        <h1>Havainnot</h1>
-        <MapContainerComponent />
-        <MapContainerComponent />
-        <MapContainerComponent />
-        <MapContainerComponent />
+        <h1>Uusi havainto</h1>
         <div>
           <form onSubmit={this.addObservation}>
-            <div id="laji">
               <h3>Laji</h3>
-              <h4>Etsi nimen perusteella</h4>
-              <input id="search" type="text" name="search" onChange={this.handleChange} value={this.state.search}/>
-              <div id="results" style={visibility} onClick={this.divOnClick}>
-                  <a href="">{this.state.result}</a>
+              <p>Etsi nimen perusteella</p>
+              <input id="search" type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli" />
+              <div id="results" style={visibility}>
+                {this.state.results.map(species => 
+                  <p key={species.id}><a href="" onClick={this.handleSpeciesClick} id={species.id}>{species.finnishName} ({species.latinName}</a>)</p>)
+                }
               </div>
-            </div>
+              <h3>Aika</h3>
+              <p>Päivämäärä</p>
+              <input type="text" name="date" onChange={this.handleDateChange} placeholder="31.12.1900"/>
+              <p>Kellonaika</p>
+              <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
+              <h3>Sijainti</h3>
           </form>
+          <LocationComponent />
         </div>
       </div>
     )

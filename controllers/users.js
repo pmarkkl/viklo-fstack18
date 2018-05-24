@@ -3,6 +3,7 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 const Request = require('../models/request')
 const jwt = require('jsonwebtoken')
+const validator = require('../validation')
 
 usersRouter.get('/', async (req,res) => {
   const users = await User
@@ -29,14 +30,22 @@ usersRouter.get('/:id', async (req,res) => {
 usersRouter.post('/', async (req, res) => {
   try {
     const body = req.body
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+
+    const errors = validator.validateRegForm(body)
+    console.log(errors)
+
+    if (errors.length > 0) {
+      return res.status(422).json({ error: errors })
+    }
 
     const maybeExists = await User.find({ email: body.email })
 
     if (maybeExists.length > 0) {
-      return res.status(400).json({ error: 'Sähköposti on jo rekisteröity' })
+      return res.status(400).json({ error: ['Sähköposti on jo rekisteröity'] })
     }
+
+    const saltRounds = 10
+    const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
     const user = new User({
       firstname: body.firstname,

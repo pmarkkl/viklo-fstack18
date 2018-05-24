@@ -34,7 +34,6 @@ class AddSpecies extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <h1>lisää laji</h1>
@@ -43,6 +42,13 @@ class AddSpecies extends React.Component {
         latinaksi: <input type="text" name="latinName" onChange={this.handleFieldChange} /><br />
         <button>lisää laji</button>
         </form>
+        <br />
+        <h1>lajit</h1>
+        <div>
+          { this.props.species
+            .sort((eka, toka) => (eka.finnishName > toka.finnishname) - (eka.finnishName < toka.finnishName))
+            .map(species => <p key={species.id}>{species.finnishName} ({species.latinName})</p>) }
+        </div>
       </div>
     )
   }
@@ -50,7 +56,8 @@ class AddSpecies extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    user: state.user,
+    species: state.species
   }
 }
 

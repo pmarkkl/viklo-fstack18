@@ -9,7 +9,8 @@ const markerReducer = (state = [], action) => {
     case 'EMPTY_MARKERS':
       return []
     case 'DELETE_LAST':
-      const id = action.data
+      const length = state.length
+      const id = state[length-1].id
       return state.filter(marker => marker.id !== id)
     default:
       return state
@@ -52,11 +53,10 @@ export const emptyMarkers = () => {
   }
 }
 
-export const deleteLast = (data) => {
+export const deleteLast = () => {
   return async (dispatch) => {
     dispatch({
-      type: 'DELETE_LAST',
-      data
+      type: 'DELETE_LAST'
     })
   }
 }
