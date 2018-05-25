@@ -17,17 +17,21 @@ export class MapContainer extends React.Component {
       lng: 25.0270719
     },
     mapZoom: 7,
-    activeMarker: {},
-    activeMarkerInfo: {
-      firstname: '',
-      lastname: '',
-      latitude: '',
-      longitude: '',
-      date: undefined,
-      comment: '',
-      species: {
-        finnishName: '',
-        latinName: ''
+    activeMarker: {
+      observation: {
+        additionalComments: '',
+        latitude: '',
+        longitude: '',
+        date: '',
+        comment: '',
+        species: {
+          finnishName: '',
+          latinName: ''
+        },
+        user: {
+          firstname: '',
+          lastname: ''
+        }
       }
     },
     newMarker: {
@@ -39,26 +43,21 @@ export class MapContainer extends React.Component {
   }
 
   componentWillReceiveProps() {
-    this.setState({ mapFocus: this.props.daLocation })
+    if (this.props.daLocation && this.props.zoom) {
+      this.setState({ mapFocus: this.props.daLocation, mapZoom: this.props.zoom })
+    }
   }
 
   onMarkerClick = (props, marker) => {
+    if (!marker.observation.user) {
+      return
+    }
+    this.setState({ activeMarker: marker })
+    console.log(this.state.activeMarker)
     if (props.observation.species) {
       this.setState({
         showingInfoWindow: true,
         activeMarker: marker,
-        activeMarkerInfo: {
-          firstname: props.observation.user.firstname,
-          lastname: props.observation.user.lastname,
-          latitude: props.observation.latitude,
-          longitude: props.observation.longitude,
-          date: props.observation.date,
-          comment: props.observation.additionalComments,
-          species: {
-            finnishName: props.observation.species.finnishName,
-            latinName: props.observation.species.latinName
-          }
-        },
         mapFocus: {
           lat: props.observation.latitude,
           lng: props.observation.longitude
@@ -72,6 +71,7 @@ export class MapContainer extends React.Component {
   }
 
   onMapClick = (mapProps, map, clickEvent, mapCenter) => {
+
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
       return
@@ -91,6 +91,7 @@ export class MapContainer extends React.Component {
       latitude: lat,
       longitude: lng
     }
+
     this.props.addMarker(locationObject)
     this.props.setLocation({ latitude: lat, longitude: lng })
 
@@ -98,6 +99,7 @@ export class MapContainer extends React.Component {
       lastMarker: locationObject.id,
       mapFocus: { lat, lng }
     })
+
   }
 
   testiButtonClick = (event) => {
@@ -113,19 +115,21 @@ export class MapContainer extends React.Component {
   handleFieldChange = (event) => {
     event.preventDefault()
     this.setState({ [event.target.name]: event.target.value })
-    console.log(this.state.search)
   }
 
   render() {
     const style = {
       width: '100%',
-      height: '400px'
+      height: '650px'
+    }
+
+    const morjes = {
+      color: 'black'
     }
 
     return (
       <div>
         <div id="kartta">
-        <button onClick={this.testiButtonClick}>click</button>
         <Map 
           google={this.props.google} 
           zoom={this.state.mapZoom} 
@@ -141,16 +145,17 @@ export class MapContainer extends React.Component {
               position={{lat: observation.latitude, lng: observation.longitude}} 
               onClick={this.onMarkerClick}
               observation={observation}
+              style={morjes}
             >
             </Marker>) 
           }
           <InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow}>
             <div>
-              <p><b>{this.state.activeMarkerInfo.species.finnishName} ({this.state.activeMarkerInfo.species.latinName})</b></p>
-              <p>Havaitsija: {this.state.activeMarkerInfo.firstname} {this.state.activeMarkerInfo.lastname}</p>
-              <p>Tarkempi sijainti: {this.state.activeMarkerInfo.latitude}, {this.state.activeMarkerInfo.longitude}</p>
-              <p>Päivämäärä: {this.state.activeMarkerInfo.date}</p>
-              <p>Kommentit: <br /> {this.state.activeMarkerInfo.comment}</p>
+              <p>Laji: {this.state.activeMarker.observation.species.finnishName} ({this.state.activeMarker.observation.species.latinName})</p>
+              <p>Havaitsija: {this.state.activeMarker.observation.user.firstname} {this.state.activeMarker.observation.user.lastname}</p>
+              <p>Koordinaatit: {this.state.activeMarker.observation.latitude}, {this.state.activeMarker.observation.longitude}</p>
+              <p>Päivämäärä: {this.state.activeMarker.observation.date}</p>
+              <p>Kommentit: {this.state.activeMarker.observation.additionalComments}</p>
             </div>
           </InfoWindow>
         </Map>
@@ -170,5 +175,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast, setLocation })(GoogleApiWrapper({
-  apiKey: '3213213kl'
+  apiKey: asdsadsad
 })(MapContainer))

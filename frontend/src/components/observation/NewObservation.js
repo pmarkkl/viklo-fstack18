@@ -28,9 +28,10 @@ class NewObservation extends React.Component {
     const requestObject = {
       token: this.props.user.token,
       user: this.props.user.id,
-      species: this.state.species,
+      species: this.state.speciesId,
       latitude: this.props.location.latitude,
-      longitude: this.props.location.longitude
+      longitude: this.props.location.longitude,
+      date: new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
     }
     this.setState({ latitude: '', longitude: '' })
     const response = await observationService.newObservation(requestObject)
@@ -40,7 +41,6 @@ class NewObservation extends React.Component {
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
-
     if (event.target.name === 'search') {
       const species = this.props.species.filter(species => species.finnishName.toLowerCase().includes(this.state.search.toLowerCase()))
       this.setState({ species })
@@ -74,13 +74,14 @@ class NewObservation extends React.Component {
       resultsVisibility: false, 
       results: [], 
       active: laji,
-      search
+      search,
+      speciesId: laji.id
      })
   }
 
   render() {
-
     const date = new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
+    console.log(date)
 
     const visibility = {
       display: this.state.resultsVisibility ? '' : 'none'
@@ -105,6 +106,7 @@ class NewObservation extends React.Component {
               <p>Kellonaika</p>
               <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
               <h3>Sijainti</h3>
+          <button>Lähetä</button>
           </form>
           <LocationComponent />
         </div>

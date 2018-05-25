@@ -11,8 +11,8 @@ const locationReducer = (state = [], action) => {
 
 export const initLocation = () => {
   const data = {
-    latitude: '',
-    longitude: ''
+    latitude: 0,
+    longitude: 0
   }
   return {
     type: 'INIT_LOCATION',

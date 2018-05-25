@@ -5,6 +5,14 @@ import { setMarkers, markersForUser, emptyMarkers } from '../reducers/markerRedu
 
 class MyPage extends React.Component {
 
+  componentWillMount() {
+    this.props.setMarkers()
+  }
+
+  componentWillReceiveProps() {
+    this.props.setMarkers()
+  }
+
   emptyMap = (event) => {
     event.preventDefault()
     this.props.emptyMarkers()
@@ -30,7 +38,6 @@ class MyPage extends React.Component {
         </div>
         <h3>Omat havainnot</h3>
         <button onClick={this.emptyMap}>tyhjennä kartta</button><button onClick={this.getMarkers}>hae kaikki</button><button onClick={this.getUsersMarkers}>hae omat</button>
-        <MapContainerComponent />
       </div>
     )
 

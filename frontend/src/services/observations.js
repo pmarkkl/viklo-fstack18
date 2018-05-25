@@ -13,8 +13,8 @@ const newObservation = async (request) => {
   const observationObject = {
     latitude: request.latitude,
     longitude: request.longitude,
-    date: Date.now(),
-    additionalComments: 'Ehkä menee jopa stateen asti',
+    date: request.date,
+    additionalComments: 'heeeeh',
     speciesId: request.species
   }
 

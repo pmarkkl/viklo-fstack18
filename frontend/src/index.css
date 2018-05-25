@@ -8,8 +8,8 @@ body {
 
 #kartta {
   position: relative;
-  height: 400px;
   margin: 0px;
+  height: 650px;
 }
 
 ul {
@@ -108,7 +108,6 @@ input[type=submit] {
   position: fixed;
   background-color: #24292a;
   box-shadow: 3px 0px 3px #c1cacc;
-  z-index: 1;
   top: 0;
   left: 0;
   overflow-x: hidden;
@@ -123,7 +122,7 @@ input[type=submit] {
 #jes {
   background-color: white;
   width: 97%;
-  height: 100%;
+  height: auto;
   margin: 0px auto;
   margin-bottom: 15px;
   margin-top: 15px;
@@ -132,6 +131,7 @@ input[type=submit] {
   box-sizing: border-box;
   padding: 15px;
   overflow: auto;
+  display: block;
 }
 
 button {
