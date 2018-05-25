@@ -19,7 +19,8 @@ import { MapContainerComponent } from './components/observation/Map';
 class App extends React.Component {
 
   state = {
-    popup: false
+    popup: false,
+    loginLogoutColour: '#07889b'
   }
 
   componentWillMount() {
@@ -37,9 +38,18 @@ class App extends React.Component {
   }
 
   logout = (event) => {
-    event.preventDefault()
     window.localStorage.removeItem('loggedInUser')
     this.props.logout()
+  }
+
+  changeColourHover = (event) => {
+    event.preventDefault()
+    this.setState({ loginLogoutColour: '#22abbf' })
+  }
+
+  changeColourLeave = (event) => {
+    event.preventDefault()
+    this.setState({ loginLogoutColour: '#07889b' })
   }
 
   render() {
@@ -55,6 +65,13 @@ class App extends React.Component {
       display: this.props.user.id ? '' : 'none'
     }
 
+    let loginLogout = {
+      float: 'right',
+      link: {
+        backgroundColor: this.state.loginLogoutColour
+      }
+    }
+
     const testi = {
       left: '0',
       right: '0',
@@ -67,31 +84,28 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <div id="vasen">
-          <img src={require('./logooo.png')} alt="viklo" />
-            <ul>
-              <li><Link to="/">Etusivu</Link></li>
-              <li><Link to="/uusihavainto">Uusi havainto</Link></li>
-              <li><Link to="/havainnot">Havainnot</Link></li>
-              <li><Link to="/lajit">Lisää laji</Link></li>
-              <li><Link to="/omasivu">Oma sivu</Link></li>
-            </ul>
-            <ul style={adminStyle}>
-              <li><Link to="/yllapito">Ylläpito</Link></li>
-            </ul>
-            <ul style={logOutStyle}>
-              <li><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
-            </ul>
-          </div>
-          <div id="oikea">
-            <div id="jes">
-              <Route exact path="/" render={() => <LoginForm />} />
-              <Route path="/uusihavainto" render={() => <NewObservation />} />
-              <Route path="/havainnot" render={() => <ObservationList />} />
-              <Route path="/lajit" render={() => <AddSpecies />} /> 
-              <Route path="/omasivu" render={() => <MyPage />} />
-              <Route path="/yllapito" render={() => <MapContainerComponent />} />
+          <div id="header">
+            <div id="headerLeft">
+              <img src={require('./logouuu.png')} alt="viklo" />
             </div>
+            <div id="headerRight">
+              <ul>
+                <li><Link to="/">Etusivu</Link></li>
+                <li><Link to="/uusihavainto">Uusi havainto</Link></li>
+                <li><Link to="/havainnot">Havainnot</Link></li>
+                <li><Link to="/lajit">Lisää laji</Link></li>
+                <li><Link to="/omasivu">Oma sivu</Link></li>
+                <li onMouseEnter={this.changeColourHover} onMouseLeave={this.changeColourLeave} style={loginLogout}><Link to="/" onClick={this.logout} style={loginLogout.link}>Kirjaudu ulos</Link></li>
+              </ul>
+            </div>
+          </div>
+          <div id="main">
+            <Route exact path="/" render={() => <LoginForm />} />
+            <Route path="/uusihavainto" render={() => <NewObservation />} />
+            <Route path="/havainnot" render={() => <ObservationList />} />
+            <Route path="/lajit" render={() => <AddSpecies />} /> 
+            <Route path="/omasivu" render={() => <MyPage />} />
+            <Route path="/yllapito" render={() => <MapContainerComponent />} />
           </div>
         </div>
       </Router>

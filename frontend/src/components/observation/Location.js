@@ -26,8 +26,8 @@ class Location extends React.Component {
       mapVisibility: false,
       markers: true,
       location: {
-        lat: 0,
-        lng: 0
+        latitude: 0,
+        longitude: 0
       }
     }
   }
@@ -36,30 +36,56 @@ class Location extends React.Component {
     this.props.setMarkers()
   }
 
+  componentWillReceiveProps() {
+    this.setState({ 
+      location: { latitude: this.props.location.latitude, longitude: this.props.location.longitude }
+    })
+  }
+
   error = (error) => {
     console.warn(error.message)
   }
-  
+
+  reverseGeoCode = () => {
+    const geocoder = new window.google.maps.Geocoder()
+    
+    const latlng = {
+      lat: this.props.location.latitude,
+      lng: this.props.location.longitude
+    }
+
+    geocoder.geocode({ 'location': latlng }, (results,status) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          console.log(results[0])
+          this.setState({ result: results[0].formatted_address.replace('Finland', 'Suomi').replace('Unnamed Road,', '') })
+        }
+      } else {
+        this.setState({ result: 'Ei osoitetietoja.' })
+      }
+    })
+  }
+
   getLocation = (event) => {
     navigator.geolocation.getCurrentPosition(this.success, this.error, options)
   }
 
   geoCodeAddress = (event) => {
-
     event.preventDefault()
     const geocoder = new window.google.maps.Geocoder()
 
     geocoder.geocode( { 'address': this.state.search }, (results, status) => {
       if (status === 'OK') {
-        console.log('latitude: ', results[0].geometry.viewport.f.b)
-        console.log('longitude: ', results[0].geometry.viewport.b.b)
-
         const mapFocusObject = {
           lat: results[0].geometry.viewport.f.b,
           lng: results[0].geometry.viewport.b.b
         }
 
-        this.setState({ result: results[0].formatted_address.replace('Finland', 'Suomi'), focus: mapFocusObject, zoom: 14 })
+        this.setState({ 
+          result: results[0].formatted_address.replace('Finland', 'Suomi'), 
+          focus: mapFocusObject, 
+          zoom: 14
+        })
 
         const locationForReducer = {
           latitude: mapFocusObject.lat,
@@ -73,9 +99,13 @@ class Location extends React.Component {
         }
 
         this.props.setLocation(locationObjectWithid)
-        this.props.deleteLast()
+
+        if (this.props.markers.length > 0) {
+          this.props.deleteLast()
+        }
+
         this.props.addMarker(locationObjectWithid)
-        this.setState({ mapVisibility: true, location: { lat: locationObjectWithid.latitude, lng: locationObjectWithid.longitude } })
+        this.setState({ mapVisibility: true, location: { latitude: locationObjectWithid.latitude, longitude: locationObjectWithid.longitude } })
 
     } else {
         console.log('Ei tuloksia');
@@ -90,12 +120,17 @@ class Location extends React.Component {
 
   success = (position) => {
     const coordinates = position.coords
-    this.setState({ latitude: coordinates.latitude, longitude: coordinates.longitude })
+
+    this.setState({ location: { latitude: coordinates.latitude, longitude: coordinates.longitude }})
+
     const locationForReducer = {
       latitude: coordinates.latitude,
       longitude: coordinates.longitude
     }
+
+    this.setState({ location: { latitude: coordinates.latitude, longitude: coordinates.longitude } })
     this.props.setLocation(locationForReducer)
+    this.reverseGeoCode()
   }
 
   handleFieldChange = (event) => {
@@ -105,11 +140,23 @@ class Location extends React.Component {
   toggleVisibility = (event) => {
     event.preventDefault()
     this.setState({ mapVisibility: false, search: '' })
+    this.reverseGeoCode()
+    this.props.setMarkers()
+  }
+
+  openMap = (event) => {
+    event.preventDefault()
+    this.setState({ mapVisibility: true })
   }
 
   toggleMarkers = (event) => {
     event.preventDefault()
     this.setState({ markers: !this.state.markers })
+  }
+
+  emptyMap = (event) => {
+    event.preventDefault()
+    this.props.emptyMarkers()
   }
 
   render() {
@@ -124,11 +171,12 @@ class Location extends React.Component {
       left: '50%',
       marginRight: '-50%',
       width: '1050px',
-      height: '650px',
-      backgroundColor: '#383e41',
+      height: '678px',
+      backgroundColor: '#414045',
       padding: '2px',
       transform: 'translate(-50%, -50%)',
-      fontSize: '6pt'
+      fontSize: '6pt',
+      zIndex: '3'
     }
 
     const testi = {
@@ -138,7 +186,8 @@ class Location extends React.Component {
       top: '0',
       bottom: '0',
       position: 'absolute',
-      backgroundColor: 'rgba(0,0,0,0.7)'
+      backgroundColor: 'rgba(0,0,0,0.7)',
+      zIndex: '2'
     }
 
     const buttonStyle = {
@@ -148,26 +197,39 @@ class Location extends React.Component {
       fontSize: '8pt'
     }
 
+    const resultsStyle = {
+      display: this.props.location.latitude.toString().length < 2 ? 'none' : '',
+      backgroundColor: '#f7f7f7',
+      width: '350px',
+      fontSize: '10pt',
+      padding: '10px'
+    }
+
+    console.log(this.props.location.latitude.toString().length)
+
     return (
       <div>
-      <button onClick={this.getLocation}>Hae laitteesi sijainti</button>
-      <p>Syötä osoite:</p>
-      <form onSubmit={this.geoCodeAddress}>
-        <input type="text" name="search" value={this.state.search} onChange={this.handleFieldChange} placeholder="Pasteurinkatu 1, Helsinki"/>
-        <button>Etsi</button>
-      </form>
-      <form>
-        <p>Koordinaatit</p>
-        <input type="text" name="lat" value={this.state.location.lat} readOnly/>
-        <input type="text" name="lng" value={this.state.location.lng} readOnly/>
-      </form>
-      <div style={testi}>
-      </div>
-      <div style={popUpTesti}>
-        <img src={require('../../x.png')} alt="Sulje" onClick={this.toggleVisibility} />&nbsp;
-        <img src={require('../../marker.png')} alt="Sulje" onClick={this.toggleVisibility} />
-        <MapContainerComponent daLocation={this.state.focus} zoom={this.state.zoom}/>
-      </div>
+        <h3>Sijainti</h3>
+        <p>Merkitse sijainti kartalle:</p>
+        <img src={require('../../icons/baseline_map_black_18dp.png')} alt="Avaa kartta" onClick={this.openMap} />
+        <form onSubmit={this.geoCodeAddress}>
+          <input type="text" name="search" value={this.state.search} onChange={this.handleFieldChange} placeholder="Pasteurinkatu 1, Helsinki"/>
+          <button>Etsi</button>
+        </form>
+        <p>Sijainti käyttämäsi laitteen perusteella:</p>
+        <p><button onClick={this.getLocation}>Hae laitteesi sijainti</button></p>
+        <div style={resultsStyle}>
+          <p>{this.state.result}</p>
+          <p>{this.props.location.latitude}</p>
+          <p>{this.props.location.longitude}</p>
+        </div>
+        <div style={testi}>
+        </div>
+        <div style={popUpTesti}>
+          <img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} />&nbsp;
+          <img src={require('../../icons/baseline_location_off_white_18dp.png')} alt="Tyhjennä kartta" onClick={this.emptyMap} />
+          <MapContainerComponent daLocation={this.state.focus} zoom={this.state.zoom}/>
+        </div>
       </div>
     )
   }
@@ -176,10 +238,11 @@ class Location extends React.Component {
 const mapStateToProps = (state) => {
   return {
     observations: state.observations,
-    location: state.location
+    location: state.location,
+    markers: state.markers
   }
 }
 
-export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers })(GoogleApiWrapper({
-  apiKey: asdasdsads
+export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
+  apiKey: 
 })(Location))

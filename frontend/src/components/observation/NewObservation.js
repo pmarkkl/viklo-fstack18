@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import observationService from '../../services/observations'
 import { observationCreation } from '../../reducers/observationReducer'
+import { setMarkers, emptyMarkers } from '../../reducers/markerReducer'
 import { LocationComponent } from './Location'
 
 class NewObservation extends React.Component {
@@ -18,10 +19,10 @@ class NewObservation extends React.Component {
       speciesId: '',
       date: '',
       time: '',
-      active: {}
+      active: {},
+      additionalComments: ''
     }
   }
-
 
   addObservation = async (event) => {
     event.preventDefault()
@@ -31,16 +32,19 @@ class NewObservation extends React.Component {
       species: this.state.speciesId,
       latitude: this.props.location.latitude,
       longitude: this.props.location.longitude,
+      additionalComments: this.state.additionalComments,
       date: new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
     }
     this.setState({ latitude: '', longitude: '' })
     const response = await observationService.newObservation(requestObject)
-    this.props.observationCreation(response)
     console.log(response)
+    this.props.emptyMarkers()
+    this.props.setMarkers()
   }
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
+    console.log(this.state)
     if (event.target.name === 'search') {
       const species = this.props.species.filter(species => species.finnishName.toLowerCase().includes(this.state.search.toLowerCase()))
       this.setState({ species })
@@ -80,36 +84,84 @@ class NewObservation extends React.Component {
   }
 
   render() {
-    const date = new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
-    console.log(date)
 
     const visibility = {
       display: this.state.resultsVisibility ? '' : 'none'
     }
 
+    const tr = {
+      verticalAlign: 'top'
+    }
+
+    const jes = {
+      display: 'inline-block',
+      width: '400px',
+    }
+
+    const jes2 = {
+      float: 'left',
+      width: '400px',
+    }
+
+    const commentfield = {
+      float: 'left',
+      marginTop: '50px'
+    }
+
     return (
       <div>
-        <h1>Uusi havainto</h1>
+        <h2>Lisää havainto</h2>
         <div>
-          <form onSubmit={this.addObservation}>
-              <h3>Laji</h3>
-              <p>Etsi nimen perusteella</p>
-              <input id="search" type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli" />
-              <div id="results" style={visibility}>
-                {this.state.results.map(species => 
-                  <p key={species.id}><a href="" onClick={this.handleSpeciesClick} id={species.id}>{species.finnishName} ({species.latinName}</a>)</p>)
-                }
-              </div>
-              <h3>Aika</h3>
-              <p>Päivämäärä</p>
-              <input type="text" name="date" onChange={this.handleDateChange} placeholder="31.12.1900"/>
-              <p>Kellonaika</p>
-              <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
-              <h3>Sijainti</h3>
-          <button>Lähetä</button>
-          </form>
-          <LocationComponent />
         </div>
+        <table style={jes2}>
+          <tbody>
+            <tr style={tr}>
+              <td style={tr}>
+                <h3>Laji</h3>
+                <p>Etsi nimen perusteella</p>
+                <input id="search" type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli" />
+                <div id="results" style={visibility}>
+                  {this.state.results.map(species => 
+                    <p key={species.id}><a href="" onClick={this.handleSpeciesClick} id={species.id}>{species.finnishName} ({species.latinName}</a>)</p>)
+                  }
+                </div>
+              </td>
+            </tr>
+            <tr style={tr}>
+              <td style={tr}>
+              <h3>Aika</h3>
+                <p>Päivämäärä</p>
+                <input type="text" name="date" onChange={this.handleDateChange} placeholder="31.12.1900"/>
+                <p>Kellonaika</p>
+                <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
+              </td>
+              <td style={tr}>
+              </td>
+            </tr>
+            <tr style={tr}>
+              <td style={tr}>
+                <form onSubmit={this.addObservation}>
+                  <h3>Kommentti:</h3>
+                  <textarea name="additionalComments" placeholder="Poikanen" onChange={this.handleChange} /><br />
+                  <button>Lisää havainto</button>
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table style={jes}>
+          <tbody>
+            <tr style={tr}>
+              <td style={tr}>
+              <LocationComponent />
+              </td>
+            </tr>
+            <tr style={tr}>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     )
   }
@@ -125,5 +177,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { observationCreation }
+  { observationCreation, setMarkers, emptyMarkers }
 )(NewObservation)

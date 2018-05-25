@@ -71,13 +71,14 @@ export class MapContainer extends React.Component {
   }
 
   onMapClick = (mapProps, map, clickEvent, mapCenter) => {
-
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
       return
     }
 
-    this.props.deleteLast()
+    if (this.props.markers.length > 0) {
+      this.props.deleteLast()
+    }
 
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
@@ -175,5 +176,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast, setLocation })(GoogleApiWrapper({
-  apiKey: asdsadsad
+  apiKey: 'AIzaSyD8bfLtwWL2sBo1qktwaxChVIomZ10gMpU'
 })(MapContainer))

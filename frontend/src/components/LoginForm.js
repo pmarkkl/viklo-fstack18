@@ -120,14 +120,14 @@ class LoginForm extends React.Component {
     const loginform = () => (
       <div>
         { loginInfo() }
-        <h3>Kirjaudu sisään</h3>
+        <h2>Kirjaudu</h2>
         <form onSubmit={this.login} autoComplete="on">
           <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} placeholder="Sähköposti"/><br />
           <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
           <button>Kirjaudu</button>
         </form>
         { regSuccess() }
-        <h3>Rekisteröityminen</h3>
+        <h3>Rekisteröidy</h3>
         <form onSubmit={this.register} autoComplete="on">
           <input type="text" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} placeholder="Sähköposti" /><br />
           <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />
@@ -144,7 +144,7 @@ class LoginForm extends React.Component {
 
     const logoutform = () => (
       <div>
-        <h3>{this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in</h3>
+        {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in<br />
         <button onClick={this.logout}>Kirjaudu ulos</button>
       </div>
     )

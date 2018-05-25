@@ -7,6 +7,7 @@ const markerReducer = (state = [], action) => {
     case 'ADD_MARKER':
       return [...state, action.data]
     case 'EMPTY_MARKERS':
+      console.log('EMPTY MARKERS')
       return []
     case 'DELETE_LAST':
       const length = state.length
