@@ -39,12 +39,16 @@ export class MapContainer extends React.Component {
       lng: 0
     },
     lastMarker: '',
-    addressSearch: ''
+    addressSearch: '',
+    marker: { clickable: false }
   }
 
   componentWillReceiveProps() {
-    if (this.props.daLocation && this.props.zoom) {
-      this.setState({ mapFocus: this.props.daLocation, mapZoom: this.props.zoom })
+    if (this.props.location) {
+      this.setState({ mapFocus: { lat: this.props.location.latitude, lng: this.props.location.longitude } })
+    }
+    if (this.props.zoom) {
+      this.setState({ mapZoom: this.props.zoom })
     }
   }
 
@@ -53,7 +57,7 @@ export class MapContainer extends React.Component {
       return
     }
     this.setState({ activeMarker: marker })
-    console.log(this.state.activeMarker)
+
     if (props.observation.species) {
       this.setState({
         showingInfoWindow: true,
@@ -71,6 +75,7 @@ export class MapContainer extends React.Component {
   }
 
   onMapClick = (mapProps, map, clickEvent, mapCenter) => {
+
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
       return
@@ -93,7 +98,17 @@ export class MapContainer extends React.Component {
       longitude: lng
     }
 
-    this.props.addMarker(locationObject)
+    if (this.state.marker.clickable) {
+      this.state.marker.setMap(null)
+    }
+
+    const marker = new window.google.maps.Marker({
+      position: new window.google.maps.LatLng(lat, lng),
+      map
+    })
+
+    this.setState({ marker })
+
     this.props.setLocation({ latitude: lat, longitude: lng })
 
     this.setState({
@@ -111,6 +126,8 @@ export class MapContainer extends React.Component {
 
   onReady = (mapProps, map) => {
     map.disableDoubleClickZoom = true
+    map.mapTypeId = 'terrain'
+    map.clickable = this.props.clickable
   }
 
   handleFieldChange = (event) => {
@@ -176,5 +193,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast, setLocation })(GoogleApiWrapper({
-  apiKey: 'AIzaSyD8bfLtwWL2sBo1qktwaxChVIomZ10gMpU'
+  apiKey: asd, language: 'fi', mapTypeId: 'terrain'
 })(MapContainer))

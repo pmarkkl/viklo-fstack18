@@ -46,6 +46,8 @@ observationRouter.post('/', async (req,res) => {
     const observation = new Observation({
       latitude: body.latitude,
       longitude: body.longitude,
+      zipcode: body.zipcode,
+      town: body.town,
       date,
       additionalComments: body.additionalComments,
       user,

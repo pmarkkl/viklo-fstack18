@@ -15,7 +15,9 @@ const newObservation = async (request) => {
     longitude: request.longitude,
     date: request.date,
     additionalComments: request.additionalComments,
-    speciesId: request.species
+    speciesId: request.species,
+    zipcode: request.zipcode,
+    town: request.town
   }
 
   const response = await axios.post(url, observationObject, config)

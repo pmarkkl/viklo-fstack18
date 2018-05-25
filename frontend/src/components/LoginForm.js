@@ -120,14 +120,14 @@ class LoginForm extends React.Component {
     const loginform = () => (
       <div>
         { loginInfo() }
-        <h2>Kirjaudu</h2>
+        <h1>Kirjaudu</h1>
         <form onSubmit={this.login} autoComplete="on">
           <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} placeholder="Sähköposti"/><br />
           <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
           <button>Kirjaudu</button>
         </form>
         { regSuccess() }
-        <h3>Rekisteröidy</h3>
+        <h1>Rekisteröidy</h1>
         <form onSubmit={this.register} autoComplete="on">
           <input type="text" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} placeholder="Sähköposti" /><br />
           <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />

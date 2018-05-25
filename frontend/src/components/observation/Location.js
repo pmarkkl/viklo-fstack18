@@ -16,11 +16,7 @@ class Location extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      focus: {
-        lat: 60.2279004,
-        lng: 25.0270719
-      },
-      zoom: 8,
+      zoom: 10,
       search: '',
       result: '',
       mapVisibility: false,
@@ -54,11 +50,27 @@ class Location extends React.Component {
       lng: this.props.location.longitude
     }
 
-    geocoder.geocode({ 'location': latlng }, (results,status) => {
+    geocoder.geocode({ 'location': latlng }, (results, status) => {
       if (status === 'OK') {
         if (results[0]) {
-          console.log(results[0])
-          this.setState({ result: results[0].formatted_address.replace('Finland', 'Suomi').replace('Unnamed Road,', '') })
+          this.setState({ result: results[0].formatted_address.replace('Unnamed Road,', '') })
+
+          // zip and town
+
+          const split = results[0].formatted_address.split(",")
+          const splitSplit = split[split.length-2].trim().split(' ')
+
+          // stateen zip und town
+
+          const forState = {
+            latitude: latlng.lat,
+            longitude: latlng.lng,
+            zipcode: splitSplit[0],
+            town: splitSplit[1]
+          }
+
+          this.props.setLocation(forState)
+
         }
       } else {
         this.setState({ result: 'Ei osoitetietoja.' })
@@ -87,11 +99,6 @@ class Location extends React.Component {
           zoom: 14
         })
 
-        const locationForReducer = {
-          latitude: mapFocusObject.lat,
-          longitude: mapFocusObject.lng
-        }
-        
         const locationObjectWithid = {
           id: this.generateIdForRedux(),
           latitude: mapFocusObject.lat,
@@ -141,7 +148,6 @@ class Location extends React.Component {
     event.preventDefault()
     this.setState({ mapVisibility: false, search: '' })
     this.reverseGeoCode()
-    this.props.setMarkers()
   }
 
   openMap = (event) => {
@@ -158,6 +164,14 @@ class Location extends React.Component {
     event.preventDefault()
     this.props.emptyMarkers()
   }
+
+  popUpProps = () => (
+    <div>
+      <a href="/"><img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} /></a>&nbsp;
+      <a href="/"><img src={require('../../icons/baseline_location_off_white_18dp.png')} alt="Tyhjennä kartta" onClick={this.emptyMap} /></a>
+      <MapContainerComponent zoom={this.state.zoom} />
+    </div>
+  )
 
   render() {
     const mapVisibility = {
@@ -176,7 +190,9 @@ class Location extends React.Component {
       padding: '2px',
       transform: 'translate(-50%, -50%)',
       fontSize: '6pt',
-      zIndex: '3'
+      zIndex: '3',
+      border: '1px solid #414045',
+      borderRadius: '5px',
     }
 
     const testi = {
@@ -198,37 +214,37 @@ class Location extends React.Component {
     }
 
     const resultsStyle = {
-      display: this.props.location.latitude.toString().length < 2 ? 'none' : '',
+      display: this.state.result.length < 1 ? 'none' : '',
       backgroundColor: '#f7f7f7',
-      width: '350px',
-      fontSize: '10pt',
-      padding: '10px'
+      width: '450px',
+      fontSize: '11pt',
+      padding: '10px',
+      border: '1px solid #DDDDDD',
+      boxShadow: '3px 3px 3px #fbfbfb'
     }
-
-    console.log(this.props.location.latitude.toString().length)
 
     return (
       <div>
         <h3>Sijainti</h3>
-        <p>Merkitse sijainti kartalle:</p>
-        <img src={require('../../icons/baseline_map_black_18dp.png')} alt="Avaa kartta" onClick={this.openMap} />
+        <p>Merkitse sijainti kartalle</p>
+        <a href="/"><img src={require('../../icons/baseline_map_black_18dp.png')} alt="Avaa kartta" onClick={this.openMap} /></a>
         <form onSubmit={this.geoCodeAddress}>
           <input type="text" name="search" value={this.state.search} onChange={this.handleFieldChange} placeholder="Pasteurinkatu 1, Helsinki"/>
           <button>Etsi</button>
         </form>
-        <p>Sijainti käyttämäsi laitteen perusteella:</p>
+        <p>Sijainti käyttämäsi laitteen perusteella</p>
         <p><button onClick={this.getLocation}>Hae laitteesi sijainti</button></p>
         <div style={resultsStyle}>
           <p>{this.state.result}</p>
-          <p>{this.props.location.latitude}</p>
-          <p>{this.props.location.longitude}</p>
+          <p>Lat: {this.props.location.latitude}</p>
+          <p>Lng: {this.props.location.longitude}</p>
         </div>
-        <div style={testi}>
+        <div style={testi} onClick={this.toggleVisibility}>
         </div>
         <div style={popUpTesti}>
-          <img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} />&nbsp;
-          <img src={require('../../icons/baseline_location_off_white_18dp.png')} alt="Tyhjennä kartta" onClick={this.emptyMap} />
-          <MapContainerComponent daLocation={this.state.focus} zoom={this.state.zoom}/>
+          <a href="/"><img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} /></a>&nbsp;
+          <a href="/"><img src={require('../../icons/baseline_location_off_white_18dp.png')} alt="Tyhjennä kartta" onClick={this.emptyMap} /></a>
+          <MapContainerComponent zoom={this.state.zoom} />
         </div>
       </div>
     )
@@ -244,5 +260,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: 
+  apiKey: asd, language: 'fi'
 })(Location))

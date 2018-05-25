@@ -5,6 +5,8 @@ const observationSchema = new mongoose.Schema({
   longitude: Number,
   date: String,
   additionalComments: String,
+  town: String,
+  zipcode: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   species: { type: mongoose.Schema.Types.ObjectId, ref: 'Species' }
 })
@@ -15,6 +17,8 @@ observationSchema.statics.format = (observation) => {
     latitude: observation.latitude,
     longitude: observation.longitude,
     date: observation.date,
+    town: observation.town,
+    zipcode: observation.zipcode,
     additionalComments: observation.additionalComments,
     species: {
       finnishName: observation.species.finnishName,

@@ -11,8 +11,11 @@ const locationReducer = (state = [], action) => {
 
 export const initLocation = () => {
   const data = {
-    latitude: 0,
-    longitude: 0
+    latitude: 60.2279004,
+    longitude: 25.0270719,
+    town: 'Helsinki',
+    zipcode: '00790'
+
   }
   return {
     type: 'INIT_LOCATION',

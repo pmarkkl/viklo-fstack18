@@ -61,7 +61,7 @@ class App extends React.Component {
 
     const logOutStyle = {
       marginTop: '10px',
-      backgroundColor: '#007849',
+      backgroundColor: '#7395AE',
       display: this.props.user.id ? '' : 'none'
     }
 
@@ -90,12 +90,12 @@ class App extends React.Component {
             </div>
             <div id="headerRight">
               <ul>
-                <li><Link to="/">Etusivu</Link></li>
-                <li><Link to="/uusihavainto">Uusi havainto</Link></li>
-                <li><Link to="/havainnot">Havainnot</Link></li>
-                <li><Link to="/lajit">Lisää laji</Link></li>
-                <li><Link to="/omasivu">Oma sivu</Link></li>
                 <li onMouseEnter={this.changeColourHover} onMouseLeave={this.changeColourLeave} style={loginLogout}><Link to="/" onClick={this.logout} style={loginLogout.link}>Kirjaudu ulos</Link></li>
+                <li><Link to="/">Etusivu</Link></li>
+                <li><Link to="/uusihavainto">Lisää</Link></li>
+                <li><Link to="/havainnot">Havainnot</Link></li>
+                <li><Link to="/lajit">Lajit</Link></li>
+                <li><Link to="/omasivu">Profiili</Link></li>
               </ul>
             </div>
           </div>

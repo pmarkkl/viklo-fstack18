@@ -32,6 +32,8 @@ class NewObservation extends React.Component {
       species: this.state.speciesId,
       latitude: this.props.location.latitude,
       longitude: this.props.location.longitude,
+      zipcode: this.props.location.zipcode,
+      town: this.props.location.town,
       additionalComments: this.state.additionalComments,
       date: new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
     }
@@ -44,14 +46,14 @@ class NewObservation extends React.Component {
 
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
-    console.log(this.state)
+    const search = event.target.value
     if (event.target.name === 'search') {
-      const species = this.props.species.filter(species => species.finnishName.toLowerCase().includes(this.state.search.toLowerCase()))
-      this.setState({ species })
-      if (species.length < 20) {
+      const species = this.props.species
+      const speciesFilter = species.filter(species => species.finnishName.toLowerCase().match(search.toLowerCase()))
+      if (speciesFilter.length < 21) {
           this.setState({
-            resultsVisibility: true,
-            results: species
+            results: speciesFilter,
+            resultsVisibility: true
           })
       } else {
         this.setState({
@@ -95,12 +97,12 @@ class NewObservation extends React.Component {
 
     const jes = {
       display: 'inline-block',
-      width: '400px',
+      width: '478px',
     }
 
     const jes2 = {
       float: 'left',
-      width: '400px',
+      width: '478px',
     }
 
     const commentfield = {
@@ -119,7 +121,7 @@ class NewObservation extends React.Component {
               <td style={tr}>
                 <h3>Laji</h3>
                 <p>Etsi nimen perusteella</p>
-                <input id="search" type="text" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli" />
+                <input id="search" type="text" className="lajiSearchInput" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli (Charadrius hiaticula)" />
                 <div id="results" style={visibility}>
                   {this.state.results.map(species => 
                     <p key={species.id}><a href="" onClick={this.handleSpeciesClick} id={species.id}>{species.finnishName} ({species.latinName}</a>)</p>)
