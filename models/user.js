@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, default: '' },
   passwordHash: String,
   admin: { type: Boolean, default: false },
+  activated: { type: Boolean, default: false },
   observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }],
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request' }]
@@ -17,7 +18,7 @@ const userSchema = new mongoose.Schema({
 
 userSchema.statics.format = (user) => {
   return {
-    id: user.id,
+    id: user._id,
     firstname: user.firstname,
     lastname: user.lastname,
     email: user.email,
@@ -25,10 +26,10 @@ userSchema.statics.format = (user) => {
     zipcode: user.zipcode,
     town: user.town,
     phone: user.phone,
-    admin: user.admin,
     observations: user.observations,
     friends: user.friends,
-    requests: user.requests
+    requests: user.requests,
+    activated: user.activated
   }
 }
 

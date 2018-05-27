@@ -12,6 +12,8 @@ import LoginForm from './components/LoginForm'
 import NewObservation from './components/observation/NewObservation'
 import AddSpecies from './components/AddSpecies'
 import MyPage from './components/MyPage'
+import Activation from './components/Activation'
+import ReSend from './components/ReSend'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { logout } from './reducers/userReducer'
 import { MapContainerComponent } from './components/observation/Map';
@@ -20,7 +22,7 @@ class App extends React.Component {
 
   state = {
     popup: false,
-    loginLogoutColour: '#07889b'
+    loginLogoutColour: '#501B1D'
   }
 
   componentWillMount() {
@@ -42,44 +44,7 @@ class App extends React.Component {
     this.props.logout()
   }
 
-  changeColourHover = (event) => {
-    event.preventDefault()
-    this.setState({ loginLogoutColour: '#22abbf' })
-  }
-
-  changeColourLeave = (event) => {
-    event.preventDefault()
-    this.setState({ loginLogoutColour: '#07889b' })
-  }
-
   render() {
-    const adminStyle = {
-      backgroundColor: '#3d535c',
-      marginTop: '10px',
-      display: this.props.user.admin ? '' : 'none'
-    }
-
-    const logOutStyle = {
-      marginTop: '10px',
-      backgroundColor: '#7395AE',
-      display: this.props.user.id ? '' : 'none'
-    }
-
-    let loginLogout = {
-      float: 'right',
-      link: {
-        backgroundColor: this.state.loginLogoutColour
-      }
-    }
-
-    const testi = {
-      left: '0',
-      right: '0',
-      top: '0',
-      bottom: '0',
-      position: 'absolute',
-      backgroundColor: 'rgba(0,0,0,0.6)'
-    }
 
     return (
       <Router>
@@ -90,22 +55,24 @@ class App extends React.Component {
             </div>
             <div id="headerRight">
               <ul>
-                <li onMouseEnter={this.changeColourHover} onMouseLeave={this.changeColourLeave} style={loginLogout}><Link to="/" onClick={this.logout} style={loginLogout.link}>Kirjaudu ulos</Link></li>
                 <li><Link to="/">Etusivu</Link></li>
                 <li><Link to="/uusihavainto">Lisää</Link></li>
                 <li><Link to="/havainnot">Havainnot</Link></li>
                 <li><Link to="/lajit">Lajit</Link></li>
                 <li><Link to="/omasivu">Profiili</Link></li>
+                <li><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
               </ul>
             </div>
           </div>
           <div id="main">
-            <Route exact path="/" render={() => <LoginForm />} />
-            <Route path="/uusihavainto" render={() => <NewObservation />} />
-            <Route path="/havainnot" render={() => <ObservationList />} />
-            <Route path="/lajit" render={() => <AddSpecies />} /> 
-            <Route path="/omasivu" render={() => <MyPage />} />
-            <Route path="/yllapito" render={() => <MapContainerComponent />} />
+            <Route exact path="/" render={() => <LoginForm logout={this.logout} />} />
+            <Route exact path="/uusihavainto" render={() => <NewObservation />} />
+            <Route exact path="/havainnot" render={() => <ObservationList />} />
+            <Route exact path="/lajit" render={() => <AddSpecies />} /> 
+            <Route exact path="/omasivu" render={() => <MyPage />} />
+            <Route exact path="/yllapito" render={() => <MapContainerComponent /> } />
+            <Route exact path="/activation/:id" render={({ match }) => <Activation match={match} />} />
+            <Route exact path="/resend" render={() => <ReSend user={this.props.user} />} />
           </div>
         </div>
       </Router>

@@ -14,20 +14,23 @@ loginRouter.post('/', async (req, res) => {
     return res.status(401).send({ error: 'Tunnus tai salasana väärin.' })
   }
 
+  if (!user.activated) {
+    return res.status(401).send({ error: 'Tunnustasi ei ole aktivoitu', notActivated: true, id: user.id, email: user.email })
+  }
+
   const userForToken = {
     email: user.email,
     firstname: user.firstname,
     lastname: user.lastname,
     admin: user.admin,
+    activated: user.activated,
     id: user._id
   }
 
   const token = jwt.sign(userForToken, process.env.SECRET)
 
-  console.log(user)
-
   res.status(200).send({ 
-    token, id: user.id, email: user.email, firstname: user.firstname, lastname: user.lastname, admin: user.admin
+    token, id: user.id, email: user.email, firstname: user.firstname, lastname: user.lastname, admin: user.admin, activated: user.activated
   })
 })
 

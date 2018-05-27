@@ -34,6 +34,10 @@ observationRouter.post('/', async (req,res) => {
       return res.status(401).json({ error: 'Ei tokenia tai se on virheellinen.' })
     }
     
+    if (!decodedToken.activated) {
+      return res.status(401).json({ error: 'Tunnusta ei ole aktivoitu.' })
+    }
+    
     if (body.speciesId === undefined) {
       return res.status(400).json({ error: 'Ei sisältöä.' })
     }

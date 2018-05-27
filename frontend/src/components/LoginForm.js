@@ -3,6 +3,7 @@ import loginService from '../services/login'
 import { connect } from 'react-redux'
 import { initializeUser } from '../reducers/userReducer'
 import userService from '../services/users'
+import { Link } from 'react-router-dom'
 
 class LoginForm extends React.Component {
 
@@ -22,7 +23,8 @@ class LoginForm extends React.Component {
       login: {
         visibility: false,
         message: ''
-      }
+      },
+      notActivated: false
     }
   }
 
@@ -39,9 +41,15 @@ class LoginForm extends React.Component {
       this.props.initializeUser(response)
       console.log(response)
     } else {
-      console.log('juuh')
-      this.setState({ login: { message: response.error, visibility: true }, email: '', password: '' })
-      setTimeout(() => this.setState({ login: { message: '' }}), 5000)
+      if (response.notActivated) {
+        this.setState({ login: { message: '', visibility: true }, email: '', password: '', notActivated: true })
+        console.log(response)
+        this.props.initializeUser({id: response.id, email: response.email})
+      } else {
+        console.log(response)
+        this.setState({ notActivated: false, login: { message: response.error, visibility: true }})
+        setTimeout(() => this.setState({ login: { message: '' }}), 5000)
+      }
     }
     this.setState({ email: '', password: '' })
   }
@@ -65,7 +73,7 @@ class LoginForm extends React.Component {
         this.setState({ reg: { visibility: false, message: [] } })
       ,7500)
     } else {
-      const message = `Tervetuloa käyttäjäksi ${response.firstname}. Sähköpostiosoitteeseesi ${response.email} on lähetetty aktivointilinkki.`
+      const message = [`Tervetuloa käyttäjäksi, ${response.firstname}. Sähköpostiosoitteeseesi ${response.email} on lähetetty aktivointilinkki.`]
       this.setState({ 
         reg: { visibility: true, message },
         newUserEmail: '',
@@ -85,24 +93,26 @@ class LoginForm extends React.Component {
 
     const loginInfoStyle = {
       display: this.state.login.visibility ? '' : 'none',
-      backgroundColor: '#f9f9f9',
+      backgroundColor: '#f7f7f7',
       marginTop: '5px',
       paddingLeft: '5px',
       paddingRight: '5px',
+      paddingTop: '3px',
+      paddingBottom: '3px',
+      fontSize: '11pt',
       color: 'black',
-      fontSize: '10pt',
-      border: '1px solid #FC4A1A'
     }
 
     const regInfo = {
       display: this.state.reg.visibility ? '' : 'none',
-      marginTop: '10px',
+      backgroundColor: '#f7f7f7',
+      marginTop: '5px',
       paddingLeft: '5px',
       paddingRight: '5px',
-      backgroundColor: '#f9f9f9',
+      paddingTop: '3px',
+      paddingBottom: '3px',
+      fontSize: '11pt',
       color: 'black',
-      fontSize: '10pt',
-      border: '1px solid #FC4A1A'
     }
 
     const regSuccess = () => (
@@ -111,9 +121,16 @@ class LoginForm extends React.Component {
       </div>
     )
 
+    const eiHelvetti = {
+      display: this.state.notActivated ? '' : 'none'
+    }
+
     const loginInfo = () => (
       <div style={loginInfoStyle}>
         <p>{this.state.login.message}</p>
+        <div style={eiHelvetti}>
+          {notActivated()}
+        </div>
     </div>
     )
 
@@ -126,33 +143,40 @@ class LoginForm extends React.Component {
           <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
           <button>Kirjaudu</button>
         </form>
-        { regSuccess() }
         <h1>Rekisteröidy</h1>
+        { regSuccess() }
         <form onSubmit={this.register} autoComplete="on">
           <input type="text" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} placeholder="Sähköposti" /><br />
           <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />
           <input type="text" name="newUserLastname" value={this.state.newUserLastname}onChange={this.handleFieldChange} placeholder="Sukunimi" /><br />
           <input type="password" name="newUserPassword" value={this.state.newUserPassword} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
-          <button disabled={this.state.reg.visibility}>Rekisteröidy</button>
+          <button>Rekisteröidy</button>
         </form>
       </div>
     )
 
-    const width = {
-      width: '100%'
+    const style = {
+      padding: '30px'
     }
 
+    const notActivated = () => (
+      <p>Käyttäjätunnustasi ei ole aktivoitu. Tarkista postilaatikkosi, tai <Link to="/resend">lähetä aktivointilinkki uudestaan.</Link></p>
+    )
+
     const logoutform = () => (
-      <div>
+      <div style={style}>
         {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in<br />
-        <button onClick={this.logout}>Kirjaudu ulos</button>
+        <button onClick={this.props.logout}>Kirjaudu ulos</button>
+        {this.props.user.activated ? '' : notActivated()}
       </div>
     )
+
     return (
-      <div style={width}>
-        { this.props.user.length < 1 ? loginform() : logoutform() }
+      <div>
+        { this.props.user.activated ? logoutform() : loginform() }
       </div>
     )
+
   }
 
 }

@@ -216,7 +216,7 @@ class Location extends React.Component {
     const resultsStyle = {
       display: this.state.result.length < 1 ? 'none' : '',
       backgroundColor: '#f7f7f7',
-      width: '450px',
+      width: '400px',
       fontSize: '11pt',
       padding: '10px',
       border: '1px solid #DDDDDD',
@@ -260,5 +260,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: asd, language: 'fi'
+  apiKey: asdasdsa, language: 'fi'
 })(Location))

@@ -2,7 +2,7 @@ body {
   margin: 0px;
   height: 100%;
   background-color: #EFEFEF;
-  font-size: 12pt;
+  font-size: 13pt;
   font-family: 'Noto Sans', sans-serif;
 }
 
@@ -20,6 +20,11 @@ ul {
   height: 40px;
 }
 
+a {
+  text-decoration: none;
+  color: blue;
+}
+
 li {
     float: left;
 }
@@ -33,7 +38,7 @@ li a {
     height: 40px;
     line-height: 15px;
     background-color: #7395AE;
-    font-size: 11pt;
+    font-size: 12pt;
     transition-duration: 0.2s;
 }
 
@@ -118,7 +123,7 @@ button {
   padding: 8px;
   margin: 5px;
   margin-left: 0px;
-  background-color: #7395AE;
+  background-color: #6a7f88;
   border: 1px solid #2a3031;
   color: white;
   font-family: 'Noto Sans', sans-serif;
@@ -126,9 +131,9 @@ button {
   transition-duration: 0.2s;
   display: inline-block;
   border: 1px solid #DDDDDD;
-  border-radius: 3px;
+  border-radius: 2px;
   box-sizing: border-box;
-  font-size: 10pt;
+  font-size: 12pt;
 }
 
 .lajiSearchInput {
@@ -144,7 +149,7 @@ button {
 }
 
 button:hover {
-  background-color: #6a7f88;
+  background-color: #7395AE;
 }
 
 #main {
@@ -156,7 +161,7 @@ button:hover {
   border: 1px solid #e1e1e1;
   box-shadow: 3px 3px 3px #e1e1e1;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 4px;
   padding: 20px;
   padding-top: 10px;
   overflow: auto;
@@ -179,7 +184,6 @@ button:hover {
 }
 
  #headerRight {
-   width: 1000px;
    margin-left: 93px;
    height: 40px;
    margin: 0px auto;

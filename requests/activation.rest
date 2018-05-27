@@ -1,0 +1,6 @@
+POST http://localhost:3001/api/activation
+content-type: application/json
+
+{
+  "user": "5b0a84a8970bdc1e24f835cc"
+}

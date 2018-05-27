@@ -4,6 +4,9 @@ const User = require('../models/user')
 const Request = require('../models/request')
 const jwt = require('jsonwebtoken')
 const validator = require('../validation')
+const crypto = require('crypto')
+const Token = require('../models/token')
+const nodemailer = require('nodemailer')
 
 usersRouter.get('/', async (req,res) => {
   const users = await User
@@ -27,6 +30,21 @@ usersRouter.get('/:id', async (req,res) => {
   }
 })
 
+const passwordHasher = async (password) => {
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+  return passwordHash
+}
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PW
+  }
+})
+
+
 usersRouter.post('/', async (req, res) => {
   try {
     const body = req.body
@@ -44,8 +62,7 @@ usersRouter.post('/', async (req, res) => {
       return res.status(400).json({ error: ['Sähköposti on jo rekisteröity'] })
     }
 
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+    const passwordHash = await passwordHasher(body.password)
 
     const user = new User({
       firstname: body.firstname,
@@ -55,6 +72,67 @@ usersRouter.post('/', async (req, res) => {
     })
 
     const savedUser = await user.save()
+
+    const activationToken = new Token({
+      user: savedUser.id,
+      token: crypto.randomBytes(16).toString('hex')
+    })
+
+    await activationToken.save()
+
+    const mailOptions = {
+      from: '"Viklo"',
+      to: body.email,
+      subject: 'Viklo-tunnuksen aktivointi',
+      html: `<h1>Hei, ${savedUser.firstname}</h1> <p>Aktivoi tunnuksesi klikkamalla: <a href="http://localhost:3000/activation/${activationToken.token}">http://localhost:3000/activation/${activationToken.token}</p>`
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('email sent', info.response)
+      }
+    })
+
+    res.json(User.format(savedUser))
+  } catch (exc) {
+    console.log(exc)
+    res.status(500).json([{ error: 'jotain kummaa tapahtui' }])
+  }
+})
+
+usersRouter.put('/resetpassword', async (req, res) => {
+  const body = req.body
+  try {
+    const newPassword = crypto.randomBytes(6).toString('hex')
+    const email = body.email
+    const mikaHelvetinListaSieltaPalautuu = await User.find({ email: body.email })
+
+    if (mikaHelvetinListaSieltaPalautuu.length < 1) {
+      return res.status(401).send({ error: 'Käyttäjää ei löydy' })
+    }
+
+    console.log('jaaha jahaaa', mikaHelvetinListaSieltaPalautuu[0]._id)
+
+    const passwordHash = await passwordHasher(newPassword)
+    const user = mikaHelvetinListaSieltaPalautuu[0]
+    const savedUser = await User.findByIdAndUpdate(user._id, { passwordHash }, { new: true })
+    const mailOptions = {
+      from: 'Viklo',
+      to: body.email,
+      subject: '(Viklo) Salasanan resetointi',
+      html: `<h1>Salasanan resetointi</h1><p>Olet pyytänyt salasanan resetointia tunnuksellesi ${body.email}</p><p>Uusi salasana on ${newPassword}</p>`
+    }
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error)
+      } else {
+        console.log('email sent', info.response)
+      }
+      res.json(User.format(response))
+    })
     res.json(User.format(savedUser))
   } catch (exc) {
     console.log(exc)

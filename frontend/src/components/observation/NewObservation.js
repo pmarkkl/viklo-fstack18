@@ -45,11 +45,12 @@ class NewObservation extends React.Component {
   }
 
   handleChange = (event) => {
+    console.log(this.state)
     this.setState({ [event.target.name]: event.target.value })
+    const species = this.props.species
     const search = event.target.value
     if (event.target.name === 'search') {
-      const species = this.props.species
-      const speciesFilter = species.filter(species => species.finnishName.toLowerCase().match(search.toLowerCase()))
+      const speciesFilter = species.filter(species => species.finnishName.toLowerCase().includes(search.toLowerCase()))
       if (speciesFilter.length < 21) {
           this.setState({
             results: speciesFilter,
@@ -75,10 +76,9 @@ class NewObservation extends React.Component {
     event.preventDefault()
     const laji = this.props.species.find(species => species.id === event.target.id)
     console.log(laji)
-    const search = laji.finnishName + ' (' + laji.latinName + ')'
+    const search = `${laji.finnishName} (${laji.latinName})`
     this.setState({ 
-      resultsVisibility: false, 
-      results: [], 
+      resultsVisibility: false,
       active: laji,
       search,
       speciesId: laji.id
@@ -86,7 +86,6 @@ class NewObservation extends React.Component {
   }
 
   render() {
-
     const visibility = {
       display: this.state.resultsVisibility ? '' : 'none'
     }
@@ -97,12 +96,14 @@ class NewObservation extends React.Component {
 
     const jes = {
       display: 'inline-block',
-      width: '478px',
+      width: '458px',
+      paddingLeft: '60px'
     }
 
     const jes2 = {
       float: 'left',
-      width: '478px',
+      width: '438px',
+      borderRight: '1px solid #DDDDDD'
     }
 
     const commentfield = {
