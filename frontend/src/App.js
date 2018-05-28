@@ -14,9 +14,11 @@ import AddSpecies from './components/AddSpecies'
 import MyPage from './components/MyPage'
 import Activation from './components/Activation'
 import ReSend from './components/ReSend'
+import ResetPassword from './components/ResetPassword'
+import SetPasswordReset from './components/SetPasswordReset'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { logout } from './reducers/userReducer'
-import { MapContainerComponent } from './components/observation/Map';
+import { MapContainerComponent } from './components/observation/Map'
 
 class App extends React.Component {
 
@@ -45,11 +47,16 @@ class App extends React.Component {
   }
 
 
+
   render() {
+
+    const visibility = {
+      display: this.props.user.activated ? '' : 'none'
+    }
 
     return (
       <Router>
-        <div>
+        <div className="wrapper">
           <div id="header">
             <div id="headerLeft">
               <img src={require('./logouuu.png')} alt="viklo" />
@@ -61,12 +68,12 @@ class App extends React.Component {
                 <li><Link to="/havainnot">Havainnot</Link></li>
                 <li><Link to="/lajit">Lajit</Link></li>
                 <li><Link to="/omasivu">Profiili</Link></li>
-                <li id="jees"><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
+                <li className="logout" style={visibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
               </ul>
             </div>
           </div>
           <div id="main">
-            <Route exact path="/" render={() => <LoginForm logout={this.logout} />} />
+            <Route exact path="/" render={() => <LoginForm />} />
             <Route exact path="/uusihavainto" render={() => <NewObservation />} />
             <Route exact path="/havainnot" render={() => <ObservationList />} />
             <Route exact path="/lajit" render={() => <AddSpecies />} /> 
@@ -74,6 +81,8 @@ class App extends React.Component {
             <Route exact path="/yllapito" render={() => <MapContainerComponent /> } />
             <Route exact path="/activation/:id" render={({ match }) => <Activation match={match} />} />
             <Route exact path="/resend" render={() => <ReSend user={this.props.user} />} />
+            <Route exact path="/resetpassword" render={() => <ResetPassword />} />
+            <Route exact path="/setpassword/:id" render={({ match }) => <SetPasswordReset match={match} />} />
           </div>
         </div>
       </Router>

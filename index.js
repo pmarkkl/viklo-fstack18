@@ -11,9 +11,10 @@ const speciesRouter = require('./controllers/species')
 const loginRouter = require('./controllers/login')
 const requestRouter = require('./controllers/requests')
 const tokenRouter = require('./controllers/tokens')
+const resetRouter = require('./controllers/reset')
 
 const bodyParser = require('body-parser')
-require('dotenv').config()
+/* require('dotenv').config() */
 
 mongoose.connect(config.mongoUrl)
 
@@ -30,13 +31,14 @@ app.use(logger)
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use(express.static('build'))
+/* app.use(express.static('build')) */
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/observations', observationRouter)
 app.use('/api/species', speciesRouter)
 app.use('/api/requests', requestRouter)
 app.use('/activate', tokenRouter)
+app.use('/pwresetvalidity', resetRouter)
 
 const server = http.createServer(app)
 

@@ -16,6 +16,7 @@ class LoginForm extends React.Component {
       newUserFirstname: '',
       newUserLastname: '',
       newUserPassword: '',
+      passwordConfirmation: '',
       reg: {
         visibility: false,
         message: [],
@@ -61,14 +62,15 @@ class LoginForm extends React.Component {
       email: this.state.newUserEmail,
       firstname: this.state.newUserFirstname,
       lastname: this.state.newUserLastname,
-      password: this.state.newUserPassword
+      password: this.state.newUserPassword,
+      passwordConfirmation: this.state.passwordConfirmation
     }
 
     const response = await userService.newUser(requestObject)
     console.log(response)
 
     if (response.error) {
-      this.setState({ reg: { visibility: true, message: response.error }, newUserEmail: '', newUserPassword: ''})
+      this.setState({ reg: { visibility: true, message: response.error }, newUserEmail: '', newUserPassword: '', passwordConfirmation: ''})
       setTimeout(() => 
         this.setState({ reg: { visibility: false, message: [] } })
       ,7500)
@@ -79,7 +81,8 @@ class LoginForm extends React.Component {
         newUserEmail: '',
         newUserFirstname: '',
         newUserLastname: '',
-        newUserPassword: ''
+        newUserPassword: '',
+        passwordConfirmation: ''
       })
     }
 
@@ -94,7 +97,7 @@ class LoginForm extends React.Component {
     const loginInfoStyle = {
       display: this.state.login.visibility ? '' : 'none',
       backgroundColor: '#f7f7f7',
-      marginTop: '5px',
+      marginTop: '15px',
       paddingLeft: '5px',
       paddingRight: '5px',
       paddingTop: '3px',
@@ -141,7 +144,8 @@ class LoginForm extends React.Component {
         <form onSubmit={this.login} autoComplete="on">
           <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} placeholder="Sähköposti"/><br />
           <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
-          <button>Kirjaudu</button>
+          <button>Kirjaudu</button><br />
+          <Link to="/resetpassword">Oletko unohtanut salasanasi?</Link>
         </form>
         <h1>Rekisteröidy</h1>
         { regSuccess() }
@@ -150,13 +154,13 @@ class LoginForm extends React.Component {
           <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />
           <input type="text" name="newUserLastname" value={this.state.newUserLastname}onChange={this.handleFieldChange} placeholder="Sukunimi" /><br />
           <input type="password" name="newUserPassword" value={this.state.newUserPassword} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
+          <input type="password" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleFieldChange} placeholder="Salasana uudelleen" /><br />
           <button>Rekisteröidy</button>
         </form>
       </div>
     )
 
     const style = {
-      padding: '30px'
     }
 
     const notActivated = () => (
@@ -165,9 +169,8 @@ class LoginForm extends React.Component {
 
     const logoutform = () => (
       <div style={style}>
-        {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) logged in<br />
-        <button onClick={this.props.logout}>Kirjaudu ulos</button>
-        {this.props.user.activated ? '' : notActivated()}
+        <h1>Kirjautuminen onnistui</h1>
+        {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email}) kirjautuneena.<br />
       </div>
     )
 

@@ -6,7 +6,7 @@ const ObservationList = (props) => {
 
   return (
     <div>
-      <h2>Kaikki havainnot</h2>
+      <h1>Kaikki havainnot</h1>
       {props.observations.map(observation => <Observation key={observation.id} observation={observation} />)}
     </div>
   )

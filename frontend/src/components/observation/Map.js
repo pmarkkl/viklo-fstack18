@@ -1,7 +1,7 @@
 import React from 'react'
 import { GoogleApiWrapper, InfoWindow, Map, Marker } from 'google-maps-react'
 import { connect } from 'react-redux'
-import { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast } from '../../reducers/markerReducer'
+import { addMarker, deleteLast } from '../../reducers/markerReducer'
 import { setLocation } from '../../reducers/locationReducer'
 
 export class MapContainer extends React.Component {
@@ -75,9 +75,12 @@ export class MapContainer extends React.Component {
   }
 
   onMapClick = (mapProps, map, clickEvent, mapCenter) => {
-
     if (this.state.showingInfoWindow) {
       this.setState({ showingInfoWindow: false })
+      return
+    }
+
+    if (!this.props.clickable) {
       return
     }
 
@@ -138,16 +141,22 @@ export class MapContainer extends React.Component {
   render() {
     const style = {
       width: '100%',
-      height: '650px'
+      height: this.props.height
     }
 
     const morjes = {
       color: 'black'
     }
 
+    const karttaStyle = {
+      margin: '0px',
+      height: this.props.height,
+      position: 'relative'
+    }
+
     return (
       <div>
-        <div id="kartta">
+        <div style={karttaStyle}>
         <Map 
           google={this.props.google} 
           zoom={this.state.mapZoom} 
@@ -192,6 +201,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-export const MapContainerComponent = connect(mapStateToProps, { setMarkers, markersForUser, emptyMarkers, addMarker, deleteLast, setLocation })(GoogleApiWrapper({
-  apiKey: 'AIzaSyAtKQZ9Klfw7SogD6uR9ghWLAmEbimBekk', language: 'fi', mapTypeId: 'terrain'
+export const MapContainerComponent = connect(mapStateToProps, { addMarker, deleteLast, setLocation })(GoogleApiWrapper({
+  apiKey: <x<z, language: 'fi', mapTypeId: 'terrain'
 })(MapContainer))

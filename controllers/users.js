@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const Request = require('../models/request')
+const Reset = require('../models/reset')
 const jwt = require('jsonwebtoken')
 const validator = require('../validation')
 const crypto = require('crypto')
@@ -102,27 +103,32 @@ usersRouter.post('/', async (req, res) => {
   }
 })
 
-usersRouter.put('/resetpassword', async (req, res) => {
+// palauttaa kaikkiin pyyntöihin success tietoturvan vuoksi
+
+usersRouter.post('/resetpassword', async (req, res) => {
   const body = req.body
   try {
-    const newPassword = crypto.randomBytes(6).toString('hex')
     const email = body.email
-    const mikaHelvetinListaSieltaPalautuu = await User.find({ email: body.email })
+    const userLista = await User.find({ email: body.email })
 
-    if (mikaHelvetinListaSieltaPalautuu.length < 1) {
-      return res.status(401).send({ error: 'Käyttäjää ei löydy' })
+    if (userLista.length < 1) {
+      return res.json({ message: 'Success' })
     }
 
-    console.log('jaaha jahaaa', mikaHelvetinListaSieltaPalautuu[0]._id)
+    const resetObject = new Reset({
+      user: userLista[0]._id,
+      randomBytes: crypto.randomBytes(36).toString('hex')
+    })
 
-    const passwordHash = await passwordHasher(newPassword)
-    const user = mikaHelvetinListaSieltaPalautuu[0]
-    const savedUser = await User.findByIdAndUpdate(user._id, { passwordHash }, { new: true })
+    const savedObject = await resetObject.save()
+
     const mailOptions = {
       from: 'Viklo',
       to: body.email,
       subject: '(Viklo) Salasanan resetointi',
-      html: `<h1>Salasanan resetointi</h1><p>Olet pyytänyt salasanan resetointia tunnuksellesi ${body.email}</p><p>Uusi salasana on ${newPassword}</p>`
+      html: `<h1>Salasanan resetointi</h1><p>Olet pyytänyt salasanan resetointia tunnuksellesi ${body.email}.</p>
+             <p>Voit asettaa itsellesi uuden salasanan seuraamalla seuraavasta linkistä:<br/> 
+             <a href="http://localhost:3000/setpassword/${savedObject.randomBytes}">http://localhost:3000/setpassword/${savedObject.randomBytes}</a></p>`
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -131,13 +137,37 @@ usersRouter.put('/resetpassword', async (req, res) => {
       } else {
         console.log('email sent', info.response)
       }
-      res.json(User.format(response))
     })
-    res.json(User.format(savedUser))
+    res.json({ message: 'Success' })
   } catch (exc) {
     console.log(exc)
     res.status(500).json({ error: 'jotain kummaa tapahtui' })
   }
+})
+
+usersRouter.put('/setreseted', async (req, res) => {
+  const body = req.body
+
+  if (body.newPassword !== body.passwordConfirmation) {
+    return res.status(400).send({ error: 'Salasanat eivät täsmää.' })
+  }
+
+  if (body.newPassword.length < 6 || body.newPassword.length > 21) {
+    return res.status(400).send({ error: 'Salasanan tulee olla 6-20 merkkiä pitkä.' })
+  }
+
+  const findReset = await Reset.find({ randomBytes: body.randomBytes })
+
+  if (findReset[0].user.toString() !== body.user || findReset[0].randomBytes !== body.randomBytes) {
+    return res.status(401).send({ error: 'Ei oikeuksia.' })
+  }
+
+  const passwordHash = await passwordHasher(body.newPassword)
+  const savedUser = await User.findByIdAndUpdate(findReset[0].user, { passwordHash }, { new: true })
+
+  await Reset.findOneAndRemove({ randomBytes: findReset[0].randomBytes })
+
+  res.json(User.format(savedUser))
 })
 
 usersRouter.post('/accept', async (req, res) => {

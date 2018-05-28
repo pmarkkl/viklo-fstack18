@@ -4,6 +4,7 @@ import { setLocation } from '../../reducers/locationReducer'
 import { GoogleApiWrapper } from 'google-maps-react'
 import { MapContainerComponent } from './Map'
 import { addMarker, deleteLast, emptyMarkers, setMarkers } from '../../reducers/markerReducer'
+import Mask from '../styles/Mask'
 
 const options = {
   enableHighAccuracy: true,
@@ -107,15 +108,12 @@ class Location extends React.Component {
 
         this.props.setLocation(locationObjectWithid)
 
-        if (this.props.markers.length > 0) {
-          this.props.deleteLast()
-        }
-
         this.props.addMarker(locationObjectWithid)
         this.setState({ mapVisibility: true, location: { latitude: locationObjectWithid.latitude, longitude: locationObjectWithid.longitude } })
 
     } else {
-        console.log('Ei tuloksia');
+        this.setState({ result: 'Ei tuloksia', search: '' })
+        this.props.setLocation({ latitude: 0, longitude: 0 })
       }
     })
 
@@ -174,9 +172,6 @@ class Location extends React.Component {
   )
 
   render() {
-    const mapVisibility = {
-      display: this.state.mapVisibility ? '' : 'none'
-    }
 
     const popUpTesti = {
       display: this.state.mapVisibility ? '' : 'none',
@@ -185,42 +180,29 @@ class Location extends React.Component {
       left: '50%',
       marginRight: '-50%',
       width: '1050px',
-      height: '678px',
-      backgroundColor: '#414045',
+      height: '688px',
+      backgroundColor: '#172A3D',
       padding: '2px',
       transform: 'translate(-50%, -50%)',
       fontSize: '6pt',
       zIndex: '3',
       border: '1px solid #414045',
-      borderRadius: '5px',
+      borderRadius: '3px'
     }
 
-    const testi = {
-      display: this.state.mapVisibility ? '' : 'none',
-      left: '0',
-      right: '0',
-      top: '0',
-      bottom: '0',
-      position: 'absolute',
-      backgroundColor: 'rgba(0,0,0,0.7)',
-      zIndex: '2'
-    }
-
-    const buttonStyle = {
-      backgroundColor: 'white',
-      color: 'blue',
-      margin: '0px',
-      fontSize: '8pt'
-    }
 
     const resultsStyle = {
       display: this.state.result.length < 1 ? 'none' : '',
-      backgroundColor: '#f7f7f7',
+      backgroundColor: '#f6f6f6',
       width: '400px',
       fontSize: '11pt',
       padding: '10px',
       border: '1px solid #DDDDDD',
       boxShadow: '3px 3px 3px #fbfbfb'
+    }
+
+    const latLngVisibility = {
+      display: this.props.location.latitude && this.props.location.longitude !== 0 ? '' : 'none'
     }
 
     return (
@@ -236,15 +218,16 @@ class Location extends React.Component {
         <p><button onClick={this.getLocation}>Hae laitteesi sijainti</button></p>
         <div style={resultsStyle}>
           <p>{this.state.result}</p>
-          <p>Lat: {this.props.location.latitude}</p>
-          <p>Lng: {this.props.location.longitude}</p>
+          <div style={latLngVisibility}>
+            <p>Lat: {this.props.location.latitude}</p>
+            <p>Lng: {this.props.location.longitude}</p>
+          </div>
         </div>
-        <div style={testi} onClick={this.toggleVisibility}>
-        </div>
+        <Mask visibility={this.state.mapVisibility} onClick={this.toggleVisibility} />
         <div style={popUpTesti}>
           <a href="/"><img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} /></a>&nbsp;
           <a href="/"><img src={require('../../icons/baseline_location_off_white_18dp.png')} alt="Tyhjennä kartta" onClick={this.emptyMap} /></a>
-          <MapContainerComponent zoom={this.state.zoom} />
+          <MapContainerComponent zoom={this.state.zoom} clickable={true} height={'650px'} />
         </div>
       </div>
     )
@@ -260,5 +243,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: 'AIzaSyAtKQZ9Klfw7SogD6uR9ghWLAmEbimBekk', language: 'fi'
+  apiKey: <zx<zx, language: 'fi'
 })(Location))

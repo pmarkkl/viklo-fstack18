@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Mask from '../styles/Mask'
 import observationService from '../../services/observations'
 import { observationCreation } from '../../reducers/observationReducer'
 import { setMarkers, emptyMarkers } from '../../reducers/markerReducer'
@@ -20,7 +21,8 @@ class NewObservation extends React.Component {
       date: '',
       time: '',
       active: {},
-      additionalComments: ''
+      additionalComments: '',
+      popUpVisibility: false
     }
   }
 
@@ -40,7 +42,6 @@ class NewObservation extends React.Component {
     this.setState({ latitude: '', longitude: '' })
     const response = await observationService.newObservation(requestObject)
     console.log(response)
-    this.props.emptyMarkers()
     this.props.setMarkers()
   }
 
@@ -85,6 +86,12 @@ class NewObservation extends React.Component {
      })
   }
 
+  toggleVisibility = (event) => {
+    event.preventDefault()
+    this.setState({ popUpVisibility: !this.state.popUpVisibility })
+    console.log(this.state)
+  }
+
   render() {
     const visibility = {
       display: this.state.resultsVisibility ? '' : 'none'
@@ -94,29 +101,23 @@ class NewObservation extends React.Component {
       verticalAlign: 'top'
     }
 
-    const jes = {
+    const oikea = {
       display: 'inline-block',
       width: '458px',
       paddingLeft: '60px'
     }
 
-    const jes2 = {
+    const vasen = {
       float: 'left',
       width: '438px',
       borderRight: '1px solid #DDDDDD'
     }
-
-    const commentfield = {
-      float: 'left',
-      marginTop: '50px'
-    }
-
     return (
       <div>
-        <h2>Lisää havainto</h2>
+        <h1>Lisää havainto</h1>
         <div>
         </div>
-        <table style={jes2}>
+        <table style={vasen}>
           <tbody>
             <tr style={tr}>
               <td style={tr}>
@@ -152,7 +153,7 @@ class NewObservation extends React.Component {
             </tr>
           </tbody>
         </table>
-        <table style={jes}>
+        <table style={oikea}>
           <tbody>
             <tr style={tr}>
               <td style={tr}>

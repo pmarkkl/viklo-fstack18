@@ -17,6 +17,11 @@ const validateRegForm = (values) => {
   if (values.password.length < 6 || values.password.length > 20) {
     errors.push('Anna 6-20 merkkiä pitkä salasana.')
   }
+
+  if (values.password !== values.passwordConfirmation) {
+    errors.push('Salasanat eivät täsmää.')
+  }
+
   return errors
 }
 
