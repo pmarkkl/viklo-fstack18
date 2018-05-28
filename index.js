@@ -13,6 +13,7 @@ const requestRouter = require('./controllers/requests')
 const tokenRouter = require('./controllers/tokens')
 
 const bodyParser = require('body-parser')
+require('dotenv').config()
 
 mongoose.connect(config.mongoUrl)
 
