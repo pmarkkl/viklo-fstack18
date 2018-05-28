@@ -24,9 +24,9 @@ usersRouter.get('/:id', async (req,res) => {
     } else {
       res.status(404).end()
     }
-  } catch (exception) {
-    console.log(exception)
-    res.status(404).json({ error: 'id päin helvettiä' })
+  } catch (exc) {
+    console.log(exc)
+    res.status(500).json({ error: 'jotain kummallista tapahtui' })
   }
 })
 

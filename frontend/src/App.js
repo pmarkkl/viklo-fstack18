@@ -44,6 +44,7 @@ class App extends React.Component {
     this.props.logout()
   }
 
+
   render() {
 
     return (
@@ -60,7 +61,7 @@ class App extends React.Component {
                 <li><Link to="/havainnot">Havainnot</Link></li>
                 <li><Link to="/lajit">Lajit</Link></li>
                 <li><Link to="/omasivu">Profiili</Link></li>
-                <li><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
+                <li id="jees"><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
               </ul>
             </div>
           </div>

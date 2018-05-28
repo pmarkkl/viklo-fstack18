@@ -2,5 +2,5 @@ PUT http://localhost:3001/api/users/resetpassword
 content-type: application/json
 
 {
-  "email": "zdkaslödksaLD"
+  "email": "pmarkkola@gmail.com"
 }

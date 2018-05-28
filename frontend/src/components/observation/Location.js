@@ -260,5 +260,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: asdasdsa, language: 'fi'
+  apiKey: 'AIzaSyAtKQZ9Klfw7SogD6uR9ghWLAmEbimBekk', language: 'fi'
 })(Location))
