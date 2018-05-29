@@ -19,6 +19,7 @@ import SetPasswordReset from './components/SetPasswordReset'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { logout } from './reducers/userReducer'
 import { MapContainerComponent } from './components/observation/Map'
+import Flexbox from 'flexbox-react'
 
 class App extends React.Component {
 
@@ -54,38 +55,64 @@ class App extends React.Component {
       display: this.props.user.activated ? '' : 'none'
     }
 
+    const mainDivStyle = {
+      margin: '0px auto',
+      marginTop: '70px',
+      marginBottom: '40px',
+      display: 'inline-block',
+      width: '1000px',
+      height: 'auto',
+      backgroundColor: 'white',
+      border: '1px solid #EEEEEE',
+      boxShadow: '2px 2px 2px #ebebeb',
+      padding: '25px',
+      alignSelf: 'flex-start'
+    }
+
+    const footerDivStyle = {
+      margin: '0px auto',
+    }
+
     return (
       <Router>
-        <div className="wrapper">
-          <div id="header">
-            <div id="headerLeft">
-              <img src={require('./logouuu.png')} alt="viklo" />
+        <Flexbox flexDirection="column" minHeight="100vh">
+          <Flexbox className="headerDiv" element="header" height="40px">
+            <div className="headerLeft">
             </div>
-            <div id="headerRight">
-              <ul>
-                <li><Link to="/">Etusivu</Link></li>
-                <li><Link to="/uusihavainto">Lisää</Link></li>
-                <li><Link to="/havainnot">Havainnot</Link></li>
-                <li><Link to="/lajit">Lajit</Link></li>
-                <li><Link to="/omasivu">Profiili</Link></li>
-                <li className="logout" style={visibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
-              </ul>
+            <div className="headerRight">
+                <ul>
+                  <li><Link to="/">Etusivu</Link></li>
+                  <li><Link to="/uusihavainto">Lisää</Link></li>
+                  <li><Link to="/havainnot">Havainnot</Link></li>
+                  <li><Link to="/omasivu">Käyttäjäsivu</Link></li>
+                  <li className="logout" style={visibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
+                </ul>
+              </div>
+          </Flexbox>
+ 
+          <Flexbox flexGrow={1} width="1000">
+            <div style={mainDivStyle}>
+              <Route exact path="/" render={() => <LoginForm />} />
+              <Route exact path="/uusihavainto" render={() => <NewObservation />} />
+              <Route exact path="/havainnot" render={() => <ObservationList />} />
+              <Route exact path="/lajit" render={() => <AddSpecies />} /> 
+              <Route exact path="/omasivu" render={() => <MyPage />} />
+              <Route exact path="/yllapito" render={() => <MapContainerComponent /> } />
+              <Route exact path="/activation/:id" render={({ match }) => <Activation match={match} />} />
+              <Route exact path="/resend" render={() => <ReSend user={this.props.user} />} />
+              <Route exact path="/resetpassword" render={() => <ResetPassword />} />
+              <Route exact path="/setpassword/:id" render={({ match }) => <SetPasswordReset match={match} />} />
             </div>
-          </div>
-          <div id="main">
-            <Route exact path="/" render={() => <LoginForm />} />
-            <Route exact path="/uusihavainto" render={() => <NewObservation />} />
-            <Route exact path="/havainnot" render={() => <ObservationList />} />
-            <Route exact path="/lajit" render={() => <AddSpecies />} /> 
-            <Route exact path="/omasivu" render={() => <MyPage />} />
-            <Route exact path="/yllapito" render={() => <MapContainerComponent /> } />
-            <Route exact path="/activation/:id" render={({ match }) => <Activation match={match} />} />
-            <Route exact path="/resend" render={() => <ReSend user={this.props.user} />} />
-            <Route exact path="/resetpassword" render={() => <ResetPassword />} />
-            <Route exact path="/setpassword/:id" render={({ match }) => <SetPasswordReset match={match} />} />
-          </div>
-        </div>
+          </Flexbox>
+ 
+          <Flexbox element="footer">
+            <div style={footerDivStyle}>
+            <Link to="/viklo">Info</Link> | <Link to="/yhteys">Ota yhteyttä</Link>
+            </div>
+          </Flexbox>
+        </Flexbox>
       </Router>
+
     )
   }
 }

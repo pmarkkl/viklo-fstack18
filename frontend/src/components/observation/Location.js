@@ -180,8 +180,8 @@ class Location extends React.Component {
       left: '50%',
       marginRight: '-50%',
       width: '1050px',
-      height: '688px',
-      backgroundColor: '#172A3D',
+      height: '690px',
+      backgroundColor: '#373737',
       padding: '2px',
       transform: 'translate(-50%, -50%)',
       fontSize: '6pt',
@@ -195,7 +195,7 @@ class Location extends React.Component {
       display: this.state.result.length < 1 ? 'none' : '',
       backgroundColor: '#f6f6f6',
       width: '400px',
-      fontSize: '11pt',
+      fontSize: '13pt',
       padding: '10px',
       border: '1px solid #DDDDDD',
       boxShadow: '3px 3px 3px #fbfbfb'
@@ -207,14 +207,16 @@ class Location extends React.Component {
 
     return (
       <div>
-        <h3>Sijainti</h3>
-        <p>Merkitse sijainti kartalle</p>
+        <h4>Sijainti</h4>
+        <br />
+        Merkitse sijainti kartalle:<br />
         <a href="/"><img src={require('../../icons/baseline_map_black_18dp.png')} alt="Avaa kartta" onClick={this.openMap} /></a>
         <form onSubmit={this.geoCodeAddress}>
           <input type="text" name="search" value={this.state.search} onChange={this.handleFieldChange} placeholder="Pasteurinkatu 1, Helsinki"/>
           <button>Etsi</button>
         </form>
-        <p>Sijainti käyttämäsi laitteen perusteella</p>
+        <br />
+        Sijainti käyttämäsi laitteen perusteella:<br />
         <p><button onClick={this.getLocation}>Hae laitteesi sijainti</button></p>
         <div style={resultsStyle}>
           <p>{this.state.result}</p>
@@ -243,5 +245,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: <zx<zx, language: 'fi'
+  apiKey: 'AIzaSyD-5OOmNZJ7eOvdb5SyK8LAu8LnkQhOCQg', language: 'fi'
 })(Location))

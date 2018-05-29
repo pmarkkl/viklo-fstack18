@@ -2,9 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Mask from '../styles/Mask'
 import observationService from '../../services/observations'
-import { observationCreation } from '../../reducers/observationReducer'
+import { initializeObservations} from '../../reducers/observationReducer'
 import { setMarkers, emptyMarkers } from '../../reducers/markerReducer'
 import { LocationComponent } from './Location'
+import { Link } from 'react-router-dom'
 
 class NewObservation extends React.Component {
 
@@ -22,7 +23,9 @@ class NewObservation extends React.Component {
       time: '',
       active: {},
       additionalComments: '',
-      popUpVisibility: false
+      popUpVisibility: false,
+      observationSent: false,
+      response: {}
     }
   }
 
@@ -41,8 +44,14 @@ class NewObservation extends React.Component {
     }
     this.setState({ latitude: '', longitude: '' })
     const response = await observationService.newObservation(requestObject)
-    console.log(response)
+    console.log('response här', response)
+    this.setState({ response })
+    if (response.id) {
+      this.setState({ observationSent: true })
+    }
+    console.log(this.state.response)
     this.props.setMarkers()
+    this.props.initializeObservations()
   }
 
   handleChange = (event) => {
@@ -103,71 +112,91 @@ class NewObservation extends React.Component {
 
     const oikea = {
       display: 'inline-block',
-      width: '458px',
+      width: '454px',
       paddingLeft: '60px'
     }
 
     const vasen = {
       float: 'left',
-      width: '438px',
-      borderRight: '1px solid #DDDDDD'
+      width: '354px'
     }
-    return (
-      <div>
-        <h1>Lisää havainto</h1>
+
+    if (!this.state.observationSent) {
+      return (
         <div>
+          <h1>Lisää havainto</h1>
+          <div>
+          </div>
+          <table style={vasen}>
+            <tbody>
+              <tr style={tr}>
+                <td style={tr}>
+                  <h4>Laji</h4>
+                  Etsi nimen perusteella:<br />
+                  <input id="search" type="text" className="lajiSearchInput" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli (Charadrius hiaticula)" />
+                  <div className="speciesResults" style={visibility}>
+                    {this.state.results.map(species => 
+                      <p key={species.id}><a href="" onClick={this.handleSpeciesClick} id={species.id}>{species.finnishName} ({species.latinName}</a>)</p>)
+                    }
+                  </div>
+                </td>
+              </tr>
+              <tr style={tr}>
+                <td style={tr}>
+                  <h4>Aika</h4>
+                  Päivämäärä<br />
+                  <input type="text" name="date" onChange={this.handleDateChange} placeholder="31.12.1900"/><br />
+                  Kellonaika<br />
+                  <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
+                </td>
+                <td style={tr}>
+                </td>
+              </tr>
+              <tr style={tr}>
+                <td style={tr}>
+                  <form onSubmit={this.addObservation}>
+                    <h4>Kommentti</h4>
+                    <textarea name="additionalComments" placeholder="Poikanen" onChange={this.handleChange} /><br />
+                    <button>Lisää havainto</button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style={oikea}>
+            <tbody>
+              <tr style={tr}>
+                <td style={tr}>
+                <LocationComponent />
+                </td>
+              </tr>
+              <tr style={tr}>
+                <td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <table style={vasen}>
-          <tbody>
-            <tr style={tr}>
-              <td style={tr}>
-                <h3>Laji</h3>
-                <p>Etsi nimen perusteella</p>
-                <input id="search" type="text" className="lajiSearchInput" name="search" onChange={this.handleChange} value={this.state.search} placeholder="Tylli (Charadrius hiaticula)" />
-                <div id="results" style={visibility}>
-                  {this.state.results.map(species => 
-                    <p key={species.id}><a href="" onClick={this.handleSpeciesClick} id={species.id}>{species.finnishName} ({species.latinName}</a>)</p>)
-                  }
-                </div>
-              </td>
-            </tr>
-            <tr style={tr}>
-              <td style={tr}>
-              <h3>Aika</h3>
-                <p>Päivämäärä</p>
-                <input type="text" name="date" onChange={this.handleDateChange} placeholder="31.12.1900"/>
-                <p>Kellonaika</p>
-                <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
-              </td>
-              <td style={tr}>
-              </td>
-            </tr>
-            <tr style={tr}>
-              <td style={tr}>
-                <form onSubmit={this.addObservation}>
-                  <h3>Kommentti:</h3>
-                  <textarea name="additionalComments" placeholder="Poikanen" onChange={this.handleChange} /><br />
-                  <button>Lisää havainto</button>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table style={oikea}>
-          <tbody>
-            <tr style={tr}>
-              <td style={tr}>
-              <LocationComponent />
-              </td>
-            </tr>
-            <tr style={tr}>
-              <td>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    )
+      )
+    } else {
+
+      const succesfulRequest = () => (
+          <div>
+            <h1>Havainto lisätty</h1>
+            <h4>Lisätty havainto:</h4>
+            <p>Laji: {this.state.response.species.finnishName} ({this.state.response.species.latinName})</p>
+            <p>Päivämäärä: {this.state.response.date}</p>
+            <p>Sijainti: {this.state.response.latitude}, {this.state.response.longitude} ({this.state.response.town})</p>
+            <Link to="/uusihavainto">Palaa takaisin</Link>
+          </div>
+      )
+
+      return (
+        <div>
+          {this.state.response.id ? succesfulRequest() : ''}
+        </div>
+      )
+    }
   }
 }
 
@@ -181,5 +210,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { observationCreation, setMarkers, emptyMarkers }
+  { setMarkers, emptyMarkers, initializeObservations }
 )(NewObservation)

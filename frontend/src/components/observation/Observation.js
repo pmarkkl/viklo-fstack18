@@ -2,7 +2,7 @@ import React from 'react'
 
 const Observation = ({ observation }) => {
   return (
-    <div id="observation">
+    <div className="observation">
       <p>Laji: {observation.species.finnishName} ({observation.species.latinName})</p>
       <p>Havainnon tekijä: {observation.user.firstname} {observation.user.lastname}</p>
       <p>Aika: {observation.date}</p>
