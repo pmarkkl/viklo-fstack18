@@ -16,6 +16,8 @@ import Activation from './components/Activation'
 import ReSend from './components/ReSend'
 import ResetPassword from './components/ResetPassword'
 import SetPasswordReset from './components/SetPasswordReset'
+import SingleMarkerMap from './components/observation/SingleMarkerMap'
+import Info from './components/Info'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { logout } from './reducers/userReducer'
 import { MapContainerComponent } from './components/observation/Map'
@@ -32,7 +34,6 @@ class App extends React.Component {
     this.props.initializeObservations()
     this.props.initializeSpecies()
     this.props.initLocation()
-    this.props.setMarkers()
     const loggedIn = window.localStorage.getItem('loggedInUser')
     const parsed = JSON.parse(loggedIn)
     if (parsed) {
@@ -81,10 +82,10 @@ class App extends React.Component {
             </div>
             <div className="headerRight">
                 <ul>
-                  <li><Link to="/">Etusivu</Link></li>
-                  <li><Link to="/uusihavainto">Lisää</Link></li>
-                  <li><Link to="/havainnot">Havainnot</Link></li>
-                  <li><Link to="/omasivu">Käyttäjäsivu</Link></li>
+                  <li className="navLink"><Link to="/">Etusivu</Link></li>
+                  <li className="navLink"><Link to="/uusihavainto">Lisää</Link></li>
+                  <li className="navLink"><Link to="/havainnot">Havainnot</Link></li>
+                  <li className="navLink"><Link to="/omasivu">Käyttäjäsivu</Link></li>
                   <li className="logout" style={visibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
                 </ul>
               </div>
@@ -102,6 +103,9 @@ class App extends React.Component {
               <Route exact path="/resend" render={() => <ReSend user={this.props.user} />} />
               <Route exact path="/resetpassword" render={() => <ResetPassword />} />
               <Route exact path="/setpassword/:id" render={({ match }) => <SetPasswordReset match={match} />} />
+              <Route exact path="/havainnot/:id" render={({ match }) => <SingleMarkerMap id={match.params.id} />} />
+              <Route path="/viklo" render={() => <Info />} />
+              <Route path="/yhteys" render={() => <div><h1>Ota yhteyttä</h1><p>Ei ihan vielä.</p></div>}/>
             </div>
           </Flexbox>
  

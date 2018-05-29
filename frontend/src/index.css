@@ -10,7 +10,7 @@ a {
   color: blue;
 }
 
-ul {
+.headerRight ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -18,14 +18,14 @@ ul {
   letter-spacing: 1px;
 }
 
-li {
+.headerRight li {
   display: inline-block;
   font-size: 12pt;
   line-height: 40px;
   height: 40px;
 }
 
-li a {
+.headerRight li a {
   display: block;
   color: white;
   text-align: center;
@@ -36,9 +36,44 @@ li a {
   padding-right: 10px;
 }
 
-li a:hover {
+.headerRight li a:hover {
   background-color: #5e5e5e;
   border-bottom: 4px solid #C5B358;
+}
+
+.observationList ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12pt;
+  letter-spacing: 1px;
+}
+
+.observationList li {
+  display: inline-block;
+  font-size: 12pt;
+  line-height: 40px;
+  height: 40px; 
+}
+
+.observationList li a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  letter-spacing: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.observationList li a:hover {
+  cursor: pointer;
+  background-color: #5e5e5e;
+}
+
+.active {
+  background-color: #365d81;
 }
 
 input, [type=text] select {
@@ -78,16 +113,6 @@ textarea {
 }
 
 
-.observation {
-  width: 100%;
-  padding: 0px 5px 0px 5px;
-  margin-bottom: 5px;
-  background-color: #f3f3f3;
-  border: 1px solid #5e6874;
-  box-sizing: border-box;
-  font-size: 13pt;
-}
-
 .speciesResults {
   width: 268px;
   margin: 0px;
@@ -102,6 +127,7 @@ textarea {
   position: absolute;
   font-family: 'Noto Sans', sans-serif;
 }
+
 
 #search {
   width: 280px;
@@ -187,6 +213,7 @@ body {
   padding-top: 0px;
   position: fixed;
   width: 100%;
+  z-index: 2;
 }
 
 .mainHeader {
@@ -199,7 +226,7 @@ body {
 h1 {
   padding: 0px;
   margin: 0px;
-  padding-top: 10px;
+  padding-top: 0px;
   padding-bottom: 10px;
 }
 
@@ -223,6 +250,7 @@ footer a:visited {
 footer a:hover {
   color: #A80000;
 }
+
 .headerRight {
   margin-left: 93px;
   width: 100%;
@@ -241,10 +269,10 @@ footer a:hover {
 
 .logout {
  float: right;
- background-color: #A80000;
+ background-color: #76323F;
 }
 
-.logout a:hover {
+.logout li a:hover {
   border-bottom: 0px;
 }
 

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const url = '/pwresetvalidity'
+const url = 'http://localhost:3001/pwresetvalidity'
 
 const checkValidity = async (request) => {
   try {

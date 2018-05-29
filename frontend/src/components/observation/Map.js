@@ -43,7 +43,18 @@ export class MapContainer extends React.Component {
     marker: { clickable: false }
   }
 
+  componentWillMount() {
+    console.log('COMPONENT WILL MOUNT')
+    if (this.props.location) {
+      this.setState({ initialCenter: { lat: this.props.location.latitude, lng: this.props.location.longitude }})
+    }
+    if (this.props.zoom) {
+      this.setState({ mapZoom: this.props.zoom })
+    }
+  }
+
   componentWillReceiveProps() {
+    console.log('component will receive props', this.props)
     if (this.props.location) {
       this.setState({ mapFocus: { lat: this.props.location.latitude, lng: this.props.location.longitude } })
     }
@@ -202,5 +213,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { addMarker, deleteLast, setLocation })(GoogleApiWrapper({
-  apiKey: 'AIzaSyD-5OOmNZJ7eOvdb5SyK8LAu8LnkQhOCQg', language: 'fi', mapTypeId: 'terrain'
+  apiKey: <z', language: 'fi', mapTypeId: 'terrain'
 })(MapContainer))

@@ -4,6 +4,13 @@ const markerReducer = (state = [], action) => {
   switch (action.type) {
     case 'SET_MARKERS':
       return action.data
+    case 'SINGLE_MARKER':
+      const filtered = state.find(marker => marker.id === action.data)
+      if (filtered) {
+        return [filtered]
+      } else {
+        return []
+      }
     case 'ADD_MARKER':
       return [...state, action.data]
     case 'EMPTY_MARKERS':
@@ -23,6 +30,15 @@ export const setMarkers = () => {
     dispatch ({
       type: 'SET_MARKERS',
       data: observations
+    })
+  }
+}
+
+export const setSingleMarker = (id) => {
+  return async (dispatch) => {
+    dispatch({
+      type: 'SINGLE_MARKER',
+      data: id
     })
   }
 }
