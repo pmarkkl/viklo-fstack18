@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const Observation = require('../models/observation')
 const User = require('../models/user')
 const Species = require('../models/species')
+const validator = require('../validation')
 
 observationRouter.get('/', async (req, res) => {
   const observations = await Observation
@@ -22,13 +23,22 @@ const getTokenFrom = (req) => {
 }
 
 observationRouter.post('/', async (req,res) => {
-  console.log(req.body)
   const body = req.body
+
+  console.log('juuh')
+
+  const errors = validator.validateObservationPost(body)
+
+  console.log('errors', errors)
+  console.log('jees')
+
+  if (errors.length > 0) {
+    return res.status(400).json({ error: errors })
+  }
+
   try {
     const token = getTokenFrom(req)
     const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    console.log(decodedToken)
 
     if (!token || !decodedToken.id) {
       return res.status(401).json({ error: 'Ei tokenia tai se on virheellinen.' })

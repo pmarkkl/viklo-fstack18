@@ -38,8 +38,9 @@ class App extends React.Component {
     const parsed = JSON.parse(loggedIn)
     if (parsed) {
       this.props.initializeUser(parsed)
-      this.props.initFriends(parsed.id)
-      this.props.initRequests(parsed.id)
+      console.log('parsed', parsed)
+/*       this.props.initFriends(parsed.id)
+      this.props.initRequests(parsed.id) */
     }
   }
 
@@ -85,7 +86,7 @@ class App extends React.Component {
                   <li className="navLink"><Link to="/">Etusivu</Link></li>
                   <li className="navLink"><Link to="/uusihavainto">Lisää</Link></li>
                   <li className="navLink"><Link to="/havainnot">Havainnot</Link></li>
-                  <li className="navLink"><Link to="/omasivu">Käyttäjäsivu</Link></li>
+                  <li className="navLink"><Link to="/omasivu">Käyttäjähallinta</Link></li>
                   <li className="logout" style={visibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
                 </ul>
               </div>

@@ -9,10 +9,10 @@ const observationStyle = {
   marginBottom: '3px',
   backgroundColor: '#f3f3f3',
   boxSizing: 'border-box',
-  fontSize: '14pt',
+  fontSize: '10pt',
   position: 'relative',
   zIndex: 1,
-  width: '1000px'
+  fontFamily: `'Noto Sans', sans-serif`
 }
 
 const Observation = (props) => {

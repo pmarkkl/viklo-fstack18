@@ -25,6 +25,49 @@ const validateRegForm = (values) => {
   return errors
 }
 
+// ilmeisesti null Date on 01-01-1970
+
+const validateObservationPost = (values) => {
+  const errors = []
+
+  const dateObject = new Date(values.date)
+  const dateCompare = new Date(Date.now())
+  dateCompare.setFullYear(dateCompare.getFullYear()-5)
+
+  if (!values.speciesId || !values.latitude || !values.longitude) {
+    return errors.push('Muut kentät kuin kommentti ovat pakollisia.')
+  }
+
+  if (dateObject < dateCompare) {
+    errors.push('Emme valitettavasti hyväksy yli viiden vuoden takaisia havaintoja.')
+  }
+
+  if (dateObject > Date.now()) {
+    errors.push('Emme valitettavasti hyväksy havaintoja tulevaisuudesta.')
+  }
+
+  if (values.zipcode.length < 5 || values.zipcode.length > 5 || values.town.length < 2) {
+    errors.push('Tarvitsemme validit osoitetiedot.')
+  }
+
+  return errors
+}
+
+const validateContacts = (values) => {
+  const errors = []
+  console.log('values', values)
+    if (values.address.length < 5 || values.address.length > 40) {
+      errors.push('Katuosoitteessa näyttäisi olevan jotain vikaa.')
+    }
+    if (values.town.length < 2 || values.town.length > 35) {
+      errors.push('Kunnassa näyttäisi olevan jotain vikaa.')
+    }
+    if (values.zipcode.length < 5 || values.zipcode.length > 5) {
+      errors.push('Postinumero ei ole syötetty oikein.')
+    }
+    return errors
+}
+
 module.exports = {
-  validateRegForm
+  validateRegForm, validateObservationPost, validateContacts
 }

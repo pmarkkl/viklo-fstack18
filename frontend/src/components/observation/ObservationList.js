@@ -10,7 +10,7 @@ class ObservationList extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      offset: 1,
+      offset: 0,
       observations: [],
       loaded: false,
       limit: 10
@@ -22,6 +22,10 @@ class ObservationList extends React.Component {
     this.props.setMarkers()
   }
 
+  sortByDate = (first, second) => {
+    return new Date(first.date) - new Date(second.date)
+  }
+
   loadObservations = async () => {
     let observations = []
     if (this.props.observations.length < 1) {
@@ -30,7 +34,7 @@ class ObservationList extends React.Component {
     } else {
       observations = this.props.observations
     }
-    const filteredObservations = observations.slice(this.state.offset, this.state.offset+this.state.limit)
+    const filteredObservations = observations.sort(this.sortByDate).reverse().slice(this.state.offset, this.state.offset+this.state.limit)
     this.setState({ observations: filteredObservations, pageCount: Math.ceil(observations.length / this.state.limit)})
   }
 

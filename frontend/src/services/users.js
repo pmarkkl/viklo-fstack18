@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { setToken } from './helpers'
 const url = 'http://localhost:3001/api/users'
 
 const getAll = async () => {
@@ -39,6 +39,16 @@ const setPasswordAfterReset = async (passwords) => {
   }
 }
 
+const setContacts = async (request) => {
+  try {
+    const config = setToken(request.token)
+    const response = await axios.put(`${url}/setcontacts`, request, config)
+    return response.data
+  } catch (exc) {
+    return exc.response.data
+  }
+}
+
 const resetPassword = async (email) => {
   const requestObject = {
     email
@@ -52,5 +62,5 @@ const resetPassword = async (email) => {
 }
 
 export default {
-  getAll, newUser, fetchUserData, resetPassword, setPasswordAfterReset
+  getAll, newUser, fetchUserData, resetPassword, setPasswordAfterReset, setContacts
 }

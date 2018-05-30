@@ -10,7 +10,7 @@ const SingleMarkerMap = (props) => {
 
   return (
     <div>
-      <Link to="/havainnot">Palaa takaisin havaintoihin</Link>
+      <Link to="/havainnot"><img src={require('../../icons/baseline_arrow_left_alt_bla.png')} alt="takaisin"/></Link>
       <div>{ props.observations.length > 0 ? <MapContainerComponent zoom={14} clickable={false} height={'650px'} location={ { latitude: 0, longitude: 0 } }/> : '' }</div>
     </div>
   )

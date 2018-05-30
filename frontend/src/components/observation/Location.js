@@ -59,6 +59,18 @@ class Location extends React.Component {
           // zip and town
 
           const split = results[0].formatted_address.split(",")
+
+          console.log('split', split)
+
+          let town = ''
+          let zipcode = ''
+
+          if (split.length >= 3) {
+            const splitSplit = split[split.length-2].trim().split(' ')
+            zipcode = splitSplit[0]
+            town = splitSplit[1]
+          }
+
           const splitSplit = split[split.length-2].trim().split(' ')
 
           // stateen zip und town
@@ -66,8 +78,8 @@ class Location extends React.Component {
           const forState = {
             latitude: latlng.lat,
             longitude: latlng.lng,
-            zipcode: splitSplit[0],
-            town: splitSplit[1]
+            zipcode,
+            town
           }
 
           this.props.setLocation(forState)
@@ -245,5 +257,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: asdsads'''a, language: 'fi'
+  apiKey: zzzzz, language: 'fi'
 })(Location))

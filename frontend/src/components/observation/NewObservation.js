@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Mask from '../styles/Mask'
 import observationService from '../../services/observations'
 import { initializeObservations} from '../../reducers/observationReducer'
 import { setMarkers, emptyMarkers } from '../../reducers/markerReducer'
@@ -25,12 +24,17 @@ class NewObservation extends React.Component {
       additionalComments: '',
       popUpVisibility: false,
       observationSent: false,
-      response: {}
+      response: {},
+      error: {
+        visibility: false,
+        message: []
+      }
     }
   }
 
   addObservation = async (event) => {
     event.preventDefault()
+
     const requestObject = {
       token: this.props.user.token,
       user: this.props.user.id,
@@ -42,12 +46,16 @@ class NewObservation extends React.Component {
       additionalComments: this.state.additionalComments,
       date: new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
     }
+
     this.setState({ latitude: '', longitude: '' })
+
     const response = await observationService.newObservation(requestObject)
     console.log('response här', response)
     this.setState({ response })
     if (response.id) {
       this.setState({ observationSent: true })
+    } else if (response.error) {
+      return this.setState({ error: { message: response.error, visibility: true } })
     }
     console.log(this.state.response)
     this.props.setMarkers()
@@ -101,6 +109,11 @@ class NewObservation extends React.Component {
     console.log(this.state)
   }
 
+  toggleObservationSent = (event) => {
+    event.preventDefault()
+    this.setState({ observationSent: false, search: '', speciesId: '' })
+  }
+
   render() {
     const visibility = {
       display: this.state.resultsVisibility ? '' : 'none'
@@ -119,6 +132,15 @@ class NewObservation extends React.Component {
     const vasen = {
       float: 'left',
       width: '354px'
+    }
+
+    const errorMessage = {
+      display: this.state.error.visibility ? '' : 'none',
+      padding: '5px'
+    }
+
+    const errorMessageStyle = {
+      color: '#A80000'
     }
 
     if (!this.state.observationSent) {
@@ -145,7 +167,7 @@ class NewObservation extends React.Component {
                 <td style={tr}>
                   <h4>Aika</h4>
                   Päivämäärä<br />
-                  <input type="text" name="date" onChange={this.handleDateChange} placeholder="31.12.1900"/><br />
+                  <input type="text" name="date" onChange={this.handleDateChange} placeholder="1.1.2018"/><br />
                   Kellonaika<br />
                   <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
                 </td>
@@ -157,6 +179,10 @@ class NewObservation extends React.Component {
                   <form onSubmit={this.addObservation}>
                     <h4>Kommentti</h4>
                     <textarea name="additionalComments" placeholder="Poikanen" onChange={this.handleChange} /><br />
+                    <div style={errorMessage}>
+                      Havainnon lisäys ei onnistunut.
+                      {this.state.error.message.map(error => <p style={errorMessageStyle} key={error}>{error}</p>)}
+                    </div>
                     <button>Lisää havainto</button>
                   </form>
                 </td>
@@ -187,7 +213,7 @@ class NewObservation extends React.Component {
             <p>Laji: {this.state.response.species.finnishName} ({this.state.response.species.latinName})</p>
             <p>Päivämäärä: {this.state.response.date}</p>
             <p>Sijainti: {this.state.response.latitude}, {this.state.response.longitude} ({this.state.response.town})</p>
-            <Link to="/uusihavainto">Palaa takaisin</Link>
+            <Link to="/uusihavainto" onClick={this.toggleObservationSent}>Palaa takaisin</Link>
           </div>
       )
 

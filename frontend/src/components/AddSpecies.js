@@ -14,7 +14,6 @@ class AddSpecies extends React.Component {
   }
 
   handleFieldChange = (event) => {
-    event.preventDefault()
     this.setState({ [event.target.name]: event.target.value })
     console.log(this.state)
   }

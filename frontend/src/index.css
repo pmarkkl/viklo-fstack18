@@ -31,9 +31,9 @@ a {
   text-align: center;
   text-decoration: none;
   transition-duration: 0.3s;
-  letter-spacing: 1px;
-  padding-left: 10px;
-  padding-right: 10px;
+  letter-spacing: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .headerRight li a:hover {
@@ -240,7 +240,8 @@ footer {
 footer a {
   text-decoration: none;
   color: black;
-  font-size: 1
+  font-size: 13pt;
+  letter-spacing: 2px;
 }
 
 footer a:visited {
@@ -286,4 +287,9 @@ h4 {
   padding: 0;
   width: 100%;
   height: 100%;
+}
+
+.myPageTable td {
+  width: 280px;
+  vertical-align: top;
 }

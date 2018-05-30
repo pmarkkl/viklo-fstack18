@@ -142,19 +142,19 @@ class LoginForm extends React.Component {
         { loginInfo() }
         <h1>Kirjaudu</h1>
         <form onSubmit={this.login} autoComplete="on">
-          <input type="text" name="email" value={this.state.email} onChange={this.handleFieldChange} placeholder="Sähköposti"/><br />
-          <input type="password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
+          <input type="text" autoComplete="user-email" name="email" value={this.state.email} onChange={this.handleFieldChange} placeholder="Sähköposti"/><br />
+          <input type="password" autoComplete="user-password" name="password" value={this.state.password} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
           <button>Kirjaudu</button><br />
           <Link to="/resetpassword">Oletko unohtanut salasanasi?</Link>
         </form>
         <h1>Rekisteröidy</h1>
         { regSuccess() }
         <form onSubmit={this.register} autoComplete="on">
-          <input type="text" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} placeholder="Sähköposti" /><br />
-          <input type="text" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />
-          <input type="text" name="newUserLastname" value={this.state.newUserLastname}onChange={this.handleFieldChange} placeholder="Sukunimi" /><br />
-          <input type="password" name="newUserPassword" value={this.state.newUserPassword} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
-          <input type="password" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleFieldChange} placeholder="Salasana uudelleen" /><br />
+          <input type="text" autoComplete="new-user-email" name="newUserEmail" value={this.state.newUserEmail} onChange={this.handleFieldChange} placeholder="Sähköposti" /><br />
+          <input type="text" autoComplete="new-user-firstname" name="newUserFirstname" value={this.state.newUserFirstname} onChange={this.handleFieldChange} placeholder="Etunimi" /><br />
+          <input type="text" autoComplete="new-user-lastname" name="newUserLastname" value={this.state.newUserLastname}onChange={this.handleFieldChange} placeholder="Sukunimi" /><br />
+          <input type="password" autoComplete="new-password" name="newUserPassword" value={this.state.newUserPassword} onChange={this.handleFieldChange} placeholder="Salasana" /><br />
+          <input type="password" autoComplete="new-password" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleFieldChange} placeholder="Salasana uudelleen" /><br />
           <button>Rekisteröidy</button>
         </form>
       </div>

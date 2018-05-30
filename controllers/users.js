@@ -170,6 +170,29 @@ usersRouter.put('/setreseted', async (req, res) => {
   res.json(User.format(savedUser))
 })
 
+usersRouter.put('/setcontacts', async (req, res) => {
+  const body = req.body
+  try {
+    const token = getTokenFrom(req)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return res.status(401).send({ error: ['Ei tokenia, tai se ei ole validi.'] })
+    }
+
+    const errors = validator.validateContacts(body)
+
+    if (errors.length > 0) {
+      return res.status(422).json({ error: errors })
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(decodedToken.id, { address: body.address, town: body.town, zipcode: body.zipcode, phone: body.phone }, { new: true })
+    res.json(User.format(updatedUser))
+  } catch (exc) {
+    res.status(500).json({ error: ['jotain kummallista tapahtui'] })
+  }
+})
+
 usersRouter.post('/accept', async (req, res) => {
   const body = req.body
   try {
