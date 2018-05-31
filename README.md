@@ -17,7 +17,7 @@
 | 30.5. | 3,5 | Syötteen validointia, listauksen parantelua ja debuggausta. Käyttäjän tietojen muutosmahdollisuuden luominen.
 | 31.5. | 4 | Säätöä käyttäjähallinan ja ulkoasun kanssa. Settimeoutit kuntoon. Pahimpia sotkuja siivottu.
 
-#yhteensä 84 tuntia
+# yhteensä 84 tuntia
 
 # Viklo - lintuharrastajan havaintokirja
 
