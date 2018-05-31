@@ -31,14 +31,14 @@ app.use(logger)
 app.use(bodyParser.json())
 app.use(cors())
 
-app.use(express.static('build'))
+/* app.use(express.static('build')) */
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/observations', observationRouter)
 app.use('/api/species', speciesRouter)
 app.use('/api/requests', requestRouter)
-app.use('/api/activate', tokenRouter)
-app.use('/api/pwresetvalidity', resetRouter)
+app.use('/activate', tokenRouter)
+app.use('/pwresetvalidity', resetRouter)
 
 const server = http.createServer(app)
 
