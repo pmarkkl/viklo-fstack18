@@ -213,5 +213,5 @@ const mapStateToProps = (state) => {
 }
 
 export const MapContainerComponent = connect(mapStateToProps, { addMarker, deleteLast, setLocation })(GoogleApiWrapper({
-  apiKey: 'AIzaSyB3llHczRhvs9RuSvcnDCqs9vdzlXXtPJM', language: 'fi', mapTypeId: 'terrain'
+  apiKey: 'AIzaSyBmAVBitGI5BRkZbosJaj2KX6dD6LdW2Z0', language: 'fi', mapTypeId: 'terrain'
 })(MapContainer))
