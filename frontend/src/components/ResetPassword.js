@@ -9,7 +9,14 @@ class ResetPassword extends React.Component {
     email: '',
     success: false,
     redirect: false,
-    infoWindowVisibility: false
+    infoWindowVisibility: false,
+    timeoutId: ''
+  }
+
+  componentWillUnmount() {
+    if (this.state.timeoutId) {
+      clearTimeout(this.state.timeoutId)
+    }
   }
 
   handleSubmit = async (event) => {
@@ -25,7 +32,9 @@ class ResetPassword extends React.Component {
     const response = await userService.resetPassword(this.state.email)
     if (response.data.message === 'Success') {
       this.setState({ success: true })
-      setTimeout(() => this.setState({ redirect: true }),5000)
+      const id = setTimeout(() => this.setState({ redirect: true }), 5000)
+      console.log('setTimeout id', id)
+      this.setState({ timeoutId: id })
     }
   }
 
@@ -45,7 +54,7 @@ class ResetPassword extends React.Component {
         <div style={infoWindow}>
           Syötä kelvollinen sähköpostiosoite.
         </div>
-        <p>Syötä sähköposti:</p>
+        Anna sähköpostisi:<br />
         <form onSubmit={this.handleSubmit}>
           <input type="text" name="email" value={this.state.email} onChange={this.handleChange} /><br />
           <button type="submit">Lähetä</button>

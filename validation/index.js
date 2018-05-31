@@ -34,8 +34,11 @@ const validateObservationPost = (values) => {
   const dateCompare = new Date(Date.now())
   dateCompare.setFullYear(dateCompare.getFullYear()-5)
 
-  if (!values.speciesId || !values.latitude || !values.longitude) {
-    return errors.push('Muut kentät kuin kommentti ovat pakollisia.')
+  console.log('values', values)
+  console.log('values.speciesid', values.speciesId.length)
+
+  if (values.speciesId.length < 10 || !values.latitude || !values.longitude) {
+    errors.push('Muut kentät kuin kommentti ovat pakollisia.')
   }
 
   if (dateObject < dateCompare) {
@@ -46,10 +49,10 @@ const validateObservationPost = (values) => {
     errors.push('Emme valitettavasti hyväksy havaintoja tulevaisuudesta.')
   }
 
-  if (values.zipcode.length < 5 || values.zipcode.length > 5 || values.town.length < 2) {
+/*   if (values.zipcode.length < 5 || values.zipcode.length > 5 || values.town.length < 2) {
     errors.push('Tarvitsemme validit osoitetiedot.')
-  }
-
+  } */
+  console.log('errors', errors)
   return errors
 }
 

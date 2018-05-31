@@ -27,7 +27,8 @@ class App extends React.Component {
 
   state = {
     popup: false,
-    loginLogoutColour: '#501B1D'
+    loginLogoutColour: '#501B1D',
+    loginBoxTriggered: false
   }
 
   componentWillMount() {
@@ -44,18 +45,25 @@ class App extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    if (this.props.user.id) {
+      window.localStorage.setItem('loggedInUser', JSON.stringify(this.props.user))
+      console.log('hoh')
+    }
+  }
+
   logout = (event) => {
     window.localStorage.removeItem('loggedInUser')
     this.props.logout()
   }
 
+  toggleLoginBox = (event) => {
+    event.preventDefault()
+    this.setState({ loginBoxTriggered: !this.state.loginBoxTriggered })
+  }
 
 
   render() {
-
-    const visibility = {
-      display: this.props.user.activated ? '' : 'none'
-    }
 
     const mainDivStyle = {
       margin: '0px auto',
@@ -75,8 +83,36 @@ class App extends React.Component {
       margin: '0px auto',
     }
 
+    const logOutVisibility = {
+      display: this.props.user.activated ? '' : 'none'
+    }
+
+    const logInVisibility = {
+      display: this.props.user.id ? 'none' : ''
+    }
+
+    const loginBox = {
+      backgroundColor: 'white',
+      fontSize: '11pt',
+      width: '200px',
+      top: '40px',
+      right: '0px',
+      zIndex: '4',
+      position: 'fixed',
+      padding: '10px',
+      border: '1px solid #EEEEEE',
+      boxShadow: '2px 2px 2px #ebebeb',
+      display: this.state.loginBoxTriggered ? '' : 'none'
+    }
+
+    const loginBoxButton = {
+      padding: '4px',
+      fontSize: '11pt',
+    }
+
     return (
       <Router>
+        <div>
         <Flexbox flexDirection="column" minHeight="100vh">
           <Flexbox className="headerDiv" element="header" height="40px">
             <div className="headerLeft">
@@ -84,17 +120,18 @@ class App extends React.Component {
             <div className="headerRight">
                 <ul>
                   <li className="navLink"><Link to="/">Etusivu</Link></li>
-                  <li className="navLink"><Link to="/uusihavainto">Lisää</Link></li>
+                  <li className="navLink" style={logOutVisibility}><Link to="/uusihavainto">Lisää</Link></li>
                   <li className="navLink"><Link to="/havainnot">Havainnot</Link></li>
-                  <li className="navLink"><Link to="/omasivu">Käyttäjähallinta</Link></li>
-                  <li className="logout" style={visibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
+                  <li className="navLink" style={logOutVisibility}><Link to="/omasivu">Käyttäjähallinta</Link></li>
+                  <li className="logout" style={logOutVisibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
+                  <li style={logInVisibility} className="login"><Link to="/">Kirjaudu sisään</Link></li>
                 </ul>
               </div>
           </Flexbox>
  
           <Flexbox flexGrow={1} width="1000">
             <div style={mainDivStyle}>
-              <Route exact path="/" render={() => <LoginForm />} />
+            <Route exact path="/" render={() => <LoginForm />} />
               <Route exact path="/uusihavainto" render={() => <NewObservation />} />
               <Route exact path="/havainnot" render={() => <ObservationList />} />
               <Route exact path="/lajit" render={() => <AddSpecies />} /> 
@@ -109,13 +146,18 @@ class App extends React.Component {
               <Route path="/yhteys" render={() => <div><h1>Ota yhteyttä</h1><p>Ei ihan vielä.</p></div>}/>
             </div>
           </Flexbox>
- 
           <Flexbox element="footer">
             <div style={footerDivStyle}>
             <Link to="/viklo">Info</Link> | <Link to="/yhteys">Ota yhteyttä</Link>
             </div>
           </Flexbox>
         </Flexbox>
+        <div style={loginBox} className="loginBox">
+          <input type="text" placeholder="Sähköposti" />
+          <input type="password" placeholder="Salasana" />
+          <button style={loginBoxButton}>Kirjaudu</button>
+        </div>
+        </div>
       </Router>
 
     )

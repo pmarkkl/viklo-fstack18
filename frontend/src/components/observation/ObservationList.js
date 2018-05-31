@@ -55,7 +55,7 @@ class ObservationList extends React.Component {
 
     return (
       <div>
-        <h1>Kaikki havainnot</h1>
+        <h1>Kaikki havainnot aikajärjestyksessä</h1>
         <div style={paginateStyle} className="observationList">
         <ReactPaginate previousLabel={"Edellinen"}
                         nextLabel={"Seuraava"}

@@ -25,8 +25,13 @@ class LoginForm extends React.Component {
         visibility: false,
         message: ''
       },
-      notActivated: false
+      notActivated: false,
+      timeoutId: ''
     }
+  }
+
+  componentWillMount() {
+    clearTimeout(this.state.timeoutId)
   }
 
   login = async (event) => {
@@ -49,7 +54,8 @@ class LoginForm extends React.Component {
       } else {
         console.log(response)
         this.setState({ notActivated: false, login: { message: response.error, visibility: true }})
-        setTimeout(() => this.setState({ login: { message: '' }}), 5000)
+        const id = setTimeout(() => this.setState({ login: { message: '' }}), 5000)
+        this.setState({ timeoutId: id })
       }
     }
     this.setState({ email: '', password: '' })
@@ -71,11 +77,10 @@ class LoginForm extends React.Component {
 
     if (response.error) {
       this.setState({ reg: { visibility: true, message: response.error }, newUserEmail: '', newUserPassword: '', passwordConfirmation: ''})
-      setTimeout(() => 
-        this.setState({ reg: { visibility: false, message: [] } })
-      ,7500)
+      const id = setTimeout(() => this.setState({ reg: { visibility: false, message: [] } }), 7500)
+      this.setState({ timeoutId: id })
     } else {
-      const message = [`Tervetuloa käyttäjäksi, ${response.firstname}. Sähköpostiosoitteeseesi ${response.email} on lähetetty aktivointilinkki.`]
+      const message = [`Tervetuloa käyttäjäksi, ${response.firstname}. Sähköpostiisi ${response.email} on lähetetty aktivointilinkki.`]
       this.setState({ 
         reg: { visibility: true, message },
         newUserEmail: '',
@@ -100,9 +105,9 @@ class LoginForm extends React.Component {
       marginTop: '15px',
       paddingLeft: '5px',
       paddingRight: '5px',
-      paddingTop: '3px',
-      paddingBottom: '3px',
-      fontSize: '11pt',
+      paddingTop: '2px',
+      paddingBottom: '2px',
+      fontSize: '12pt',
       color: 'black',
     }
 

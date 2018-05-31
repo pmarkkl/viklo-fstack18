@@ -71,8 +71,6 @@ class Location extends React.Component {
             town = splitSplit[1]
           }
 
-          const splitSplit = split[split.length-2].trim().split(' ')
-
           // stateen zip und town
 
           const forState = {
@@ -83,7 +81,7 @@ class Location extends React.Component {
           }
 
           this.props.setLocation(forState)
-
+          
         }
       } else {
         this.setState({ result: 'Ei osoitetietoja.' })
@@ -175,6 +173,11 @@ class Location extends React.Component {
     this.props.emptyMarkers()
   }
 
+  fillMap = (event) => {
+    event.preventDefault()
+    this.props.setMarkers()
+  } 
+
   popUpProps = () => (
     <div>
       <a href="/"><img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} /></a>&nbsp;
@@ -241,6 +244,7 @@ class Location extends React.Component {
         <div style={popUpTesti}>
           <a href="/"><img src={require('../../icons/baseline_close_white_18dp.png')} alt="Sulje" onClick={this.toggleVisibility} /></a>&nbsp;
           <a href="/"><img src={require('../../icons/baseline_location_off_white_18dp.png')} alt="Tyhjennä kartta" onClick={this.emptyMap} /></a>
+          <a href="/"><img src={require('../../icons/baseline_place_white_18dp.png')} alt="Täytä kartta" onClick={this.fillMap} /></a>
           <MapContainerComponent zoom={this.state.zoom} clickable={true} height={'650px'} />
         </div>
       </div>
@@ -257,5 +261,5 @@ const mapStateToProps = (state) => {
 }
 
 export const LocationComponent = connect(mapStateToProps, { setLocation, addMarker, deleteLast, setMarkers, emptyMarkers })(GoogleApiWrapper({
-  apiKey: zzzzz, language: 'fi'
+  apiKey: 'AIzaSyDua0eoVyFIByDZ-6wbEKFhhWCgcgq0CeI', language: 'fi'
 })(Location))

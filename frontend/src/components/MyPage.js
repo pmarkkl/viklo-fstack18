@@ -1,26 +1,43 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { MapContainerComponent } from '../components/observation/Map'
 import { setMarkers, markersForUser, emptyMarkers } from '../reducers/markerReducer'
+import { initializeUser } from '../reducers/userReducer'
 import { Redirect } from 'react-router-dom'
 import userService from '../services/users'
+import { Link } from 'react-router-dom'
 
 class MyPage extends React.Component {
 
-  state = {
-    currentPassword: '',
-    newPassword: '',
-    passwordConfirmation: '',
-    address: '',
-    zipcode: '',
-    town: '',
-    phone: '',
-    messages: [],
-    messageVisibility: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentPassword: '',
+      newPassword: '',
+      passwordConfirmation: '',
+      address: '',
+      zipcode: '',
+      town: '',
+      phone: '',
+      messages: [],
+      messageVisibility: false,
+      returnedErrors: false,
+      menu: {
+        contacts: true,
+        observations: false
+      },
+      timeoutId: ''
+    }
   }
+
 
   componentWillMount() {
     this.props.setMarkers()
+  }
+
+  componentWillUnmount() {
+    if (this.state.timeoutId) {
+      clearTimeout(this.state.timeoutId)
+    }
   }
 
   emptyMap = (event) => {
@@ -56,13 +73,58 @@ class MyPage extends React.Component {
       phone: this.state.phone
     }
     const response = await userService.setContacts(requestObject)
-    this.setState({ address: '', zipcode: '', town: '' })
+    this.setState({ address: '', zipcode: '', town: '', phone: '' })
     if (response.error) {
-      this.setState({ messages: response.error, messageVisibility: true })
+      this.setState({ messages: response.error, messageVisibility: true, returnedErrors: true })
+      const id = setTimeout(() => this.setState({ messageVisibility: false, messages: [] }), 7500)
+      this.setState({ timeoutId: id })
     } else {
-      this.setState({ messages: ['Yhteystiedot päivitetty'], messageVisibility: true })
+      const id = setTimeout(() => this.setState({ messageVisibility: false, messages: [] }), 7500)
+      this.setState({ timeoutId: id })
+      const updatedUser = {
+        activated: this.props.user.activated,
+        token: this.props.user.token,
+        admin: this.props.user.admin,
+        email: this.props.user.email,
+        firstname: this.props.user.firstname,
+        lastname: this.props.user.lastname,
+        id: this.props.user.id,
+        address: response.address,
+        zipcode: response.zipcode,
+        town: response.town,
+        phone: response.phone
+      }
+      window.localStorage.setItem('loggedInUser', JSON.stringify(updatedUser))
+      await this.props.initializeUser(updatedUser)
     }
-    setTimeout(() => this.setState({ messageVisibility: false }), 7500)
+  }
+
+  handlePasswordSubmit = async (event) => {
+    event.preventDefault()
+    const requestObject = {
+      token: this.props.user.token,
+      currentPassword: this.state.currentPassword,
+      newPassword: this.state.newPassword,
+      passwordConfirmation: this.state.passwordConfirmation
+    }
+    const response = await userService.setPassword(requestObject)
+    console.log(response)
+    if (response.error) {
+      this.setState({ messageVisibility: true, messages: response.error })
+    } else {
+      this.setState({ messageVisibility: true, messages: response.message })
+    }
+    const id = setTimeout(() => this.setState({ messageVisibility: false, messages: [] }), 7500)
+    this.setState({ timeoutId: id })
+  }
+
+  handleMenuClick = (event) => {
+    event.preventDefault()
+    if (event.target.name === 'contacts') {
+      this.setState({ menu: { contacts: true, observations: false } })
+    } else {
+      this.setState({ menu: { contacts: false, observations: true } })
+    }
   }
 
   render() {
@@ -77,70 +139,100 @@ class MyPage extends React.Component {
     }
 
     const contactsDiv = {
-      backgroundColor: '#f3f3f3',
+      backgroundColor: '#575757',
+      color: 'white',
       width: '100%',
       marginTop: '10px',
-      padding: '10px'
+      padding: '10px',
+      fontSize: '12pt'
     }
 
     const messageDiv = {
       display: this.state.messageVisibility ? '' : 'none',
-      width: '100%',
+      minWidth: '300px',
       minHeight: '30px',
-      color: 'red',
+      paddingLeft: '10px',
+      paddingRight: '10px',
+      fontSize: '13pt',
+      color: this.state.returnedErrors? 'red' : 'black',
       backgroundColor: '#f3f3f3'
     }
+
+    const contactsActive = {
+      backgroundColor: this.state.menu.contacts ? '#365d81' : ''
+    }
+
+    const observationsActive = {
+      backgroundColor: this.state.menu.observations ? '#365d81' : ''
+    }
+
+    const contacts = () => (
+      <div>
+        <div style={messageDiv}>
+          { this.state.messages.map(error => <p key={error}>{error}</p>) }
+        </div>
+        <table className="myPageTable">
+        <tbody>
+          <tr>
+            <td>
+              <form onSubmit={this.handlePasswordSubmit}>
+              Päivitä salasana<br />
+              <input type="password" name="currentPassword" value={this.state.currentPassword} onChange={this.handleFieldChange} placeholder="Nykyinen salasana"/><br />
+              <input type="password" name="newPassword" value={this.state.newPassword} onChange={this.handleFieldChange} placeholder="Uusi salasana"/><br />
+              <input type="password" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleFieldChange} placeholder="Uusi salasana uudestaan"/><br />
+              <button>Lähetä</button>
+              </form>
+            </td>
+            <td>
+              Päivitä tiedot<br />
+              <form onSubmit={this.handleContactsSubmit}>
+                <input type="text" name="address" value={this.state.address} onChange={this.handleFieldChange} placeholder="Katuosoite"/><br />
+                <input type="text" name="zipcode" value={this.state.zipcode} onChange={this.handleFieldChange} placeholder="Postinumero"/><br />
+                <input type="text" name="town" value={this.state.town} onChange={this.handleFieldChange} placeholder="Kunta"/><br />
+                <input type="text" name="phone" value={this.state.phone} onChange={this.handleFieldChange} placeholder="Puhelinnumero" /><br />
+                <button>Lähetä</button>
+              </form>
+            </td>
+            <td>
+              Nykyiset tietosi
+              <div style={contactsDiv}>
+              Osoite:<br />
+              {this.props.user.address} {this.props.user.zipcode} {this.props.user.town}<br />
+              </div>
+              <div style={contactsDiv}>
+              Puhelin:<br />
+              {this.props.user.phone}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    )
+
+
+    const observations = () => (
+      <div>
+        <h1>to be continued</h1>
+      </div>
+    )
 
     if (this.props.user.activated) {
       return (
         <div>
-          <h1>Käyttäjäsivu</h1>
-          <div style={margin}>
-            {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email})
+          <div>
+            <h1>Käyttäjäsivu</h1>
+            <div style={margin}>
+              {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email})
+            </div>
+            <div className="myPageMenu" style={divStyle}>
+              <ul>
+                <li style={contactsActive} onClick={this.handleMenuClick}><Link to="/omasivu" name="contacts">Käyttäjätiedot</Link></li>
+                <li style={observationsActive} onClick={this.handleMenuClick}><Link to="/omasivu" name="observations">Havainnot</Link></li>
+              </ul>
+            </div>
           </div>
-          <div className="observationList" style={divStyle}>
-            <ul>
-              <li><a href="/">Käyttäjätiedot</a></li>
-            </ul>
-          </div>
-          <div style={messageDiv}>
-            { this.state.messages.map(error => <p key={error}>{error}</p>) }
-          </div>
-          <table className="myPageTable">
-            <tbody>
-              <tr>
-                <td>
-                  <form>
-                  Päivitä salasana<br />
-                  <input type="password" name="currentPassword" value={this.state.newPassword} onChange={this.handleFieldChange} placeholder="Nykyinen salasana"/><br />
-                  <input type="password" name="newPassword" value={this.state.newPassword} onChange={this.handleFieldChange} placeholder="Uusi salasana"/><br />
-                  <input type="password" name="newConfirmation" value={this.state.newPassword} onChange={this.handleFieldChange} placeholder="Uusi salasana uudestaan"/><br />
-                  <button>Lähetä</button>
-                  </form>
-                </td>
-                <td>
-                  Päivitä tiedot<br />
-                  <form onSubmit={this.handleContactsSubmit}>
-                    <input type="text" name="address" value={this.state.address} onChange={this.handleFieldChange} placeholder="Katuosoite"/><br />
-                    <input type="text" name="zipcode" value={this.state.zipcode} onChange={this.handleFieldChange} placeholder="Postinumero"/><br />
-                    <input type="text" name="town" value={this.state.town} onChange={this.handleFieldChange} placeholder="Kunta"/><br />
-                    <input type="text" name="phone" value={this.state.phone} onChange={this.handleFieldChange} placeholder="Puhelinnumero" /><br />
-                    <button>Lähetä</button>
-                  </form>
-                </td>
-                {/* tämä pitää muistaa korjata */}
-                <td>
-                  Nykyiset tietosi
-                  <div style={contactsDiv}>
-                  Osoite:<br />
-                  {this.props.user.address} {this.props.user.zipcode} {this.props.user.town}<br />
-                  Puhelin:<br />
-                  {this.props.user.phone}
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          { this.state.menu.contacts ? contacts() : observations() }
         </div>
       )
     } else {
@@ -161,5 +253,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { setMarkers, markersForUser, emptyMarkers }
+  { setMarkers, markersForUser, emptyMarkers, initializeUser }
 )(MyPage)

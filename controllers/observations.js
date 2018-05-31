@@ -25,12 +25,7 @@ const getTokenFrom = (req) => {
 observationRouter.post('/', async (req,res) => {
   const body = req.body
 
-  console.log('juuh')
-
-  const errors = validator.validateObservationPost(body)
-
-  console.log('errors', errors)
-  console.log('jees')
+  const errors = await validator.validateObservationPost(body)
 
   if (errors.length > 0) {
     return res.status(400).json({ error: errors })
@@ -41,15 +36,11 @@ observationRouter.post('/', async (req,res) => {
     const decodedToken = jwt.verify(token, process.env.SECRET)
 
     if (!token || !decodedToken.id) {
-      return res.status(401).json({ error: 'Ei tokenia tai se on virheellinen.' })
+      return res.status(401).json({ error: ['Ei tokenia tai se on virheellinen.'] })
     }
     
     if (!decodedToken.activated) {
-      return res.status(401).json({ error: 'Tunnusta ei ole aktivoitu.' })
-    }
-    
-    if (body.speciesId === undefined) {
-      return res.status(400).json({ error: 'Ei sisältöä.' })
+      return res.status(401).json({ error: ['Tunnusta ei ole aktivoitu.'] })
     }
 
     const user = await User.findById(decodedToken.id)
@@ -80,10 +71,10 @@ observationRouter.post('/', async (req,res) => {
 
   } catch (exception) {
     if (exception.name = 'JsonWebTokenError') {
-      res.status(401).json({ error: exception.message })
+      res.status(401).json({ error: [exception.message] })
     } else {
       console.log(exception)
-      res.status(500).json({ error: 'Jotain kummallista tapahtui' })
+      res.status(500).json({ error: ['Jotain kummallista tapahtui'] })
     }
   }
 })

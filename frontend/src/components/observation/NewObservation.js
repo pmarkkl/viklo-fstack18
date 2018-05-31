@@ -4,7 +4,7 @@ import observationService from '../../services/observations'
 import { initializeObservations} from '../../reducers/observationReducer'
 import { setMarkers, emptyMarkers } from '../../reducers/markerReducer'
 import { LocationComponent } from './Location'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class NewObservation extends React.Component {
 
@@ -53,7 +53,7 @@ class NewObservation extends React.Component {
     console.log('response här', response)
     this.setState({ response })
     if (response.id) {
-      this.setState({ observationSent: true })
+      this.setState({ observationSent: true, error: { message: [], visibility: false } })
     } else if (response.error) {
       return this.setState({ error: { message: response.error, visibility: true } })
     }
@@ -143,6 +143,12 @@ class NewObservation extends React.Component {
       color: '#A80000'
     }
 
+    if (!this.props.user.activated) {
+      return (
+        <Redirect to="/" />
+      )
+    }
+
     if (!this.state.observationSent) {
       return (
         <div>
@@ -205,7 +211,6 @@ class NewObservation extends React.Component {
         </div>
       )
     } else {
-
       const succesfulRequest = () => (
           <div>
             <h1>Havainto lisätty</h1>

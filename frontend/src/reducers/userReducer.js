@@ -18,14 +18,6 @@ export const initializeUser = (user) => {
   }
 }
 
-export const activateUser = (user) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'ACTIVATION'
-    })
-  }
-}
-
 export const logout = () => {
   return async (dispatch) => {
     dispatch({

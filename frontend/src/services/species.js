@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { setToken } from './helpers'
 
-const url = 'http://localhost:3001/api/species'
+const url = '/api/species'
 
 const getAll = async () => {
   const response = await axios.get(url)

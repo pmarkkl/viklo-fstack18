@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { setToken } from './helpers'
-const url = 'http://localhost:3001/api/users'
+const url = '/api/users'
 
 const getAll = async () => {
   const response = await axios.get(url)
@@ -49,6 +49,16 @@ const setContacts = async (request) => {
   }
 }
 
+const setPassword = async (request) => {
+  try {
+    const config = setToken(request.token)
+    const response = await axios.put(`${url}/setpassword`, request, config)
+    return response.data
+  } catch (exc) {
+    return exc.response.data
+  }
+}
+
 const resetPassword = async (email) => {
   const requestObject = {
     email
@@ -57,10 +67,10 @@ const resetPassword = async (email) => {
     const response = await axios.post(`${url}/resetpassword`, requestObject)
     return response
   } catch (exc) {
-    console.log(exc)
+    return exc.response.data
   }
 }
 
 export default {
-  getAll, newUser, fetchUserData, resetPassword, setPasswordAfterReset, setContacts
+  getAll, newUser, fetchUserData, resetPassword, setPasswordAfterReset, setContacts, setPassword
 }

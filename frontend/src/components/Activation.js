@@ -2,7 +2,6 @@ import React from 'react'
 import activationService from '../services/activation'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { activateUser } from '../reducers/userReducer'
 
 class Activation extends React.Component {
 
@@ -50,5 +49,5 @@ const mapStateToProps = (state) => {
 
 export default connect (
   mapStateToProps,
-  { activateUser }
+  null
 )(Activation)

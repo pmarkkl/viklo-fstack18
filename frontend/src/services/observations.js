@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { setToken } from './helpers'
-const url = 'http://localhost:3001/api/observations'
+const url = '/api/observations'
 
 const getAll = async () => {
   const response = await axios.get(url)

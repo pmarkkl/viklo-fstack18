@@ -11,10 +11,6 @@ const observationReducer = (state = [], action) => {
   }
 }
 
-const sortByDate = (first, second) => {
-  return new Date(first.date) - new Date(second.date)
-}
-
 export const initializeObservations = () => {
   return async (dispatch) => {
     const observations = await observationService.getAll()

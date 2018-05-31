@@ -9,7 +9,7 @@ const crypto = require('crypto')
 const Token = require('../models/token')
 const nodemailer = require('nodemailer')
 
-usersRouter.get('/', async (req,res) => {
+/* usersRouter.get('/', async (req,res) => {
   const users = await User
   .find({})
   .populate('observations')
@@ -29,7 +29,7 @@ usersRouter.get('/:id', async (req,res) => {
     console.log(exc)
     res.status(500).json({ error: 'jotain kummallista tapahtui' })
   }
-})
+}) */
 
 const passwordHasher = async (password) => {
   const saltRounds = 10
@@ -185,11 +185,42 @@ usersRouter.put('/setcontacts', async (req, res) => {
     if (errors.length > 0) {
       return res.status(422).json({ error: errors })
     }
-
+ 
     const updatedUser = await User.findByIdAndUpdate(decodedToken.id, { address: body.address, town: body.town, zipcode: body.zipcode, phone: body.phone }, { new: true })
     res.json(User.format(updatedUser))
   } catch (exc) {
     res.status(500).json({ error: ['jotain kummallista tapahtui'] })
+  }
+})
+
+usersRouter.put('/setpassword', async (req, res) => {
+  const body = req.body
+  try {
+    const token = getTokenFrom(req)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!token || !decodedToken.id) {
+      return res.status(401).send({ error: ['Ei tokenia, tai se ei ole validi.'] })
+    }
+    
+    const currentUser = await User.findById(decodedToken.id)
+    const comparePasswords = await bcrypt.compare(body.currentPassword, currentUser.passwordHash)
+
+    if (!comparePasswords) {
+      return res.status(400).send({ error: ['Nykyinen salasana on väärin.'] })
+    }
+
+    if (body.newPassword !== body.passwordConfirmation) {
+      return res.status(400).send({ error: ['Uusi salasana ei täsmää vahvistuksen kanssa.'] })
+    }
+
+    const passwordHash = await passwordHasher(body.newPassword)
+    const savedUser = await User.findByIdAndUpdate(decodedToken.id, { passwordHash }, { new: true })
+    console.log(savedUser)
+
+    res.json({ message: ['Salasana muutettu.'] })
+  } catch (exc) {
+    console.log(exc)
+    res.status(500).json({ error: ['jotain kummaa tapahtui'] })
   }
 })
 

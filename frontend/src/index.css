@@ -18,14 +18,14 @@ a {
   letter-spacing: 1px;
 }
 
-.headerRight li {
+.navLink {
   display: inline-block;
   font-size: 12pt;
   line-height: 40px;
   height: 40px;
 }
 
-.headerRight li a {
+.navLink a {
   display: block;
   color: white;
   text-align: center;
@@ -36,9 +36,55 @@ a {
   padding-right: 15px;
 }
 
-.headerRight li a:hover {
+.navLink a:hover {
   background-color: #5e5e5e;
   border-bottom: 4px solid #C5B358;
+}
+
+.logout {
+  font-size: 12pt;
+  line-height: 40px;
+  height: 40px;
+  float: right;
+}
+
+.logout a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  letter-spacing: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #76323F;
+}
+
+.logout a:hover {
+  background-color: #5e5e5e;
+}
+
+.login {
+  font-size: 12pt;
+  line-height: 40px;
+  height: 40px;
+  float: right;
+}
+
+.login a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  letter-spacing: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  background-color: #007849;
+}
+
+.login a:hover {
+  background-color: #5e5e5e;
 }
 
 .observationList ul {
@@ -72,6 +118,7 @@ a {
   background-color: #5e5e5e;
 }
 
+/* observationList active */
 .active {
   background-color: #365d81;
 }
@@ -97,6 +144,35 @@ input[type=submit] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.loginBox input, [type=text] select {
+  width: 200px;
+  padding: 3px;
+  margin: 3px;
+  margin-left: 0px;
+  display: inline-block;
+  border: 1px solid #DDDDDD;
+  box-sizing: border-box;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 11pt;
+}
+
+.loginbox button {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  background-color: #373737;
+  border: 1px solid #2a3031;
+  color: white;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 9pt;
+  transition-duration: 0.2s;
+  display: inline-block;
+  border: 1px solid #DDDDDD;
+  border-radius: 2px;
+  box-sizing: border-box;
+  font-size: 12pt;
 }
 
 textarea {
@@ -268,15 +344,6 @@ footer a:hover {
   width: 100px;
 }
 
-.logout {
- float: right;
- background-color: #76323F;
-}
-
-.logout li a:hover {
-  border-bottom: 0px;
-}
-
 h4 {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -290,6 +357,37 @@ h4 {
 }
 
 .myPageTable td {
-  width: 280px;
+  width: 300px;
   vertical-align: top;
+}
+
+
+.myPageMenu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12pt;
+  letter-spacing: 1px;
+}
+
+.myPageMenu li {
+  display: inline-block;
+  font-size: 12pt;
+  line-height: 40px;
+  height: 40px; 
+}
+
+.myPageMenu li a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  transition-duration: 0.3s;
+  letter-spacing: 1px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.myPageMenu li a:hover {
+  background-color: #5e5e5e;
 }
