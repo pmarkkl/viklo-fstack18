@@ -37,8 +37,8 @@ app.use('/api/users', usersRouter)
 app.use('/api/observations', observationRouter)
 app.use('/api/species', speciesRouter)
 app.use('/api/requests', requestRouter)
-app.use('/activate', tokenRouter)
-app.use('/pwresetvalidity', resetRouter)
+app.use('/api/activate', tokenRouter)
+app.use('/api/pwresetvalidity', resetRouter)
 
 const server = http.createServer(app)
 
