@@ -112,7 +112,7 @@ class MyPage extends React.Component {
     if (response.error) {
       this.setState({ messageVisibility: true, messages: response.error, currentPassword: '', newPassword: '', passwordConfirmation: '' })
     } else {
-      this.setState({ messageVisibility: true, messages: response.message })
+      this.setState({ messageVisibility: true, messages: response.message, currentPassword: '', newPassword: '', passwordConfirmation: '' })
     }
     const id = setTimeout(() => this.setState({ messageVisibility: false, messages: [] }), 7500)
     this.setState({ timeoutId: id })
