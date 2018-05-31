@@ -2,6 +2,7 @@ const http = require('http')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+const config = require('./utils/config')
 const cors = require('cors')
 
 const usersRouter = require('./controllers/users')
@@ -15,7 +16,7 @@ const resetRouter = require('./controllers/reset')
 const bodyParser = require('body-parser')
 require('dotenv').config()
 
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(config.mongoUrl)
 
 const logger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -41,8 +42,8 @@ app.use('/pwresetvalidity', resetRouter)
 
 const server = http.createServer(app)
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server running on port ${process.env.PORT}`)
+server.listen(config.port || 5000, () => {
+  console.log(`Server running on port ${config.port}`)
 })
 
 server.on('close', () => {
