@@ -110,7 +110,7 @@ class MyPage extends React.Component {
     const response = await userService.setPassword(requestObject)
     console.log(response)
     if (response.error) {
-      this.setState({ messageVisibility: true, messages: response.error })
+      this.setState({ messageVisibility: true, messages: response.error, currentPassword: '', newPassword: '', passwordConfirmation: '' })
     } else {
       this.setState({ messageVisibility: true, messages: response.message })
     }
