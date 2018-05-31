@@ -50,7 +50,7 @@ tokenRouter.post('/resend', async (req, res) => {
     from: '"Viklo"',
     to: user.email,
     subject: 'Viklo-tunnuksen aktivointi',
-    html: `<h1>Hei, ${user.firstname}</h1> <p>Aktivoi tunnuksesi klikkamalla: <a href="http://localhost:3000/activation/${activationToken.token}">http://localhost:3000/activation/${activationToken.token}</p>`
+    html: `<h1>Hei, ${user.firstname}</h1> <p>Aktivoi tunnuksesi klikkamalla: <a href="http://viklo.herokuapp.com/activation/${activationToken.token}">http://viklo.herokuapp.com/activation/${activationToken.token}</p>`
   }
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

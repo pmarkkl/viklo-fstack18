@@ -17,7 +17,21 @@
 | 30.5. | 3,5 | Syötteen validointia, listauksen parantelua ja debuggausta. Käyttäjän tietojen muutosmahdollisuuden luominen.
 | 31.5. | 4 | Säätöä käyttäjähallinan ja ulkoasun kanssa. Settimeoutit kuntoon. Pahimpia sotkuja siivottu.
 
+https://github.com/puhuri666/viklo-fstack18/blob/master/tuntikirja.xlsx
+
 # yhteensä 84 tuntia
+
+#  Käyttöohjeet
+
+Sovelluksen sijainti: http://viklo.herokuapp.com/
+
+Sovellusta voi käyttää testitunnuksilla (käyttäjä: timo@tes.ti, salasana: TimonOmaPassu6), tai tehdä uudet tunnukset. Uudet tunnukset vaativat kuitenkin toimivan sähköpostin, koska uusi tunnus tulee aktivoida sähköpostiin saapuvasta linkistä.
+
+Lisää-linkin alta voi lisätä omia lintuhavaintoja. Kohdassa laji tulee syöttää jokin hakusana, esimerkiksi "Kiljuhanhi" ja klikata lajia. Sitten valitaan sijainti kartalta, jonka saa auki klikkaamalla karttaikonia, tai syöttämällä esimerkiksi hakusanat "kumpula helsinki" input-kenttään. Päivämäärä ja kellonaika on pakollinen tieto, mutta kommenttia ei tarvitse syöttää.
+
+Havainnot-sivulta löytää kaikki havainnot aikajärjestyksessä ja niitä voi tarkastella kartalla.
+
+Käyttäjähallinassa voi muuttaa tunnuksen salasanaa ja yhteystietoja.
 
 # Viklo - lintuharrastajan havaintokirja
 

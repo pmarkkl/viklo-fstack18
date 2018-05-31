@@ -85,7 +85,7 @@ usersRouter.post('/', async (req, res) => {
       from: '"Viklo"',
       to: body.email,
       subject: 'Viklo-tunnuksen aktivointi',
-      html: `<h1>Hei, ${savedUser.firstname}</h1> <p>Aktivoi tunnuksesi klikkamalla: <a href="http://localhost:3000/activation/${activationToken.token}">http://localhost:3000/activation/${activationToken.token}</p>`
+      html: `<h1>Hei, ${savedUser.firstname}</h1> <p>Aktivoi tunnuksesi klikkamalla: <a href="http://viklo.herokuapp.com/activation/${activationToken.token}">http://viklo.herokuapp.com/activation/${activationToken.token}</p>`
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -102,6 +102,8 @@ usersRouter.post('/', async (req, res) => {
     res.status(500).json([{ error: 'jotain kummaa tapahtui' }])
   }
 })
+
+usersRouter.post('/aktivoitestitunnus')
 
 // palauttaa kaikkiin pyyntöihin success tietoturvan vuoksi
 
@@ -128,7 +130,7 @@ usersRouter.post('/resetpassword', async (req, res) => {
       subject: '(Viklo) Salasanan resetointi',
       html: `<h1>Salasanan resetointi</h1><p>Olet pyytänyt salasanan resetointia tunnuksellesi ${body.email}.</p>
              <p>Voit asettaa itsellesi uuden salasanan seuraamalla seuraavasta linkistä:<br/> 
-             <a href="http://localhost:3000/setpassword/${savedObject.randomBytes}">http://localhost:3000/setpassword/${savedObject.randomBytes}</a></p>`
+             <a href="http://viklo.herokuapp.com/setpassword/${savedObject.randomBytes}">http://viklo.herokuapp.com/setpassword/${savedObject.randomBytes}</a></p>`
     }
 
     transporter.sendMail(mailOptions, (error, info) => {
