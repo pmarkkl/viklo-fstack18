@@ -27,7 +27,7 @@ Sovelluksen sijainti: http://viklo.herokuapp.com/
 
 Sovellusta voi käyttää testitunnuksilla (käyttäjä: timo@tes.ti, salasana: TimonOmaPassu6), tai tehdä uudet tunnukset. Uudet tunnukset vaativat kuitenkin toimivan sähköpostin, koska uusi tunnus tulee aktivoida sähköpostiin saapuvasta linkistä.
 
-Lisää-linkin alta voi lisätä omia lintuhavaintoja. Kohdassa laji tulee syöttää jokin hakusana, esimerkiksi "Kiljuhanhi" ja klikata lajia. Sitten valitaan sijainti kartalta, jonka saa auki klikkaamalla karttaikonia, tai syöttämällä esimerkiksi hakusanat "kumpula helsinki" input-kenttään. Päivämäärä ja kellonaika on pakollinen tieto, mutta kommenttia ei tarvitse syöttää.
+Lisää-linkin alta voi lisätä omia lintuhavaintoja. Kohdassa laji tulee syöttää jokin hakusana, esimerkiksi "Kiljuhanhi" ja klikata lajia. Sitten valitaan sijainti kartalta, jonka saa auki klikkaamalla karttaikonia, tai syöttämällä esimerkiksi hakusanat "kumpula helsinki" input-kenttään. Tarkempi sijainti valintaak klikkaamalla kartaa, jolloin siihen ilmestyy uusi marker. Päivämäärä ja kellonaika on pakollinen tieto, mutta kommenttia ei tarvitse syöttää.
 
 Havainnot-sivulta löytää kaikki havainnot aikajärjestyksessä ja niitä voi tarkastella kartalla.
 
