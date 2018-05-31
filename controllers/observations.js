@@ -25,7 +25,7 @@ const getTokenFrom = (req) => {
 observationRouter.post('/', async (req,res) => {
   const body = req.body
 
-  const errors = await validator.validateObservationPost(body)
+  const errors = validator.validateObservationPost(body)
 
   if (errors.length > 0) {
     return res.status(400).json({ error: errors })
