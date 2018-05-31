@@ -231,8 +231,6 @@ class Location extends React.Component {
           <button>Etsi</button>
         </form>
         <br />
-        Sijainti käyttämäsi laitteen perusteella:<br />
-        <p><button onClick={this.getLocation}>Hae laitteesi sijainti</button></p>
         <div style={resultsStyle}>
           <p>{this.state.result}</p>
           <div style={latLngVisibility}>
