@@ -26,6 +26,7 @@ https://github.com/puhuri666/viklo-fstack18/blob/master/tuntikirja.xlsx
 Sovelluksen sijainti: http://viklo.herokuapp.com/
 
 EDIT: rekisteröitymistä ei näköjään edes kannata kokeilla, koska routet lahosivat täysin buildia rakentaessa...
+
 EDIT2 (1.6.2018): routet nyt saatu säädettyä kuntoon ja aktivoimislinkit näyttäisivät toimivan
 
 Sovellusta voi käyttää testitunnuksilla (käyttäjä: timo@tes.ti, salasana: TimonOmaPassu6), tai tehdä uudet tunnukset. Uudet tunnukset vaativat kuitenkin toimivan sähköpostin, koska uusi tunnus tulee aktivoida sähköpostiin saapuvasta linkistä. Jos rekisteröitymistä haluaa kokeilla, niin sähköpostiosoitteet ovat sitten tietokannassa selväkielisenä.
