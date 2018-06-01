@@ -26,6 +26,8 @@ https://github.com/puhuri666/viklo-fstack18/blob/master/tuntikirja.xlsx
 Sovelluksen sijainti: http://viklo.herokuapp.com/
 
 EDIT: rekisteröitymistä ei näköjään edes kannata kokeilla, koska routet lahosivat täysin buildia rakentaessa...
+EDIT2 (1.6.2018): routet nyt saatu säädettyä kuntoon ja aktivoimislinkit näyttäisivät toimivan
+
 Sovellusta voi käyttää testitunnuksilla (käyttäjä: timo@tes.ti, salasana: TimonOmaPassu6), tai tehdä uudet tunnukset. Uudet tunnukset vaativat kuitenkin toimivan sähköpostin, koska uusi tunnus tulee aktivoida sähköpostiin saapuvasta linkistä. Jos rekisteröitymistä haluaa kokeilla, niin sähköpostiosoitteet ovat sitten tietokannassa selväkielisenä.
 
 Lisää-linkin alta voi lisätä omia lintuhavaintoja. Kohdassa laji tulee syöttää jokin hakusana, esimerkiksi "Kiljuhanhi" ja klikata lajia. Sitten valitaan sijainti kartalta, jonka saa auki klikkaamalla karttaikonia, tai syöttämällä esimerkiksi hakusanat "kumpula helsinki" input-kenttään. Tarkempi sijainti valintaa klikkaamalla kartaa, jolloin siihen ilmestyy uusi marker. Päivämäärä ja kellonaika on pakollinen tieto, mutta kommenttia ei tarvitse välttämättä syöttää.
