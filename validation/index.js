@@ -37,6 +37,14 @@ const validateObservationPost = (values) => {
   console.log('values', values)
   console.log('values.speciesid', values.speciesId.length)
 
+  if (Number(values.number) < 1 || Number(values.number) > 10000) {
+    errors.push('Anna kelvollinen lukumäärä.')
+  }
+
+  if (values.sex !== ('undefined' || 'Uros' || 'Naaras')) {
+    errors.push('Sukupuolen valitsemisessa virhe.')
+  }
+
   if (values.speciesId.length < 10 || !values.latitude || !values.longitude) {
     errors.push('Muut kentät kuin kommentti ovat pakollisia.')
   }

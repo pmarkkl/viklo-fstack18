@@ -1,5 +1,5 @@
 import axios from 'axios'
-const url = '/activate'
+const url = 'http://localhost:3001/activate'
 
 const activate = async (request) => {
   try {

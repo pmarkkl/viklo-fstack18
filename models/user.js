@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
   activated: { type: Boolean, default: false },
   observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }],
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request' }]
+  requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request' }],
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }]
 })
 
 userSchema.statics.format = (user) => {
@@ -29,7 +30,8 @@ userSchema.statics.format = (user) => {
     observations: user.observations,
     friends: user.friends,
     requests: user.requests,
-    activated: user.activated
+    activated: user.activated,
+    likes: user.likes
   }
 }
 

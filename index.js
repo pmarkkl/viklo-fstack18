@@ -40,9 +40,9 @@ app.use('/api/requests', requestRouter)
 app.use('/activate', tokenRouter)
 app.use('/pwresetvalidity', resetRouter)
 
-app.get('*', (req, res) => {
+/* app.get('*', (req, res) => {
   res.sendFile(__dirname + '/build/index.html')
-})
+}) */
 
 const server = http.createServer(app)
 

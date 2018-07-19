@@ -9,7 +9,7 @@ const crypto = require('crypto')
 const Token = require('../models/token')
 const nodemailer = require('nodemailer')
 
-/* usersRouter.get('/', async (req,res) => {
+usersRouter.get('/', async (req,res) => {
   const users = await User
   .find({})
   .populate('observations')
@@ -29,7 +29,7 @@ usersRouter.get('/:id', async (req,res) => {
     console.log(exc)
     res.status(500).json({ error: 'jotain kummallista tapahtui' })
   }
-}) */
+})
 
 const passwordHasher = async (password) => {
   const saltRounds = 10

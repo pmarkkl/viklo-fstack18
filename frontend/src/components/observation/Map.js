@@ -165,6 +165,14 @@ export class MapContainer extends React.Component {
       position: 'relative'
     }
 
+    const sexVisibility = {
+      display: this.state.activeMarker.observation.sex === 'undefined' ? 'none' : ''
+    }
+
+    const commentVisibility = {
+      display: this.state.activeMarker.observation.additionalComments.length > 0 ? '' : 'none'
+    }
+
     return (
       <div>
         <div style={karttaStyle}>
@@ -193,7 +201,9 @@ export class MapContainer extends React.Component {
               <p>Havaitsija: {this.state.activeMarker.observation.user.firstname} {this.state.activeMarker.observation.user.lastname}</p>
               <p>Koordinaatit: {this.state.activeMarker.observation.latitude}, {this.state.activeMarker.observation.longitude}</p>
               <p>Päivämäärä: {this.state.activeMarker.observation.date}</p>
-              <p>Kommentit: {this.state.activeMarker.observation.additionalComments}</p>
+              <p style={commentVisibility}>Kommentit: {this.state.activeMarker.observation.additionalComments}</p>
+              <p>Lukumäärä: {this.state.activeMarker.observation.number}</p>
+              <p style={sexVisibility}>Sukupuoli: {this.state.activeMarker.observation.sex}</p>
             </div>
           </InfoWindow>
         </Map>

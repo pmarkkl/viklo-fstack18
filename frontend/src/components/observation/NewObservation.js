@@ -28,7 +28,10 @@ class NewObservation extends React.Component {
       error: {
         visibility: false,
         message: []
-      }
+      },
+      number: 0,
+      single: false,
+      sex: 'undefined'
     }
   }
 
@@ -44,6 +47,8 @@ class NewObservation extends React.Component {
       zipcode: this.props.location.zipcode,
       town: this.props.location.town,
       additionalComments: this.state.additionalComments,
+      sex: this.state.sex,
+      number: this.state.number,
       date: new Date(this.state.date + ' ' + this.state.time.replace('.', ':'))
     }
 
@@ -63,7 +68,6 @@ class NewObservation extends React.Component {
   }
 
   handleChange = (event) => {
-    console.log(this.state)
     this.setState({ [event.target.name]: event.target.value })
     const species = this.props.species
     const search = event.target.value
@@ -79,6 +83,15 @@ class NewObservation extends React.Component {
           resultsVisibility: false
         })
       }
+    }
+  }
+
+  handleNumberChange = (event) => {
+    this.setState({ number: event.target.value })
+    if (Number(event.target.value) === 1) {
+      this.setState({ single: true })
+    } else {
+      this.setState({ single: false })
     }
   }
 
@@ -101,6 +114,11 @@ class NewObservation extends React.Component {
       search,
       speciesId: laji.id
      })
+  }
+
+  handleSexChange = (event) => {
+    console.log('handleSexChange', event.target.value)
+    this.setState({ sex: event.target.value })
   }
 
   toggleVisibility = (event) => {
@@ -143,6 +161,10 @@ class NewObservation extends React.Component {
       color: '#A80000'
     }
 
+    const showSex = {
+      display: this.state.single ? '' : 'none'
+    }
+
     if (!this.props.user.activated) {
       return (
         <Redirect to="/" />
@@ -171,13 +193,33 @@ class NewObservation extends React.Component {
               </tr>
               <tr style={tr}>
                 <td style={tr}>
+                  Lukumäärä<br />
+                  <input type="text" name="number" onChange={this.handleNumberChange} /><br />
+                  <div style={showSex}>
+                    Sukupuoli <br />
+                    <select name="sex" className="dropdown" onChange={this.handleSexChange}>
+                      <option value="Uros">Uros</option>
+                      <option value="Naaras">Naaras</option>
+                    </select>
+                  </div>
+                </td>
+              </tr>
+              <tr style={tr}>
+                <td style={tr}>
                   <h4>Aika</h4>
                   Päivämäärä<br />
                   <input type="text" name="date" onChange={this.handleDateChange} placeholder="1.1.2018"/><br />
                   Kellonaika<br />
                   <input type="text" name="time" onChange={this.handleChange} placeholder="13.00"/>
                 </td>
+              </tr>
+            </tbody>
+          </table>
+          <table style={oikea}>
+            <tbody>
+              <tr style={tr}>
                 <td style={tr}>
+                <LocationComponent />
                 </td>
               </tr>
               <tr style={tr}>
@@ -191,19 +233,6 @@ class NewObservation extends React.Component {
                     </div>
                     <button>Lisää havainto</button>
                   </form>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <table style={oikea}>
-            <tbody>
-              <tr style={tr}>
-                <td style={tr}>
-                <LocationComponent />
-                </td>
-              </tr>
-              <tr style={tr}>
-                <td>
                 </td>
               </tr>
             </tbody>

@@ -65,6 +65,10 @@ class App extends React.Component {
 
   render() {
 
+    const testi = 3290123
+
+    console.log({testi})
+
     const mainDivStyle = {
       margin: '0px auto',
       marginTop: '70px',

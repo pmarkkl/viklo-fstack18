@@ -7,8 +7,11 @@ const observationSchema = new mongoose.Schema({
   additionalComments: String,
   town: String,
   zipcode: String,
+  number: Number,
+  sex: String,
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  species: { type: mongoose.Schema.Types.ObjectId, ref: 'Species' }
+  species: { type: mongoose.Schema.Types.ObjectId, ref: 'Species' },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }]
 })
 
 observationSchema.statics.format = (observation) => {
@@ -20,6 +23,8 @@ observationSchema.statics.format = (observation) => {
     town: observation.town,
     zipcode: observation.zipcode,
     additionalComments: observation.additionalComments,
+    number: observation.number,
+    sex: observation.sex,
     species: {
       finnishName: observation.species.finnishName,
       latinName: observation.species.latinName
@@ -28,7 +33,8 @@ observationSchema.statics.format = (observation) => {
       id: observation.user._id,
       firstname: observation.user.firstname,
       lastname: observation.user.lastname
-    }
+    },
+    likes: observation.likes
   }
 }
 

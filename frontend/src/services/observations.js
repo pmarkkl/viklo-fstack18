@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { setToken } from './helpers'
-const url = '/api/observations'
+const url = 'http://localhost:3001/api/observations'
 
 const getAll = async () => {
   const response = await axios.get(url)
@@ -17,7 +17,9 @@ const newObservation = async (request) => {
       additionalComments: request.additionalComments,
       speciesId: request.species,
       zipcode: request.zipcode,
-      town: request.town
+      town: request.town,
+      sex: request.sex,
+      number: request.number
     }
 
     const response = await axios.post(url, observationObject, config)
@@ -27,6 +29,19 @@ const newObservation = async (request) => {
   }
 }
 
+const like = async (request) => {
+  try {
+  const config = await setToken(request.user.token)
+  const object = {
+    observation: request.observation
+  }
+  const response = await axios.post(`${url}/like`, object, config)
+  console.log('response', response)
+  } catch (exc) {
+    return exc.response.data
+  }
+}
+
 export default {
-  getAll, newObservation
+  getAll, newObservation, like
 }

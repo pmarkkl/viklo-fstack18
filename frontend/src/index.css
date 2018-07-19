@@ -10,6 +10,11 @@ a {
   color: blue;
 }
 
+.dropdown {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 13pt;
+}
+
 .headerRight ul {
   list-style-type: none;
   margin: 0;
