@@ -5,6 +5,7 @@ import { initializeUser } from '../reducers/userReducer'
 import { Redirect } from 'react-router-dom'
 import userService from '../services/users'
 import { Link } from 'react-router-dom'
+import MyPageObservation from './observation/MyPageObservation'
 
 class MyPage extends React.Component {
 
@@ -25,7 +26,8 @@ class MyPage extends React.Component {
         contacts: true,
         observations: false
       },
-      timeoutId: ''
+      timeoutId: '',
+      observations: []
     }
   }
 
@@ -213,7 +215,7 @@ class MyPage extends React.Component {
 
     const observations = () => (
       <div>
-        <h1>to be continued</h1>
+        { this.props.observations.map(observation => <MyPageObservation key={observation.id} observation={observation} />) }
       </div>
     )
 
@@ -228,7 +230,7 @@ class MyPage extends React.Component {
             <div className="myPageMenu" style={divStyle}>
               <ul>
                 <li style={contactsActive} onClick={this.handleMenuClick}><Link to="/omasivu" name="contacts">Käyttäjätiedot</Link></li>
-                <li style={observationsActive} onClick={this.handleMenuClick}><Link to="/omasivu" name="observations">Havainnot</Link></li>
+                <li style={observationsActive} onClick={this.handleMenuClick}><Link to="/omasivu" name="observations">Omat havainnot</Link></li>
               </ul>
             </div>
           </div>

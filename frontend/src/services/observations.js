@@ -42,6 +42,20 @@ const like = async (request) => {
   }
 }
 
+const remove = async (request) => {
+  try {
+    const config = await setToken(request.user.token)
+    const object = {
+      observation: request.observation
+    }
+    const response = await axios.delete(url, object, config)
+    console.log(response)
+  } catch (exc) {
+    console.log(exc)
+    return exc
+  }
+}
+
 export default {
-  getAll, newObservation, like
+  getAll, newObservation, like, remove
 }

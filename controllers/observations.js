@@ -119,6 +119,29 @@ observationRouter.post('/like', async (req, res) => {
       res.status(500).json({ error: ['Jotain kummallista tapahtui'] })
     }
   }
+
+  observationRouter.delete('/', (req, res) => {
+    const body = req.body
+    try {
+      const token = getTokenFrom(req)
+      const decodedToken = jwt.verify(token, process.env.SECRET)
+  
+      if (!token || !decodedToken.id) {
+        return res.status(401).json({ error: ['Ei tokenia tai se on virheellinen.'] })
+      }
+
+      console.log(body)
+      res.status(201)
+    } catch (exc) {
+      if (exception.name = 'JsonWebTokenError') {
+        res.status(401).json({ error: [exception.message] })
+      } else {
+        console.log(exception)
+        res.status(500).json({ error: ['Jotain kummallista tapahtui'] })
+      }
+    }
+  })
+
 })
 
 module.exports = observationRouter
