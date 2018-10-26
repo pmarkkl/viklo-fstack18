@@ -58,7 +58,7 @@ class NewObservation extends React.Component {
     console.log('response här', response)
     this.setState({ response })
     if (response.id) {
-      this.setState({ observationSent: true, error: { message: [], visibility: false } })
+      this.setState({ observationSent: true, error: { message: [], visibility: false }, showSex: false })
     } else if (response.error) {
       return this.setState({ error: { message: response.error, visibility: true } })
     }

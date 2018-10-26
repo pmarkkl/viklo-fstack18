@@ -228,7 +228,7 @@ class MyPage extends React.Component {
 
     const observations = () => (
       <div>
-        { this.props.observations.filter(observation => observation.user.id == this.props.user.id).map(observation => <MyPageObservation key={observation.id} observation={observation} />) }
+        { this.props.observations.filter(observation => observation.user.id === this.props.user.id).map(observation => <MyPageObservation key={observation.id} observation={observation} />) }
       </div>
     )
 
@@ -236,7 +236,7 @@ class MyPage extends React.Component {
       return (
         <div>
           <div>
-            <h1>Käyttäjäsivu</h1>
+            <h1>Oma sivu</h1>
             <div style={margin}>
               {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email})
             </div>

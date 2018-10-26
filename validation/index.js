@@ -34,14 +34,16 @@ const validateObservationPost = (values) => {
   const dateCompare = new Date(Date.now())
   dateCompare.setFullYear(dateCompare.getFullYear()-5)
 
-  console.log('values', values)
-  console.log('values.speciesid', values.speciesId.length)
-
   if (Number(values.number) < 1 || Number(values.number) > 10000) {
     errors.push('Anna kelvollinen lukumäärä.')
   }
 
-  if (values.sex !== ('undefined' || 'Uros' || 'Naaras')) {
+  console.log(values.sex)
+  console.log('is it true', values.sex.toLowerCase() === 'naaras')
+
+  if (values.sex.toLowerCase().trim() !== 'naaras' || 'uros' || 'undefined') {
+    console.log('mites täällä', values.sex)
+    console.log('ja type vielä', typeof values.sex)
     errors.push('Sukupuolen valitsemisessa virhe.')
   }
 

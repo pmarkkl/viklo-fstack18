@@ -8,6 +8,7 @@ import { setMarkers } from './reducers/markerReducer'
 import { initFriends } from './reducers/friendsReducer'
 import { initRequests } from './reducers/requestsReducer'
 import ObservationList from './components/observation/ObservationList'
+import Users from './components/Users'
 import LoginForm from './components/LoginForm'
 import NewObservation from './components/observation/NewObservation'
 import AddSpecies from './components/AddSpecies'
@@ -28,7 +29,9 @@ class App extends React.Component {
   state = {
     popup: false,
     loginLogoutColour: '#501B1D',
-    loginBoxTriggered: false
+    loginBoxTriggered: false,
+    showNavMenu: false,
+    activeMenuItem: {}
   }
 
   componentWillMount() {
@@ -114,6 +117,10 @@ class App extends React.Component {
       fontSize: '11pt',
     }
 
+    const testi2 = {
+      backgroundColor: '#365d81'
+    }
+
     return (
       <Router>
         <div>
@@ -126,7 +133,8 @@ class App extends React.Component {
                   <li className="navLink"><Link to="/">Etusivu</Link></li>
                   <li className="navLink" style={logOutVisibility}><Link to="/uusihavainto">Lisää</Link></li>
                   <li className="navLink"><Link to="/havainnot">Havainnot</Link></li>
-                  <li className="navLink" style={logOutVisibility}><Link to="/omasivu">Käyttäjähallinta</Link></li>
+                  <li className="navLink" style={testi2}><Link to="/kayttajat">Käyttäjät</Link></li>
+                  <li className="navLink" style={logOutVisibility}><Link to="/omasivu">Oma sivu</Link></li>
                   <li className="logout" style={logOutVisibility}><Link to="/" onClick={this.logout}>Kirjaudu ulos</Link></li>
                   <li style={logInVisibility} className="login"><Link to="/">Kirjaudu sisään</Link></li>
                 </ul>
@@ -138,7 +146,8 @@ class App extends React.Component {
             <Route exact path="/" render={() => <LoginForm />} />
               <Route exact path="/uusihavainto" render={() => <NewObservation />} />
               <Route exact path="/havainnot" render={() => <ObservationList />} />
-              <Route exact path="/lajit" render={() => <AddSpecies />} /> 
+              <Route exact path="/lajit" render={() => <AddSpecies />} />
+              <Route exact path="/kayttajat" render={() => <Users />} />
               <Route exact path="/omasivu" render={() => <MyPage />} />
               <Route exact path="/yllapito" render={() => <MapContainerComponent /> } />
               <Route exact path="/activation/:id" render={({ match }) => <Activation match={match} />} />
@@ -156,11 +165,6 @@ class App extends React.Component {
             </div>
           </Flexbox>
         </Flexbox>
-        <div style={loginBox} className="loginBox">
-          <input type="text" placeholder="Sähköposti" />
-          <input type="password" placeholder="Salasana" />
-          <button style={loginBoxButton}>Kirjaudu</button>
-        </div>
         </div>
       </Router>
 

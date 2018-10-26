@@ -162,6 +162,7 @@ class LoginForm extends React.Component {
           <input type="password" autoComplete="new-password" name="passwordConfirmation" value={this.state.passwordConfirmation} onChange={this.handleFieldChange} placeholder="Salasana uudelleen" /><br />
           <button>Rekisteröidy</button>
         </form>
+        <br />
       </div>
     )
 

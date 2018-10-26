@@ -14,7 +14,7 @@ usersRouter.get('/', async (req,res) => {
   .find({})
   .populate('observations')
   .populate('requests', { accepted: 1, sent: 1, received: 1 })
-  res.json(users.map(User.format))
+  res.json(users.map(User.publicFormat))
 })
 
 usersRouter.get('/:id', async (req,res) => {
@@ -102,8 +102,6 @@ usersRouter.post('/', async (req, res) => {
     res.status(500).json([{ error: 'jotain kummaa tapahtui' }])
   }
 })
-
-usersRouter.post('/aktivoitestitunnus')
 
 // palauttaa kaikkiin pyyntöihin success tietoturvan vuoksi
 

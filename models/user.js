@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
   phone: { type: String, default: '' },
   passwordHash: String,
   admin: { type: Boolean, default: false },
-  activated: { type: Boolean, default: false },
+  activated: { type: Boolean, default: true },
   observations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Observation' }],
   friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
   requests: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Request' }],
@@ -32,6 +32,17 @@ userSchema.statics.format = (user) => {
     requests: user.requests,
     activated: user.activated,
     likes: user.likes
+  }
+}
+
+userSchema.statics.publicFormat = (user) => {
+  return {
+    id: user._id,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    town: user.town,
+    observations: user.observations,
+    friends: user.friends,
   }
 }
 
