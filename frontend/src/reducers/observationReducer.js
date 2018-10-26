@@ -6,7 +6,9 @@ const observationReducer = (state = [], action) => {
       return action.data
     case 'NEW_OBSERVATION':
       return [...state, action.data]
-    default: 
+    case 'REMOVE_OBSERVATION':
+      return state.filter(observation => observation.id !== action.data)
+    default:
       return state
   }
 }
@@ -24,6 +26,14 @@ export const initializeObservations = () => {
 export const observationCreation = (data) => {
   return {
     type: 'NEW_OBSERVATION',
+    data
+  }
+}
+
+export const observationRemoval = (data) => {
+  console.log(data)
+  return {
+    type: 'REMOVE_OBSERVATION',
     data
   }
 }

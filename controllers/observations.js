@@ -119,29 +119,38 @@ observationRouter.post('/like', async (req, res) => {
       res.status(500).json({ error: ['Jotain kummallista tapahtui'] })
     }
   }
+})
 
-  observationRouter.delete('/', (req, res) => {
-    const body = req.body
-    try {
-      const token = getTokenFrom(req)
-      const decodedToken = jwt.verify(token, process.env.SECRET)
-  
-      if (!token || !decodedToken.id) {
-        return res.status(401).json({ error: ['Ei tokenia tai se on virheellinen.'] })
-      }
+observationRouter.delete('/:id', async (req, res) => {
+  try {
+    const token = getTokenFrom(req)
+    const decodedToken = jwt.verify(token, process.env.SECRET)
 
-      console.log(body)
-      res.status(201)
-    } catch (exc) {
-      if (exception.name = 'JsonWebTokenError') {
-        res.status(401).json({ error: [exception.message] })
-      } else {
-        console.log(exception)
-        res.status(500).json({ error: ['Jotain kummallista tapahtui'] })
-      }
+    const observation = await Observation.findById(req.params.id)
+
+    if (!token || !decodedToken.id) {
+      return res.status(401).json({ error: ['Ei tokenia tai se on virheellinen.'] })
     }
-  })
 
+    if (JSON.stringify(decodedToken.id) !== JSON.stringify(observation.user)) {
+      return res.status(401).send({ error: 'Unauthorized' })
+    }
+
+    await Observation.findByIdAndRemove(req.params.id)
+    const user = await User.findById(decodedToken.id)
+    user.observations = user.observations.filter(observation => JSON.stringify(observation) !== JSON.stringify(req.params.id))
+    await user.save()
+
+    res.status(204).send({ message: 'Successfully deleted observation.' })
+  } catch (exc) {
+    if (exc.name = 'JsonWebTokenError') {
+      console.log(exc.message)
+      res.status(401).json({ error: [exc.message] })
+    } else {
+      console.log(exc)
+      res.status(500).json({ error: ['Jotain kummallista tapahtui'] })
+    }
+  }
 })
 
 module.exports = observationRouter

@@ -8,6 +8,7 @@ import locationReducer from './reducers/locationReducer'
 import markerReducer from './reducers/markerReducer'
 import friendsReducer from './reducers/friendsReducer'
 import requestsReducer from './reducers/requestsReducer'
+import userNotificationReducer from './reducers/userNotificationReducer'
 
 const reducer = combineReducers({
   observations: observationReducer,
@@ -16,7 +17,8 @@ const reducer = combineReducers({
   location: locationReducer,
   markers: markerReducer,
   friends: friendsReducer,
-  requests: requestsReducer
+  requests: requestsReducer,
+  userNotification: userNotificationReducer
 })
 
 const store = createStore(

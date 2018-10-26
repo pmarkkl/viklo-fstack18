@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { setMarkers, markersForUser, emptyMarkers } from '../reducers/markerReducer'
+import { initNotification, clearNotification } from '../reducers/userNotificationReducer'
 import { initializeUser } from '../reducers/userReducer'
 import { Redirect } from 'react-router-dom'
 import userService from '../services/users'
@@ -27,7 +28,8 @@ class MyPage extends React.Component {
         observations: false
       },
       timeoutId: '',
-      observations: []
+      observations: [],
+      notification: ''
     }
   }
 
@@ -98,6 +100,8 @@ class MyPage extends React.Component {
       }
       window.localStorage.setItem('loggedInUser', JSON.stringify(updatedUser))
       await this.props.initializeUser(updatedUser)
+      this.props.initNotification('Käyttäjätiedot päivitetty.')
+      setTimeout(() => this.props.clearNotification(), 7500)
     }
   }
 
@@ -168,6 +172,15 @@ class MyPage extends React.Component {
       backgroundColor: this.state.menu.observations ? '#365d81' : ''
     }
 
+    const notificationStyle = {
+      backgroundColor: '#efefef',
+      display: this.props.userNotification.length > 0 ? '' : 'none',
+      fontSize: '15pt',
+      marginTop: '4px',
+      marginBottom: '4px',
+      padding: '5px'
+    }
+
     const contacts = () => (
       <div>
         <div style={messageDiv}>
@@ -215,7 +228,7 @@ class MyPage extends React.Component {
 
     const observations = () => (
       <div>
-        { this.props.observations.map(observation => <MyPageObservation key={observation.id} observation={observation} />) }
+        { this.props.observations.filter(observation => observation.user.id == this.props.user.id).map(observation => <MyPageObservation key={observation.id} observation={observation} />) }
       </div>
     )
 
@@ -226,6 +239,9 @@ class MyPage extends React.Component {
             <h1>Käyttäjäsivu</h1>
             <div style={margin}>
               {this.props.user.firstname} {this.props.user.lastname} ({this.props.user.email})
+            </div>
+            <div style={notificationStyle}>
+              { this.props.userNotification }
             </div>
             <div className="myPageMenu" style={divStyle}>
               <ul>
@@ -249,11 +265,12 @@ const mapStateToProps = (state) => {
   return {
     observations: state.observations,
     markers: state.markers,
-    user: state.user
+    user: state.user,
+    userNotification: state.userNotification
   }
 }
 
 export default connect(
   mapStateToProps,
-  { setMarkers, markersForUser, emptyMarkers, initializeUser }
+  { setMarkers, markersForUser, emptyMarkers, initializeUser, initNotification, clearNotification }
 )(MyPage)
