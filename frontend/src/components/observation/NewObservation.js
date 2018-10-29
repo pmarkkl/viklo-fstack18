@@ -91,7 +91,7 @@ class NewObservation extends React.Component {
     if (Number(event.target.value) === 1) {
       this.setState({ single: true })
     } else {
-      this.setState({ single: false })
+      this.setState({ single: false, sex: 'undefined' })
     }
   }
 

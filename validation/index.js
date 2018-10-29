@@ -38,12 +38,9 @@ const validateObservationPost = (values) => {
     errors.push('Anna kelvollinen lukumäärä.')
   }
 
-  console.log(values.sex)
-  console.log('is it true', values.sex.toLowerCase() === 'naaras')
+  sexes = ['Naaras', 'Uros', 'undefined']
 
-  if (values.sex.toLowerCase().trim() !== 'naaras' || 'uros' || 'undefined') {
-    console.log('mites täällä', values.sex)
-    console.log('ja type vielä', typeof values.sex)
+  if (sexes.indexOf(values.sex) < 0) {
     errors.push('Sukupuolen valitsemisessa virhe.')
   }
 
