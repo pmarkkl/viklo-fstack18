@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import observationService from '../../services/observations'
 import { initializeObservations} from '../../reducers/observationReducer'
+import { initUsers } from '../../reducers/usersReducer'
 import { setMarkers, emptyMarkers } from '../../reducers/markerReducer'
 import { LocationComponent } from './Location'
 import { Link, Redirect } from 'react-router-dom'
@@ -65,6 +66,7 @@ class NewObservation extends React.Component {
     console.log(this.state.response)
     this.props.setMarkers()
     this.props.initializeObservations()
+    this.props.initUsers()
   }
 
   handleChange = (event) => {
@@ -270,5 +272,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { setMarkers, emptyMarkers, initializeObservations }
+  { setMarkers, emptyMarkers, initializeObservations, initUsers }
 )(NewObservation)
